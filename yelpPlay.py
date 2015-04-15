@@ -1,3 +1,9 @@
+
+"""USAGE: python yelpPlay.py -ll "<lat>,<lon>"
+(note: south and west are negatives)
+prints info.... we can play around this later
+"""
+
 import argparse
 import json
 import pprint
@@ -83,7 +89,7 @@ def search(location):
         # 'term': term.replace(' ', '+'),
         'll': location.replace(' ', '+'), #need to check in an pass eventually
         # 'limit': SEARCH_LIMIT.replace(' ', '+'),
-        'offset': OFFSET.replace(' ', '+'),
+        # 'offset': OFFSET.replace(' ', '+'),
         'limit': SEARCH_LIMIT.replace(' ', '+'),
         'sort': SORT.replace(' ', '+'),
         'category_filter': "restaurants"
