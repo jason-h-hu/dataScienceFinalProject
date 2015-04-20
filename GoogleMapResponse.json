@@ -1,0 +1,476 @@
+{
+ "routes": [
+  {
+   "overview_polyline": {
+    "points": "avg~FbxzrLd@r@r@y@r@}@nApBoD|EwCdEgA_Aw@XwCdBOh@JpAStCs@tByBpB{@T{A@mGg@cBMsBBcFa@{LmDsL_EwCoBeCyCs@qA_GiKcCyBcBw@kCe@kCG}[P{QD}Ei@iEgAqEwBaGwEyMeNoEsD{CaBiC}@}H}@cOCcEe@eFqAoKkFiMaH_HwDgCuBcBaCaA}BaAaEg@cFcDy`@M}Ri@cLw@wKaAeHaCsFmAuAuBwAyFiB{FaBaFwB{J{DgBScCP}Ah@{CnBcCbAaYhAwJTuBQqCu@mCeB}KaKiGyF{F_I_BiDcCaIiE}SqLcm@{Gy\\qIsb@_FsQsDeKaF{K_GmKuFaIqJ{KsKoJoxA{eA_k@ab@y\\qVkPmKwXiP{`@wUwS{Lwh@c[aTqLoIeDyIaC{FcAyNmA_^sBcnAeHmQqAeMsByMqD_LoE{EcCwNoJiOqNW]aKaNsTm]k}@iwAg_@ql@sMeSkJuK_MkK}FuDsOgIsNoHgVeMuuAys@cx@oa@ez@a^mGeCcJaCaK_BsHe@{NB}MnAeJrB}WvIuq@fUcZxJaMxCyL`B}If@kP@qHa@yJiA{K}BgOgFuMuGgPiKgJmGiGsFiFwFeIkKqV_\\e_@qf@}F_IgK_QyJ{T_Qqb@qLwXoCwFgIcOwJgOsLkO}GsHiW_Vg~@qy@qcB_|Auc@m`@aR{MkM{HaKiHwA}AwAkCgAaE]_FJmEfDaPvD{RnAgLn@{MHsLOkO_@kc@k@wp@CoR`Agg@ZkPvAuo@^wZU}TaA{QqFoh@_Geg@}Ky_AqCqNiCaJiDiJuFcLwC}E_GqHkYmYuNmNoDoEeDoFyD{I_B{Fu@aD}BqPgDwVs@kD_AcCiEgFgDcB}Ei@{DTiBl@gG~CuElC_DzAaCn@uB\\oYhC}Ct@mFjCgEzDcKbLsBrDcC|H{AjGkEpPgBpDeEbFyDbCkC`AsQxCmKtBoN|H}LfHwr@b`@}ZvPqExAqCZcGU}Co@qDoBwQcMoZ_ToEiC}Bs@{Ds@_EGiDVmLxB_NdDka@zPyLdFiDxBcI|IkL~LqFjCyDn@sADaEOmI_BcQsFeGmBgFu@aEKmDVaEx@gFxB_ZfPap@bl@qNdLaCzAqBp@mERcFcA}`@oQ_IuEmRuNsCiBgIwD{K{EgBiAqA_BoAyCsFmOiAaByA{@wBm@mCNaCt@oF|CiB\\oEvAwBnBKR{AfCeBlEGt@Hl@fAnAvBbBh@hAVbAXnBDZ\\G`Dm@nA[HbDw@pF[pAm@`AcA\\"
+   }, 
+   "warnings": [], 
+   "bounds": {
+    "northeast": {
+     "lat": 42.3617372, 
+     "lng": -71.0202461
+    }, 
+    "southwest": {
+     "lat": 41.8227388, 
+     "lng": -71.41796
+    }
+   }, 
+   "waypoint_order": [], 
+   "summary": "I-95 N and I-93 N", 
+   "copyrights": "Map data \u00a92015 Google", 
+   "legs": [
+    {
+     "distance": {
+      "text": "50.2 mi", 
+      "value": 80772
+     }, 
+     "end_address": "Boston, MA, USA", 
+     "via_waypoint": [], 
+     "start_address": "Providence, RI, USA", 
+     "start_location": {
+      "lat": 41.8238542, 
+      "lng": -71.412656
+     }, 
+     "steps": [
+      {
+       "html_instructions": "Head <b>southwest</b> on <b>Fulton St</b> toward <b>Eddy St</b>", 
+       "distance": {
+        "text": "98 ft", 
+        "value": 30
+       }, 
+       "travel_mode": "DRIVING", 
+       "start_location": {
+        "lat": 41.8238542, 
+        "lng": -71.412656
+       }, 
+       "polyline": {
+        "points": "avg~FbxzrLd@r@"
+       }, 
+       "duration": {
+        "text": "1 min", 
+        "value": 7
+       }, 
+       "end_location": {
+        "lat": 41.8236618, 
+        "lng": -71.4129182
+       }
+      }, 
+      {
+       "html_instructions": "Turn <b>left</b> onto <b>Eddy St</b>", 
+       "distance": {
+        "text": "249 ft", 
+        "value": 76
+       }, 
+       "travel_mode": "DRIVING", 
+       "maneuver": "turn-left", 
+       "start_location": {
+        "lat": 41.8236618, 
+        "lng": -71.4129182
+       }, 
+       "polyline": {
+        "points": "{tg~FvyzrLr@y@r@}@"
+       }, 
+       "duration": {
+        "text": "1 min", 
+        "value": 40
+       }, 
+       "end_location": {
+        "lat": 41.8231424, 
+        "lng": -71.4123232
+       }
+      }, 
+      {
+       "html_instructions": "Turn <b>right</b> at the 1st cross street onto <b>Westminster St</b>", 
+       "distance": {
+        "text": "213 ft", 
+        "value": 65
+       }, 
+       "travel_mode": "DRIVING", 
+       "maneuver": "turn-right", 
+       "start_location": {
+        "lat": 41.8231424, 
+        "lng": -71.4123232
+       }, 
+       "polyline": {
+        "points": "sqg~F~uzrLnApB"
+       }, 
+       "duration": {
+        "text": "1 min", 
+        "value": 27
+       }, 
+       "end_location": {
+        "lat": 41.8227388, 
+        "lng": -71.412891
+       }
+      }, 
+      {
+       "html_instructions": "Turn <b>right</b> at the 1st cross street onto <b>Union St</b>", 
+       "distance": {
+        "text": "0.2 mi", 
+        "value": 252
+       }, 
+       "travel_mode": "DRIVING", 
+       "maneuver": "turn-right", 
+       "start_location": {
+        "lat": 41.8227388, 
+        "lng": -71.412891
+       }, 
+       "polyline": {
+        "points": "cog~FpyzrL}ArBqAhB{AzB{@hA"
+       }, 
+       "duration": {
+        "text": "2 mins", 
+        "value": 100
+       }, 
+       "end_location": {
+        "lat": 41.8243757, 
+        "lng": -71.4149917
+       }
+      }, 
+      {
+       "html_instructions": "Turn <b>right</b> onto <b>Fountain St</b>", 
+       "distance": {
+        "text": "233 ft", 
+        "value": 71
+       }, 
+       "travel_mode": "DRIVING", 
+       "maneuver": "turn-right", 
+       "start_location": {
+        "lat": 41.8243757, 
+        "lng": -71.4149917
+       }, 
+       "polyline": {
+        "points": "kyg~Ftf{rLs@w@ECEAGAG?G?UD"
+       }, 
+       "duration": {
+        "text": "1 min", 
+        "value": 34
+       }, 
+       "end_location": {
+        "lat": 41.8249345, 
+        "lng": -71.4147041
+       }
+      }, 
+      {
+       "html_instructions": "Continue onto <b>Francis St N</b>", 
+       "distance": {
+        "text": "318 ft", 
+        "value": 97
+       }, 
+       "travel_mode": "DRIVING", 
+       "start_location": {
+        "lat": 41.8249345, 
+        "lng": -71.4147041
+       }, 
+       "polyline": {
+        "points": "y|g~Fzd{rLQRiAp@}@f@"
+       }, 
+       "duration": {
+        "text": "1 min", 
+        "value": 28
+       }, 
+       "end_location": {
+        "lat": 41.8257003, 
+        "lng": -71.41525109999999
+       }
+      }, 
+      {
+       "html_instructions": "Turn <b>left</b> onto <b>Memorial Blvd</b>", 
+       "distance": {
+        "text": "282 ft", 
+        "value": 86
+       }, 
+       "travel_mode": "DRIVING", 
+       "maneuver": "turn-left", 
+       "start_location": {
+        "lat": 41.8257003, 
+        "lng": -71.41525109999999
+       }, 
+       "polyline": {
+        "points": "sah~Fhh{rLC@KHWNFXFd@Bj@@b@"
+       }, 
+       "duration": {
+        "text": "1 min", 
+        "value": 21
+       }, 
+       "end_location": {
+        "lat": 41.8257939, 
+        "lng": -71.4161056
+       }
+      }, 
+      {
+       "html_instructions": "Keep <b>right</b> at the fork, follow signs for <b>I-95 S/I-95 N</b>", 
+       "distance": {
+        "text": "118 ft", 
+        "value": 36
+       }, 
+       "travel_mode": "DRIVING", 
+       "maneuver": "fork-right", 
+       "start_location": {
+        "lat": 41.8257939, 
+        "lng": -71.4161056
+       }, 
+       "polyline": {
+        "points": "ebh~Ftm{rLIv@CZ"
+       }, 
+       "duration": {
+        "text": "1 min", 
+        "value": 4
+       }, 
+       "end_location": {
+        "lat": 41.8258559, 
+        "lng": -71.4165348
+       }
+      }, 
+      {
+       "html_instructions": "Keep <b>right</b> at the fork, follow signs for <b>Interstate 95 N/Boston</b> and merge onto <b>I-95 N</b><div style=\"font-size:0.9em\">Entering Massachusetts</div>", 
+       "distance": {
+        "text": "31.7 mi", 
+        "value": 51055
+       }, 
+       "travel_mode": "DRIVING", 
+       "maneuver": "fork-right", 
+       "start_location": {
+        "lat": 41.8258559, 
+        "lng": -71.4165348
+       }, 
+       "polyline": {
+        "points": "sbh~Fhp{rLG\\Md@IXITQ^KPQTMNURMJMFKFOHMDKDKBUDQBY@O?_@CA?QA{@IE?W?}@IaBQ}AME?e@LmAIA?iBKy@I}@Kc@Ka@Ki@O_@K]KwBo@uBq@_@KyBu@yC_AEACACAYKyAi@]MSKQKOIOKSMCAUQc@_@e@c@k@q@_@i@SYEGc@y@IOOYUc@ACS_@uBcEe@u@g@m@]a@USa@]m@e@_@UUKWKUIq@Qe@IYEYC]CU?{@C[?c@?mIHq@@gDBY?y@?qDBkAAkDByCBmA@gA?]?]Ag@?[Aa@C]Ca@CQCSCc@G[GUEUESEUEYGYIYIe@OUIWK[MQGMGQI}@e@WOUMYOYSSMUQSO[Wg@c@kAgAEE}EeF_D_Di@m@KKSSKKAAQQKI{@y@]Y[Ua@YWQ}@i@o@_@UKWKa@QYKe@Og@Om@Mg@Kk@Ic@GwAMC?g@CS?a@?yA?oA?iA@oA?wAA[Ai@Ak@Ei@Ei@IcAOk@KwA]{@We@OcA_@a@SeAi@{@c@]S]Ow@e@s@_@GCWO_@SUO}Ay@uAu@}A{@aB}@}A{@aAg@}@g@aAk@UOc@[i@e@c@c@e@k@Ya@QWQ[O[O]ISWo@Wu@Kc@ScAIc@K}@MiAGo@Ek@MmA[gDKoAGq@o@iHKyAWqDQkCCk@Cg@EkAA{A?eE?W@mB?u@A_AAUCs@EaAIqAM}AAWAOEg@G}@AMg@cHOiBOkAMq@S}@Me@Oe@M[Qc@Q[CEUa@Wc@]a@[_@OOCCUS_@Y_@U_@S_@Qe@Qi@M{Ae@_@KGCC?AAqF}AA?GCQGg@UgBu@_Ac@qAg@y@[mEiBa@M[GUE]CWAs@@O@YDe@FQD[JOF_@Ng@XQLqAz@OJw@b@a@PUFSDc@Hg@DsCHy@B_CLyAB}ENoBHiEN{@Bg@BiAAO?OAg@Cm@Kk@KYGg@Qc@Oa@Uo@]]Y]WoAkAg@i@w@q@CC[YwAmAqAmAc@_@QOCAII_@][WsAmAsAsAEEw@}@mAyA}@sAw@sA[o@MWc@aAQ_@[{@a@iAYaAk@yBWkAcAcFIa@cBkIq@mDKi@Kg@cAaFeB}I_C{L[{Aa@kBaEmSOu@GYGYQw@EUEQ[aBI]G_@qByJu@{Du@{DMo@a@oBq@cD_AwDk@{Be@}AmAaEw@}BQa@e@uAcAoC}@uBu@gBqAmC[o@o@qAaAgBoAwB}@{As@gAU]_AsASYe@m@AASY[c@iAyAkB{BsA{AgBiBsBqBsBiBoBaB{@q@u@i@uf@o^MGUQWQkZwTcN}JwB_ByEmD}AkA]W_@WgAy@gFyDgFuDoEiDe@YMKKGUQAAiEaDyEkDcBqAe@_@yAgAeCeBYUoDiCkDeCyDiCsBsAoAw@mDwBaEcCoDuBsEmCqFaDmF_DiF{C}CiBwEsC}D}BOKQIMIKGmDwBsCaBmF_DUMa@W_@QCAEEeDoBeAo@eMoHyD}B{D{BcDqBeBaAs@c@u@a@mAs@}A_AeBcA_CqAgCqA]OsB{@u@[{@[iBq@m@SoA_@wBk@cBa@a@ISEA?A?s@O{@Ou@M[EwDc@mBOiEWIAs@CiEW}DWcP_AeF[oHc@eEUkKk@gEWgIg@aPaAiIa@{He@sBOeBOw@K_BQwDm@yAWsA[uAYcCm@oDgAoAa@qAc@}Am@cFwBKEg@WiAi@sAs@UMgDmBwCoBo@e@gCkBuCaCyCoCeDiDs@u@SWAAAA?Au@{@m@u@aCaDW_@W_@UYm@{@g@w@]i@m@_AMUyA}B{@sAsCqEcDgFkCaEsA{Bg@u@mB{CyA}ByBmDwCwEiNqTeImM}@{Ak@y@a@q@cBkC_BgCu@kAyA_CeBoCwCuEaA{Ag@w@}AeCe@y@y@oAeAaBaA}AiAgBo@cAeAcBwAwBg@y@u@kA]k@k@}@cA}Ac@s@iAiBgBqC{@sA]g@OUoAeBm@u@W_@i@q@q@w@OQq@y@s@s@sAuAcAaAeAcAg@c@y@s@m@g@yAkAe@]e@[s@g@sA{@eAq@o@_@c@WkCuAsDmBoDkBcB{@{@e@wAs@{@e@{@c@[OYOmAo@eEyBoAo@eEwB_Ag@kBaASKYOq@]o@]eB}@gEyByC{AeDeBoYeOaBy@{BkAy@c@o@[aAi@QI_MoGaB{@}C_BkCuAaL}F}C_BeEyBgEyBsDmB{@e@e@Ua@U_By@GCg@Y_D_BcB{@mAk@{@]_Aa@eBu@mCiA{@_@{B_AkEiBaBs@qAi@uFaCwD_B}EsBoAk@sAi@}@_@m@Y}Aq@qAi@gBs@QGaA_@oAa@sA_@cBc@{A[gAUyBa@eBUyAQiAMw@G{@EuBIm@CuCEg@As@@A?A?sA@cCJmAFaAFaDZkDb@mDp@QDcCn@a@JcDbAoA`@mKlDcAZA@A?o@Tc@NmEzAoBp@cA\\uAb@kGtBqEzAsQbGkA`@mMhEqC`AiEtAy@VsBn@A?eCl@eEz@gG`AqD^kDXqDLwABcCFgDAgDGaFUoAK_Fg@yCa@m@MeFaA[IkBc@}Ae@EAs@Uu@Ym@S}CgA{@[q@W{CqA_CkAs@_@eCwAmCaB_@UgDyBqEwC{CoBq@c@{@o@}AiAmB_BsAmAq@m@UWs@s@WWk@m@qB}BsAeBmA}AQWqCoD_BuBAAyCyDcCeD_@g@gB{BuAkBsCwDuEeGmFaH?AeAwAyBsCiBcCc@i@sFmHmA_ByAqB_@g@u@eAeCsDeBsCsBuDg@aAw@}ASa@i@kAq@wAm@yAQa@yAkDw@oBKWkDqIkBuEuAgDwAkDWu@sA_DAGyCkHcC_GmAmCeA}Bw@aB[m@e@aAUe@mBsDy@yAmA{BqAyBuBiDs@iAsCgEy@kAiBcCuBsCmB_CeBsBiAsA{@_Ai@m@mBqBkBkBi@i@{DsDsFaFMKs@q@_@]aBwA[[[YmAeAuCkC{FmFqAkAeGmF}G_GmE}DoCmCcB{AcC{B{AsAeA_As@q@}@w@mBeB[WWWe@_@aA_AgC}BwCkCyBqBuBiBsBkBmBeByAqAcB_BmCcCqBgB_BwAiHqGwEgE}AuAqAmAgB_Bq@m@aCyBOOi@c@{BsBk@g@{AsAoBiBuAoAoAiAuAmAmBeBcB{Am@k@g@e@IGWUyCoCm@i@{AsAmBeBg@c@aB{A{@s@yAmAcA{@uAiAmAaAoAaAkBqA}@q@g@a@eAq@eAs@eBkAuBsAeBgAoDuB_Ai@"
+       }, 
+       "duration": {
+        "text": "29 mins", 
+        "value": 1759
+       }, 
+       "end_location": {
+        "lat": 42.2021065, 
+        "lng": -71.1431249
+       }
+      }, 
+      {
+       "html_instructions": "Take exit <b>12</b> to merge onto <b>I-93 N</b> toward <b>Boston</b>", 
+       "distance": {
+        "text": "15.3 mi", 
+        "value": 24632
+       }, 
+       "travel_mode": "DRIVING", 
+       "maneuver": "ramp-right", 
+       "start_location": {
+        "lat": 42.2021065, 
+        "lng": -71.1431249
+       }, 
+       "polyline": {
+        "points": "erq`GncfqLwBeBgCcBwA_Ai@_@a@_@SSKMU[U[QY[m@Sg@M_@[eAMa@Oy@MgAGeACg@Ci@?aABk@Bu@Bi@Hw@Hs@N{@bCyJNaA\\uA\\yATcAJi@VwAZeBT}AT_BTgBPmBPqBLeBV{EDaABwADyBB{A?qA?kC?a@EkCE{ECaCEqEGaH?}@?WCoDCmAEeFC}ACcDCgCCqDIuIGiFC{DE{ECaCAgBCwA?gBAiA@mA?aA?u@@w@B_DHgEN{GBqAB_BP}GBaBDqAD_BNwH@a@@y@@_@?C?C?Od@iSJyFDaB^oPRiJJoF?sB?iD?{AAcCCiDC}AEkA?OAi@CoAEy@EeAGsAQcDEs@?C?AUiDi@mGm@wF[oCGy@CU[qCiA}JKy@cAuIOkAmBmQYgBEU?A?A]sC}BgSMgAYiCkA_KqBaQQqAQqAUyA_@}Bo@cD[wAe@wB[kAeAsDSq@So@o@oBg@sAg@qAi@sAiAkC}A{Ca@w@k@cAm@eAu@oA]k@U[{@iA}AsBu@aAo@q@QQsCwCiAkA_@_@_AaAkGkGgBcBgCeCoCkC}A{Am@o@m@k@_@]USoAoAe@g@kA_Bu@u@W[U]{@qAi@{@a@q@]o@y@gBo@uA]w@q@eBM]g@aBKg@]sACKAEEKEUACI_@ESQu@EYOu@UuAYmBMcAS_BGg@MqAK}@WkB]sCaA_IIOCKEUOgAGg@Mo@Ia@Sq@KYQc@Qc@Oa@OWU]U]m@s@W[]]USSQYS[SSKSKSISISIME]GQE[GOEUEUCUA_AAWAYAU@U?SBO@]F[HUDODOFs@XuAd@qDxBeCxAoAr@iB`Au@X}A`@c@La@HWFWDc@D{CX_SbBI@i@HgARq@PODSH_@N_A^}Ax@MHUNA?CBEBGDu@j@{@v@_@`@_@`@GFEDMLyGjHk@n@o@x@Y`@KPa@r@k@jAi@nAOf@_@fAi@|B]pAw@dDCLAD?Bm@nCK\\s@~C[jASn@Ur@Wn@Wn@Sd@S^g@z@]j@_@h@]b@iBhBUPuAbAe@Vg@Te@Tc@N[Je@NgARkCf@}@Nk@HMB[DeC`@eBVG@_C\\}AVi@Jg@JSFk@RUHc@RYJa@RSJMFID_@Ty@d@k@Z{@j@[PSLQJQJ}@f@OJQJSLSJQLSLg@Xc@Xs@`@s@`@EDMHA@MF}Av@A@e@XOJA@QHe@XgE~B_@R_@Tm@\\eB~@YNc@VoBdAMHe@Vg@XmAn@IF[N{@d@OHyAx@[NQLg@VsAt@aDfBm@Zy@d@e@VmAp@eAl@c@T]Py@d@oCzA]Re@V_Af@a@Rg@Xe@X_Bz@e@VULMFcB`AoBdAs@ZaA\\q@Pi@Lc@Hk@Fc@D]Bo@@y@?K?KAq@Eq@I]EC?_Cc@YKmAi@UOg@Ye@[w@i@c@Yi@a@y@k@{@k@EE{B}AyEaDkAy@_FkDiAw@iAw@}AeAoBuAuCqBkA{@iAw@g@Yw@c@e@Si@SUIi@OSEUGQGUEUGMCWEUCk@G_AEg@CS?cA@k@@k@Di@Dg@Hi@HI@G@u@NuAX_APgB\\}@P}AXaAR_ARs@PaATUHkA^g@P{@\\}@\\{@^cBt@}MxFqAj@{@ZeEfBk@TsF~BqAh@gAd@{@d@QJo@b@k@b@ONc@`@QPYZYZq@v@wChDuGpHQRQRMLQNQPc@\\[VYR[Ro@^SHOFi@Tg@PUHe@JQD[FQBWDSBUBQBU@U@Q@U?O@q@A_AE_AIs@Ks@KUEg@Ik@Mi@Mg@Mi@Mo@SWIa@Me@Oc@Oe@Mg@Q[KUGUIe@O}Bu@e@OUIYI]M_@K[Ke@O[K]Mm@Q]K]Ic@Ie@IYE_@G[CUCSA]CQASAWAa@AU?S?Y?W@W@]BO@S@QBUBSBUBQBSDOBOBm@L]JYHa@NWHg@P]P_@Pm@ZKDMFs@`@IBcAj@iFpCcAj@i@Xc@Ts@^mAn@{@d@e@Xe@Ve@XMH_@VCBm@b@c@^QLq@n@aCvB{MvLKJWTcQxOg@d@s@n@a@^QNQNQNQNQNQLQLQLOLQLWPWPa@\\QLQNWRUPOLuC`C"
+       }, 
+       "duration": {
+        "text": "17 mins", 
+        "value": 1021
+       }, 
+       "end_location": {
+        "lat": 42.33369270000001, 
+        "lng": -71.06399329999999
+       }
+      }, 
+      {
+       "html_instructions": "Keep <b>left</b> to stay on <b>I-93 N</b>", 
+       "distance": {
+        "text": "2.0 mi", 
+        "value": 3219
+       }, 
+       "travel_mode": "DRIVING", 
+       "maneuver": "keep-left", 
+       "start_location": {
+        "lat": 42.33369270000001, 
+        "lng": -71.06399329999999
+       }, 
+       "polyline": {
+        "points": "qhkaG|tvpL}@x@SNQLKHOJMFOJMFSJSHIBKDQFODMDMDIBK@MBMBMBMBK@M@M@M?I?K?M?I?K?GAQAOAMAMCMAMCMAMCMCMCICOEOEOEMEMEMEUISISIQGKGMEMGqPoHkCkAaD{AMGKEMGSKSKUMWOSKUMQKUMUMQKQKQKUMQMQKUMSMOKUOQMQMQKMIUOUOSQwGcFi@e@QMOKOKUQMKMKcAw@QMOKWQQMQKQKSMOIQIOIQIiB{@u@]s@Yc@S[Qa@QwHaD_@Sa@S_@SYQWOUSWWQSUYQYS_@Se@Wm@Oe@Qc@_EgLO_@Qa@Ua@QUQYOOUQWOUKUM]M]O[I_@E_@Ac@@a@Bg@Jc@Ha@Ja@NYN_Bv@oCdBqAf@"
+       }, 
+       "duration": {
+        "text": "3 mins", 
+        "value": 167
+       }, 
+       "end_location": {
+        "lat": 42.3589104, 
+        "lng": -71.0517258
+       }
+      }, 
+      {
+       "html_instructions": "Take exit <b>23</b> for <b>Aquarium</b> toward <b>Quincy Market</b>", 
+       "distance": {
+        "text": "0.3 mi", 
+        "value": 424
+       }, 
+       "travel_mode": "DRIVING", 
+       "maneuver": "ramp-right", 
+       "start_location": {
+        "lat": 42.3589104, 
+        "lng": -71.0517258
+       }, 
+       "polyline": {
+        "points": "efpaGhhtpLWI_AVQDqAb@k@Ta@TYXKJGD[ZGJABA@?@ABEHA@A@CBGFA@A@A@EJA?ADk@z@?@A@O`@A@}@vBQb@M`@GNERAJ?J"
+       }, 
+       "duration": {
+        "text": "1 min", 
+        "value": 41
+       }, 
+       "end_location": {
+        "lat": 42.36174219999999, 
+        "lng": -71.0547098
+       }
+      }, 
+      {
+       "html_instructions": "Keep <b>left</b> at the fork, follow signs for <b>Gov't Ctr/Financial Dist</b>", 
+       "distance": {
+        "text": "148 ft", 
+        "value": 45
+       }, 
+       "travel_mode": "DRIVING", 
+       "maneuver": "fork-left", 
+       "start_location": {
+        "lat": 42.36174219999999, 
+        "lng": -71.0547098
+       }, 
+       "polyline": {
+        "points": "{wpaG|ztpL?H@J?JBHBJDJFHHN"
+       }, 
+       "duration": {
+        "text": "1 min", 
+        "value": 15
+       }, 
+       "end_location": {
+        "lat": 42.3615654, 
+        "lng": -71.0551847
+       }
+      }, 
+      {
+       "html_instructions": "Continue onto <b>North St</b>", 
+       "distance": {
+        "text": "0.1 mi", 
+        "value": 228
+       }, 
+       "travel_mode": "DRIVING", 
+       "start_location": {
+        "lat": 42.3615654, 
+        "lng": -71.0551847
+       }, 
+       "polyline": {
+        "points": "yvpaGz}tpLn@h@TNRL`@Zj@h@NTFLDLJVFRDNFZ@BDTRxA"
+       }, 
+       "duration": {
+        "text": "1 min", 
+        "value": 82
+       }, 
+       "end_location": {
+        "lat": 42.3602677, 
+        "lng": -71.0571595
+       }
+      }, 
+      {
+       "html_instructions": "Turn <b>left</b> onto <b>Congress St</b>", 
+       "distance": {
+        "text": "0.1 mi", 
+        "value": 167
+       }, 
+       "travel_mode": "DRIVING", 
+       "maneuver": "turn-left", 
+       "start_location": {
+        "lat": 42.3602677, 
+        "lng": -71.0571595
+       }, 
+       "polyline": {
+        "points": "unpaGfjupLDZ\\G`@I~Bc@x@STG"
+       }, 
+       "duration": {
+        "text": "1 min", 
+        "value": 40
+       }, 
+       "end_location": {
+        "lat": 42.3588756, 
+        "lng": -71.05689389999999
+       }
+      }, 
+      {
+       "html_instructions": "Turn <b>right</b> onto <b>State St</b>", 
+       "distance": {
+        "text": "249 ft", 
+        "value": 76
+       }, 
+       "travel_mode": "DRIVING", 
+       "maneuver": "turn-right", 
+       "start_location": {
+        "lat": 42.3588756, 
+        "lng": -71.05689389999999
+       }, 
+       "polyline": {
+        "points": "_fpaGphupLBp@@L@|A@D?T"
+       }, 
+       "duration": {
+        "text": "1 min", 
+        "value": 19
+       }, 
+       "end_location": {
+        "lat": 42.3588325, 
+        "lng": -71.05782239999999
+       }
+      }, 
+      {
+       "html_instructions": "Continue onto <b>Court St</b>", 
+       "distance": {
+        "text": "0.1 mi", 
+        "value": 187
+       }, 
+       "travel_mode": "DRIVING", 
+       "start_location": {
+        "lat": 42.3588325, 
+        "lng": -71.05782239999999
+       }, 
+       "polyline": {
+        "points": "uepaGjnupLQrAOhAU|@QfACBCBA@ENIPEJCBEDABC@GBC@C@QD"
+       }, 
+       "duration": {
+        "text": "1 min", 
+        "value": 41
+       }, 
+       "end_location": {
+        "lat": 42.3596073, 
+        "lng": -71.0597069
+       }
+      }, 
+      {
+       "html_instructions": "Continue onto <b>Cambridge St</b>", 
+       "distance": {
+        "text": "85 ft", 
+        "value": 26
+       }, 
+       "travel_mode": "DRIVING", 
+       "start_location": {
+        "lat": 42.3596073, 
+        "lng": -71.0597069
+       }, 
+       "polyline": {
+        "points": "qjpaGdzupLe@PC@"
+       }, 
+       "duration": {
+        "text": "1 min", 
+        "value": 4
+       }, 
+       "end_location": {
+        "lat": 42.359824, 
+        "lng": -71.05981249999999
+       }
+      }
+     ], 
+     "duration": {
+      "text": "58 mins", 
+      "value": 3450
+     }, 
+     "end_location": {
+      "lat": 42.359824, 
+      "lng": -71.05981249999999
+     }
+    }
+   ]
+  }
+ ], 
+ "status": "OK"
+}
