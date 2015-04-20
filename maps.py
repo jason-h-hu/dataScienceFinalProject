@@ -38,6 +38,7 @@ def parseLegHelper(leg):
 
 	# A step is the smallest fragement of the journey.
 	steps = [{key: step[key] for key in pathObjectFields} for step in leg["steps"]]
+	steps = [step for step in steps]
 
 	pathObject = {key: leg[key] for key in pathObjectFields}
 	pathObject["steps"] = steps
@@ -68,11 +69,13 @@ def splitRouteIntoDays(pathObject, minHours=6, maxHours=12):
 	steps = pathObject["steps"]
 	while len(steps) > 0:
 		i = findTimeHelper(steps, idealMinutes)
-		day = {	"distance": {}, 
-				"duration": {}, 
+		currentSteps = steps[:i]
+		day = {	"distance": {"value": sum([step["distance"]["value"] for step in currentSteps])}, 
+				"duration": {"value": sum([step["duration"]["value"] for step in currentSteps])}, 
 				"start_location": steps[0]["start_location"], 
-				"end_location": steps[i]["end_location"], 
-				"steps": steps[:i+1]}
+				"end_location": currentSteps[-1]["end_location"], 
+				"steps": currentSteps}
+		steps = steps[i+1:]
 
 	return days
 
