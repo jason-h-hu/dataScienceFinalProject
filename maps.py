@@ -2,26 +2,50 @@ import urllib
 import json
 import math
 
+
+"""
+
+NOTES: 
+
+Right now, the whole journey is being partitioned into days using a greedy algorithm.
+
+To decide where we'll be for a meal, we find the segment we'll be traveling on when it's mealtime, and we use the "destination" field of that segment
+
+These have a few weird edge cases. 
+
+Day partitioning could be much smarter.
+
+Also, if we're on a long segment during lunchtime, that schedules lunch for around 3 or 4. 
+
+We should interpolate on those segments, so we can find a better coordinate for lunch
+
+
+"""
+
+
+
+
 def printAsTime(totalSeconds):
 	hours = int(math.floor(totalSeconds/(60*60)))
 	mins = totalSeconds/60 - hours*60
 	return str(hours) + ":" + str(mins)
 
-
 def main():
 	fullJourney = makeRequest("Providence,RI", "San Francisco,CA")
 	dayJourneys = splitRouteIntoDays(fullJourney)
-
 	for day in dayJourneys:
-		# print sum([step["duration"]["value"] for step in day["steps"]])/(60*60)
+
+		# Debugging printlines. Prints out the whole journey
 		elapsed = 9*60*60
 		for step in day["steps"]:
 			elapsed += step["duration"]["value"]
 			print printAsTime(elapsed), "\t->\t",step["distance"]["value"]
+
+
 		meals = findMealLocation(day)
 		for time, coordinate in meals:
 			print "We'll be eating at", coordinate["lat"], ",", coordinate["lng"], "at", printAsTime(time)
-		print "next day"
+		print ""
 
 
 """ Makes the API request, parses it, and returns a pathObject
@@ -36,12 +60,14 @@ def makeRequest(startLocation, endLocation):
 	assembledURL = url + origin + "&" + destination
 	response = json.loads(urllib.urlopen(assembledURL).read())
 	if response["status"] != "OK":
-		print "Warning! Status is not okay" # should throw error?
+		print "Warning! Status is not okay" # should throw error? 					<-------------------------------------???
 		return None
 	# See https://developers.google.com/maps/documentation/directions/#DirectionsResponses
 	# for details about the fields returned by the API request.
 	return parseLegHelper(response["routes"][0]["legs"][0])
 
+""" Helps parse the API request, specifically the "leg" field returned by Google
+"""
 def parseLegHelper(leg):
 	# A leg as defined by Google is a poriton of the path, 
 	# if we use waypoints. Otherwise, it's the whole path
@@ -74,8 +100,14 @@ def splitRouteIntoDays(pathObject, minHours=6, maxHours=12):
 
 	days = []
 
+	# Right now, I take the average of min and max
+	# and say that's how long we travel
 	idealSeconds = ((minHours + maxHours) / 2)*60*60
 
+
+	# Okay, so this is a bad alogirthm. It greedily goes
+	# through the steps, to carve out segments of the journey.
+	# Paul Valiant would cry. 
 	steps = pathObject["steps"]
 	while len(steps) > 0:
 		i = findTimeHelper(steps, idealSeconds)
