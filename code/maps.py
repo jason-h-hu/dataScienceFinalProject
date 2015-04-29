@@ -40,7 +40,6 @@ def getMeals(start, end, date):
 		for secondsEllpased, location in currentMeals:
 			timedelta = datetime.timedelta(0, secondsEllpased)
 			meals.append((currentDay + timedelta, location))
-			print currentDay + timedelta
 		currentDay = currentDay + daytime
 	return meals
 
@@ -151,7 +150,7 @@ def interpolateSegment(segment, startTime, desiredTime):
 	p = (desiredTime - startTime)/segment["duration"]["value"]
 	lat = interpolate(segment["start_location"]["lat"], segment["end_location"]["lat"], p)
 	lng = interpolate(segment["start_location"]["lng"], segment["end_location"]["lng"], p)
-	return lat, lng
+	return {"lat":lat, "lng" lng}
 
 def interpolate(x1, x2, p):
 	return x1 + (x2 - x1)*p
