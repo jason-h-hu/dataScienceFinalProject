@@ -123,7 +123,6 @@ def query_api(location):
     businesses = response.get('businesses')
     num_restaurants_found = len(businesses)
 
-    print num_restaurants_found
     if num_restaurants_found==0: #TODO play around with this?
         return None
     else:
@@ -186,17 +185,13 @@ def query_api(location):
 
 def main():
     parser = argparse.ArgumentParser()
-
-    # parser.add_argument('-q', '--term', dest='term', default=DEFAULT_TERM, type=str, help='Search term (default: %(default)s)')
-    # parser.add_argument('-l', '--location', dest='location', default=DEFAULT_LOCATION, type=str, help='Search location (default: %(default)s)')
     parser.add_argument('-ll', '--ll', dest='ll', default=SARAH_HOUSE, type=str, help='Search location (default: %(default)s)')
 
     input_values = parser.parse_args()
 
     try:
-        # query_api(input_values.term, input_values.location)
         query_api(input_values.ll)
-        # query_api(LL)
+       
     except urllib2.HTTPError as error:
         sys.exit('Encountered HTTP error {0}. Abort program.'.format(error.code))
 
