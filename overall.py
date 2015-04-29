@@ -1,4 +1,4 @@
-import yelpPlay
+import yelp
 import argparse
 import urllib
 import urllib2
@@ -27,7 +27,12 @@ def main():
     input_values = parser.parse_args()
 
     try:
-        yelpPlay.query_api(input_values.ll)
+        restaurant_list = yelp.query_api(input_values.ll)
+        for restaurant in restaurant_list:
+            lat = restaurant['coord']['latitude']
+            lng = restaurant['coord']['longitude']
+            name = restaurant['name']
+            print queryGoogle(lat, lng, name)
         #next we need to write it so that yelp play will make a list of lat, long, and name to pass into googlep lay and we need to have it so that google play will return a list of reviews or however paige wants it
         # TODO start here 
         # query_api(LL)

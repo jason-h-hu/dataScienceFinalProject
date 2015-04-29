@@ -128,11 +128,38 @@ def query_api(location):
         return None
     else:
         # restaurant = {coord:{lat:<float>,lng:<float>}, img_url:<str>, name:<string>, phone_num:<str>,
-        # address:<list<str>>, rest_url:<str>, num_yelp_reviews:<int>, dist_from_ll:<float>, 
-        # review_list:[{review_author:<str>,review_star:<float>,review_text:<str>},{},..], 
+        # address:<list<str>>, rest_url:<str>, num_yelp_reviews:<int>, dist_from_ll:<float>, yelp_review:<str>, 
+        # google_review_list:[{review_author:<str>,review_star:<float>,review_text:<str>},{},..], 
         # google_star:<float>, yelp_star:<float>,google_place_id:<str>,yelp_id:<str>}
         for bus in businesses:
+            name             = bus['name']
+            yelp_star        = bus['rating']
+            rest_url         = bus['url']
+            phone_num        = bus['phone']
+            yelp_review      = bus['snippet_text']
+            img_url          = bus['image_url']
+            address          = bus['location']['display_address']
+            yelp_id          = bus['id']
+            coord            = bus['location']['coordinate']
+            num_yelp_reviews = bus['review_count']
+            dist_from_ll     = bus['distance']
             
+            restaurant = {}
+
+            restaurant['name']             = name
+            restaurant['yelp_star']        = yelp_star
+            restaurant['rest_url']         = rest_url
+            restaurant['phone_num']        = phone_num
+            restaurant['yelp_review']      =yelp_review
+            restaurant['img_url']          = img_url
+            restaurant['address']          = address
+            restaurant['yelp_id']          = yelp_id
+            restaurant['coord']            = coord
+            restaurant['num_yelp_reviews'] = num_yelp_reviews
+            restaurant['dist_from_ll']     = dist_from_ll
+
+
+
             print "NEW BUS!", bus
 
 
