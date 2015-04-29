@@ -26,9 +26,9 @@ def get_place_id(lat,lng,name):
   response = urllib.urlopen(MyUrl)
   jsonRaw = response.read()
   jsonData = json.loads(jsonRaw)
-  print jsonData
-  print jsonData['results'][0]['place_id']
-  return jsonData['results'][0]['place_id']
+  # print jsonData
+  # print jsonData['results'][0]['place_id']
+  return (jsonData['results'][0]['place_id'], jsonData['results'][0]['rating'])
 
 #This is a helper to grab the Json data that I want in a list
 def IterJson(place):
@@ -47,9 +47,16 @@ def get_reviews(place_id):
   response = urllib.urlopen(MyUrl)
   jsonRaw = response.read()
   jsonData = json.loads(jsonRaw)
-  reviews = jsonData['result']['reviews']
-  print reviews
-  return reviews
+  reviewData = jsonData['result']['reviews']
+  review_list = []
+  for review in reviewData:
+    review_dict = {}
+    review_dict['review_star']=review['rating']
+    review_dict['review_author']=review['author_name']
+    review_dict['review_text'] = review['text']
+    review_list.append(review_dict)
+  # print review_list
+  return review_list
 
 
 
@@ -83,8 +90,14 @@ def main():
     input_values = parser.parse_args()
 
     try:
-        place_id = get_place_id(input_values.lat,input_values.lng,input_values.name)
-        get_reviews(place_id)
+        (place_id,rating) = get_place_id(input_values.lat,input_values.lng,input_values.name)
+        review_list=get_reviews(place_id)
+        googleDict = {}
+        googleDict['google_place_id']=place_id
+        googleDict['googe_rating']=rating
+        googleDict['reviews'] = review_list
+        return googleDict
+
         # query_api(LL)
     except urllib2.HTTPError as error:
         sys.exit('Encountered HTTP error {0}. Abort program.'.format(error.code))
