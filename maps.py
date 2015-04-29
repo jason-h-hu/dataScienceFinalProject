@@ -1,7 +1,7 @@
 import urllib
 import json
 import math
-
+import datetime
 
 """
 
@@ -22,30 +22,31 @@ We should interpolate on those segments, so we can find a better coordinate for 
 
 """
 
+""" This is the only function you all will care about. 
+Takes in a start and end location, as words
+date is a datetime.datetime() object
 
-
-
-def printAsTime(totalSeconds):
-	hours = int(math.floor(totalSeconds/(60*60)))
-	mins = totalSeconds/60 - hours*60
-	return str(hours) + ":" + str(mins)
-
-def main():
-	fullJourney = makeRequest("Providence,RI", "San Francisco,CA")
+Returns a list of (timestamp, coordinate) of all the meals we want
+this is a datetime.datetime() object and a (int, int) respectively
+"""
+def getMeals(start, end, date):
+	fullJourney = makeRequest(start, end)
 	dayJourneys = splitRouteIntoDays(fullJourney)
+	meals = []
+	daytime = datetime.timedelta(1)
+	currentDay = datetime.datetime(date.year, date.month, date.day, 9)
 	for day in dayJourneys:
+		currentMeals = findMealLocation(day)
+		for secondsEllpased, location in currentMeals:
+			timedelta = datetime.timedelta(0, secondsEllpased)
+			meals.append((currentDay + timedelta, location))
+		currentDay = currentDay + daytime
+	return meals
 
-		# Debugging printlines. Prints out the whole journey
-		elapsed = 9*60*60
-		for step in day["steps"]:
-			elapsed += step["duration"]["value"]
-			print printAsTime(elapsed), "\t->\t",step["distance"]["value"]
 
-
-		meals = findMealLocation(day)
-		for time, coordinate in meals:
-			print "We'll be eating at", coordinate["lat"], ",", coordinate["lng"], "at", printAsTime(time)
-		print ""
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# DANGER DANGER! This is all helper functions. You shouldn't need to call any of these functions! 
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 """ Makes the API request, parses it, and returns a pathObject
@@ -53,7 +54,7 @@ def main():
 def makeRequest(startLocation, endLocation):
 
 	# Assembling the API request. Maybe we should do some
-	# input checking?
+	# input checking?																<-------------------------------------???
 	url = "http://maps.googleapis.com/maps/api/directions/json?"
 	origin = "origin=" + startLocation
 	destination = "destination=" + endLocation
@@ -67,6 +68,8 @@ def makeRequest(startLocation, endLocation):
 	return parseLegHelper(response["routes"][0]["legs"][0])
 
 """ Helps parse the API request, specifically the "leg" field returned by Google
+Takes in the really verbose description, and filters it down to just the
+distance, duration, start_location, and end_location field
 """
 def parseLegHelper(leg):
 	# A leg as defined by Google is a poriton of the path, 
@@ -141,7 +144,16 @@ def findMealLocation(pathObject, departureTime=9, lunch=12, dinner=18):
 	return [(lunchtime, lunchlocation), (dinnertime, dinnerlocation)]
 
 
+def printAsTime(totalSeconds):
+	hours = int(math.floor(totalSeconds/(60*60)))
+	mins = totalSeconds/60 - hours*60
+	return str(hours) + ":" + str(mins)
 
-	pass
+
+
+def main():
+	print getMeals("Providence,RI", "San Francisco,CA", datetime.datetime(2015, 5, 27))
+
+
 if __name__ == '__main__':
 	main()
