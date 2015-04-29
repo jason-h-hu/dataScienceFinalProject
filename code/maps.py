@@ -34,12 +34,13 @@ def getMeals(start, end, date):
 	dayJourneys = splitRouteIntoDays(fullJourney)
 	meals = []
 	daytime = datetime.timedelta(1)
-	currentDay = datetime.datetime(date.year, date.month, date.day, 9)
+	currentDay = datetime.datetime(date.year, date.month, date.day, 0)
 	for day in dayJourneys:
 		currentMeals = findMealLocation(day)
 		for secondsEllpased, location in currentMeals:
 			timedelta = datetime.timedelta(0, secondsEllpased)
 			meals.append((currentDay + timedelta, location))
+			print currentDay + timedelta
 		currentDay = currentDay + daytime
 	return meals
 
@@ -134,15 +135,26 @@ def findMealLocation(pathObject, departureTime=9, lunch=12, dinner=18):
 	meals = []
 	steps = pathObject["steps"]
 	l = findTimeHelper(steps, (lunch-departureTime)*60*60)
-	lunchtime = sum([step["duration"]["value"] for step in steps[:l]])
-	lunchlocation = steps[l-1]["end_location"]
+	lunchtime = sum([step["duration"]["value"] for step in steps[:max(l-1, 0)]])
+	lunchlocation = interpolateSegment(steps[l-1], lunchtime, lunch*60*60)
+	lunchtime = lunch*60*60
 
 	d = findTimeHelper(steps, (dinner-departureTime)*60*60)
-	dinnertime = lunchtime + sum([step["duration"]["value"] for step in steps[l:d]])
-	dinnerlocation = steps[d-1]["end_location"]
+	dinnertime = sum([step["duration"]["value"] for step in steps[:max(d-1, 0)]])
+	dinnerlocation = interpolateSegment(steps[d-1], dinnertime, dinner*60*60)
+	dinnertime = dinner*60*60
 
 	return [(lunchtime, lunchlocation), (dinnertime, dinnerlocation)]
 
+
+def interpolateSegment(segment, startTime, desiredTime):
+	p = (desiredTime - startTime)/segment["duration"]["value"]
+	lat = interpolate(segment["start_location"]["lat"], segment["end_location"]["lat"], p)
+	lng = interpolate(segment["start_location"]["lng"], segment["end_location"]["lng"], p)
+	return lat, lng
+
+def interpolate(x1, x2, p):
+	return x1 + (x2 - x1)*p
 
 def printAsTime(totalSeconds):
 	hours = int(math.floor(totalSeconds/(60*60)))
