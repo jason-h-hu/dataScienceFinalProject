@@ -127,62 +127,62 @@ def query_api(location):
     if num_restaurants_found==0: #TODO play around with this?
         return None
     else:
+        restaurant_list = []
         # restaurant = {coord:{lat:<float>,lng:<float>}, img_url:<str>, name:<string>, phone_num:<str>,
         # address:<list<str>>, rest_url:<str>, num_yelp_reviews:<int>, dist_from_ll:<float>, yelp_review:<str>, 
         # google_review_list:[{review_author:<str>,review_star:<float>,review_text:<str>},{},..], 
         # google_star:<float>, yelp_star:<float>,google_place_id:<str>,yelp_id:<str>}
         for bus in businesses:
-            name             = bus['name']
-            yelp_star        = bus['rating']
-            rest_url         = bus['url']
-            phone_num        = bus['phone']
-            yelp_review      = bus['snippet_text']
-            img_url          = bus['image_url']
-            address          = bus['location']['display_address']
-            yelp_id          = bus['id']
-            coord            = bus['location']['coordinate']
-            num_yelp_reviews = bus['review_count']
-            dist_from_ll     = bus['distance']
-            
+
             restaurant = {}
 
-            restaurant['name']             = name
-            restaurant['yelp_star']        = yelp_star
-            restaurant['rest_url']         = rest_url
-            restaurant['phone_num']        = phone_num
-            restaurant['yelp_review']      =yelp_review
-            restaurant['img_url']          = img_url
-            restaurant['address']          = address
-            restaurant['yelp_id']          = yelp_id
-            restaurant['coord']            = coord
-            restaurant['num_yelp_reviews'] = num_yelp_reviews
-            restaurant['dist_from_ll']     = dist_from_ll
+            if 'name' in bus:
+                name = bus['name']
+                restaurant['name'] = name
 
+            if 'rating' in bus:
+                yelp_star = bus['rating']
+                restaurant['yelp_star'] = yelp_star
 
+            if 'url' in bus:
+                rest_url = bus['url']
+                restaurant['rest_url'] = rest_url
 
-            print "NEW BUS!", bus
+            if 'phone' in bus:
+                phone_num = bus['phone']
+                restaurant['phone_num'] = phone_num
 
+            if 'snippet_text' in bus:
+                yelp_review = bus['snippet_text']
+                restaurant['yelp_review'] = yelp_review
 
+            if 'image_url' in bus:
+                img_url = bus['image_url']
+                restaurant['img_url'] = img_url
 
-    # if not businesses:
-    #     print u'No businesses in {0} found.'.format(location)
-    #     return
-    # # print "\n\n\n businesses"
-    # print "length"
-    # print len(businesses)
-    # print businesses
-    # # print businesses
-    # business_id = businesses[0]['id']
+            if 'location' in bus:
+                if 'display_address' in bus['location']:      
+                    address = bus['location']['display_address']
+                    restaurant['address'] = address
+                if 'coordinate' in bus['location']:
+                    coord = bus['location']['coordinate']
+                    restaurant['coord'] = coord
 
-    # print u'{0} businesses found, querying business info for the top result "{1}" ...'.format(
-    #     len(businesses),
-    #     business_id
-    # )
+            if 'id' in bus:
+                yelp_id = bus['id']
+                restaurant['yelp_id'] = yelp_id
 
-    # response = get_business(business_id)
-    # print u'Result for business "{0}" found:'.format(business_id)
-    # pprint.pprint(response, indent=2)
+            if 'review_count' in bus:
+                num_yelp_reviews = bus['review_count']
+                restaurant['num_yelp_reviews'] = num_yelp_reviews
 
+            if 'distance' in bus:
+                dist_from_ll = bus['distance']
+                restaurant['dist_from_ll'] = dist_from_ll
+
+            restaurant_list.append(restaurant)
+
+        return restaurant_list
 
 def main():
     parser = argparse.ArgumentParser()
