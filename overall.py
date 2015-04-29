@@ -29,13 +29,16 @@ def main():
     try:
         restaurant_list = yelp.query_api(input_values.ll)
         for restaurant in restaurant_list:
-            lat = restaurant['coord']['latitude']
-            lng = restaurant['coord']['longitude']
-            name = restaurant['name']
-            print queryGoogle(lat, lng, name)
-        #next we need to write it so that yelp play will make a list of lat, long, and name to pass into googlep lay and we need to have it so that google play will return a list of reviews or however paige wants it
-        # TODO start here 
-        # query_api(LL)
+            if 'coord' in restaurant:
+                lat = restaurant['coord']['latitude']
+                lng = restaurant['coord']['longitude']
+            if 'name' in restaurant:
+                name = restaurant['name']
+            google_dict = queryGoogle(lat, lng, name)
+            restaurant['google_place_id'] = google_dict['google_place_id']
+            restaurant['google_rating'] = google_dict['googe_rating']
+            restaurant['google_review_list'] = google_dict['reviews']
+        #how tdo we return?
     except urllib2.HTTPError as error:
         sys.exit('Encountered HTTP error {0}. Abort program.'.format(error.code))
 
