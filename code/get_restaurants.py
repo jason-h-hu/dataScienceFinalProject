@@ -1,7 +1,7 @@
 import yelp
 import argparse
 import urllib
-import googlePlaces
+import google_places
 import urllib2
 
 # input: latitude (float) and longitude (float)
@@ -26,11 +26,16 @@ def get_restaurants(lat=SARAH_HOUSE_LAT,lng=SARAH_HOUSE_LNG):
         if 'name' in restaurant:
             name = restaurant['name']
         if lat and lng and name:
-            google_dict = googlePlaces.queryGoogle(lat, lng, name)
+            google_dict = google_places.queryGoogle(lat, lng, name)
             if (google_dict!=None):
                 restaurant['google_place_id'] = google_dict['google_place_id']
                 restaurant['google_rating'] = google_dict['googe_rating']
                 restaurant['google_review_list'] = google_dict['reviews']
+            else:
+                restaurant['google_place_id'] = ""
+                restaurant['google_rating'] = None
+                restaurant['google_review_list'] = []
+
     return restaurant_list
 
 

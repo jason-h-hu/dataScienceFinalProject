@@ -19,13 +19,15 @@ import operator
 shelfFile = 'data/prob_dict_shelf'
 
 
-def build_text_field(rest_dict):
+def build_text_field(restaurant):
 	text_string = restaurant["yelp_review"]
+
 	for review in restaurant["google_review_list"]:
-		text_string = text_string+" "+restaurant["google_review_list"]["review_text"]
+		text_string = text_string+" "+review["review_text"]
 
 	text_string = data_cleaning.clean(text_string)
-	return text_string.split()
+	
+	return text_string.split() if text_string else []
 
 
 
@@ -43,8 +45,8 @@ def determine_unique_words(rest_text, prob_dict):
 def build_words_entry(location_list):
 
 	for restaurant in location_list:
-		prob_dict = shelve.open.(shelfFile)
-		rest_text = build_text_field(prob_dict, restaurant)
+		prob_dict = shelve.open(shelfFile)
+		rest_text = build_text_field(restaurant)
 		unique_words = determine_unique_words(rest_text, prob_dict)
 		restaurant["unique_words"] = unique_words
 
