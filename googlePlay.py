@@ -59,7 +59,15 @@ def get_reviews(place_id):
   return review_list
 
 
-
+def queryGoogle(lat, lng, name):
+  (place_id,rating) = get_place_id(lat, lng, name)
+  review_list=get_reviews(place_id)
+  googleDict = {}
+  googleDict['google_place_id']=place_id
+  googleDict['googe_rating']=rating
+  googleDict['reviews'] = review_list
+  return googleDict
+  
 def main():
     #parser = argparse.ArgumentParser()
     #parser.add_argument('-ll', '--ll', dest='ll', default=SARAH_HOUSE, type=str, help='Search location (default: %(default)s)')
