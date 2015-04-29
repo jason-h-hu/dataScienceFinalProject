@@ -134,11 +134,11 @@ def findMealLocation(pathObject, departureTime=9, lunch=12, dinner=18):
 	meals = []
 	steps = pathObject["steps"]
 	l = findTimeHelper(steps, (lunch-departureTime)*60*60)
-	lunchtime = departureTime*60*60 + sum([step["duration"]["value"] for step in steps[:l]])
+	lunchtime = sum([step["duration"]["value"] for step in steps[:l]])
 	lunchlocation = steps[l-1]["end_location"]
 
 	d = findTimeHelper(steps, (dinner-departureTime)*60*60)
-	dinnertime = departureTime*60*60 + sum([step["duration"]["value"] for step in steps[:d]])
+	dinnertime = lunchtime + sum([step["duration"]["value"] for step in steps[l:d]])
 	dinnerlocation = steps[d-1]["end_location"]
 
 	return [(lunchtime, lunchlocation), (dinnertime, dinnerlocation)]
@@ -152,7 +152,7 @@ def printAsTime(totalSeconds):
 
 
 def main():
-	print getMeals("Providence,RI", "San Francisco,CA", datetime.datetime(2015, 5, 27))
+	getMeals("Providence,RI", "San Francisco,CA", datetime.datetime(2015, 5, 27))
 
 
 if __name__ == '__main__':
