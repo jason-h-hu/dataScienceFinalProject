@@ -150,7 +150,7 @@ def interpolateSegment(segment, startTime, desiredTime):
 	p = (desiredTime - startTime)/segment["duration"]["value"]
 	lat = interpolate(segment["start_location"]["lat"], segment["end_location"]["lat"], p)
 	lng = interpolate(segment["start_location"]["lng"], segment["end_location"]["lng"], p)
-	return {"lat":lat, "lng" lng}
+	return {"lat":lat, "lng": lng}
 
 def interpolate(x1, x2, p):
 	return x1 + (x2 - x1)*p
