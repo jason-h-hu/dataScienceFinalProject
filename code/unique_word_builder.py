@@ -16,6 +16,8 @@ import data_cleaning
 import shelve
 import operator
 
+shelfFile = 'data/prob_dict_shelf'
+
 
 def build_text_field(rest_dict):
 	text_string = restaurant["yelp_review"]
@@ -38,10 +40,10 @@ def determine_unique_words(rest_text, prob_dict):
 	return unique_words
 
 
-def build_words_entry(prob_dict, location_list):
+def build_words_entry(location_list):
 
 	for restaurant in location_list:
-		prob_dict = shelve.open.(prob_dict_shelf)
+		prob_dict = shelve.open.(shelfFile)
 		rest_text = build_text_field(prob_dict, restaurant)
 		unique_words = determine_unique_words(rest_text, prob_dict)
 		restaurant["unique_words"] = unique_words

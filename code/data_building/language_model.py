@@ -93,7 +93,7 @@ def main(argv):
         word_count(training)
         clean_words()
         set_prob()
-        probs_to_save = shelve.open("prob_dict_shelf.txt", writeback=True)
+        probs_to_save = shelve.open("data/prob_dict_shelf", writeback=True)
         
         for p in prob_dict:
             probs_to_save[p] = prob_dict[p]

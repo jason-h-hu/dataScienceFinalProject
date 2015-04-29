@@ -1,6 +1,8 @@
 import argparse
 import maps
 from datetime import date
+import get_restaurants
+import unique_word_builder
 
 """
 Runs the full application, printing to the console a list of the top restaurants and reviews
@@ -13,7 +15,11 @@ def run_app(d, start, end):
 	print 'Finding places to eat for a road trip starting '+str(d)+' at '+start+' and ending at '+end
 	meals = maps.getMeals(start, end, d)
 	for m in meals:
-		print 'At '+str(m[0])+', eat at '+str(m[1]['lat'])+', '+str(m[1]['lng'])
+		coords = m[1]
+		rests = get_restaurants.get_restaurants(coords['lat'], coords['lng'])
+		rests = unique_word_builder.build_words_entry(rests)
+		print m[0],rests[:10]
+
 
 """
 Simply takes command line arguments and runs the app - see run_app for more details
