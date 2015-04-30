@@ -27,18 +27,20 @@ def build_text_field(restaurant):
 
 	text_string = data_cleaning.clean(text_string)
 	
-	return text_string.split() if text_string else []
+	return text_string.split() if len(text_string)>1 else []
 
 
 
 def determine_unique_words(rest_text, prob_dict):
-	interesting_words_dict = defaultdict()
+	interesting_words_dict = defaultdict(lambda: 0.0)
 	for word in rest_text:
 		if word in prob_dict:
 			interesting_words_dict[word] += (1/prob_dict[word])
 
 	sorted_words = sorted(interesting_words_dict.items(), key=operator.itemgetter(1))
 	unique_words =  sorted_words[:10]
+	for i in range(len(unique_words)):
+		unique_words[i] = unique_words[i][0]
 	return unique_words
 
 
@@ -48,6 +50,7 @@ def build_words_entry(location_list):
 		prob_dict = shelve.open(shelfFile)
 		rest_text = build_text_field(restaurant)
 		unique_words = determine_unique_words(rest_text, prob_dict)
+		print "unique_words", unique_words
 		restaurant["unique_words"] = unique_words
 
 		prob_dict.close()

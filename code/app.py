@@ -18,7 +18,7 @@ def run_app(d, start, end):
 		coords = m[1]
 		rests = get_restaurants.get_restaurants(coords['lat'], coords['lng'])
 		rests = unique_word_builder.build_words_entry(rests)
-		print m[0],rests[:10]
+		#print m[0],rests[:10]
 
 
 """
