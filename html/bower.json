@@ -1,13 +1,14 @@
 {
-  "name": "datascience-final",
-  "version": "0.0.1",
+  "name": "data-science-final",
+  "version": "1.0.0",
   "dependencies": {
     "angular": "~1.3.15",
+    "bootstrap": "~3.3.4",
     "angular-bootstrap": "~0.12.1",
     "angular-ui-router": "~0.2.14",
     "angular-ui-utils": "~0.1.1"
   },
-  "devDependencies": {
-    "bootstrap": "~3.3.4"
+  "resolutions": {
+    "angular": "~1.3.15"
   }
 }
