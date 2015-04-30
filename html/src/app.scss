@@ -1,0 +1,10 @@
+/**
+ * MAIN
+ * Does all global imports to create one main scss file
+ * for full app and all distinct parts
+ */
+
+@import 'sass/colors';
+@import 'sass/fonts';
+@import 'sass/extensions';
+@import 'views/views';

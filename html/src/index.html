@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="AppCtrl">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title ng-bind="pageTitle+' | '+appName"></title>
+  <!-- inject:css -->
+  <!-- endinject -->
+</head>
+
+<body>
+  <!-- Template view for app screens -->
+  <div ui-view="header"></div>
+  <div ui-view="content"></div>
+  <div ui-view="footer"></div>
+
+  <!-- inject:js -->
+  <!-- endinject -->
+</body>
+</html>
+
