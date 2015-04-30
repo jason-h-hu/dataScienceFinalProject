@@ -22,7 +22,28 @@ import re
 import string as str
 
 bus_dict = defaultdict(lambda :False)
-stop_list = ['get','just','went','on','at','go',"lot",'all', 'whys', 'being', 'over', 'isnt', 'through', 'yourselves', 'its', 'before', 'wed', 'with', 'had', 'should', 'to', 'lets', 'under', 'ours', 'has', 'ought', 'do', 'them', 'his', 'very', 'cannot', 'they', 'werent', 'not', 'during', 'yourself', 'him', 'nor', 'wont', 'did', 'theyre', 'this', 'she', 'each', 'havent', 'where', 'shed', 'because', 'doing', 'theirs', 'some', 'whens', 'up', 'are', 'further', 'ourselves', 'out', 'what', 'for', 'heres', 'while', 'does', 'above', 'between', 'youll', 'be', 'we', 'who', 'were', 'here', 'hers', 'by', 'both', 'about', 'would', 'wouldnt', 'didnt', 'ill', 'against', 'arent', 'youve', 'theres', 'or', 'thats', 'weve', 'own', 'whats', 'dont', 'into', 'youd', 'whom', 'down', 'doesnt', 'theyd', 'couldnt', 'your', 'from', 'her', 'hes', 'there', 'only', 'been', 'whos', 'hed', 'few', 'too', 'themselves', 'was', 'until', 'more', 'himself', 'on', 'but', 'you', 'hadnt', 'shant', 'mustnt', 'herself', 'than', 'those', 'he', 'me', 'myself', 'theyve', 'these', 'cant', 'below', 'of', 'my', 'could', 'shes', 'and', 'ive', 'then', 'wasnt', 'is', 'am', 'it', 'an', 'as', 'itself', 'im', 'at', 'have', 'in', 'id', 'if', 'again', 'hasnt', 'theyll', 'no', 'that', 'when', 'same', 'any', 'how', 'other', 'which', 'shell', 'shouldnt', 'our', 'after', 'most', 'such', 'why', 'wheres', 'a', 'hows', 'off', 'i', 'youre', 'well', 'yours', 'their', 'so', 'the', 'having', 'once']
+stop_list = ['get','just','went','will','on', 'us', \
+'at','go','lot','all', 'whys', 'being', 'over', 'isnt', \
+'through', 'yourselves', 'its', 'before', 'wed', 'with', \
+'had', 'should', 'to', 'lets', 'under', 'ours', 'has', 'ought', \
+'do', 'them', 'his', 'very', 'cannot', 'they', 'werent', 'not', \
+'during', 'yourself', 'him', 'nor', 'wont', 'did', 'theyre', \
+'this', 'she', 'each', 'havent', 'where', 'shed', 'because', \
+'doing', 'theirs', 'some', 'whens', 'up', 'are', 'further', \
+'ourselves', 'out', 'what', 'for', 'heres', 'while', 'does', \
+'above', 'between', 'youll', 'be', 'we', 'who', 'were', 'here', \
+'hers', 'by', 'both', 'about', 'would', 'wouldnt', 'didnt', 'ill', \
+'against', 'arent', 'youve', 'theres', 'or', 'thats', 'weve', 'own', \
+'whats', 'dont', 'into', 'youd', 'whom', 'down', 'doesnt', 'theyd', \
+'couldnt', 'your', 'from', 'her', 'hes', 'there', 'only', 'been', \
+'whos', 'hed', 'few', 'too', 'themselves', 'was', 'until', 'more', \
+'himself', 'on', 'but', 'you', 'hadnt', 'shant', 'mustnt', 'herself', 'than', \
+'those', 'he', 'me', 'myself', 'theyve', 'these', 'cant', 'below', 'of', 'my',\
+'could', 'shes', 'and', 'ive', 'then', 'wasnt', 'is', 'am', 'it', 'an', 'as',\
+'itself', 'im', 'at', 'have', 'in', 'id', 'if', 'again', 'hasnt', 'theyll',\
+'no', 'that', 'when', 'same', 'any', 'how', 'other', 'which', 'shell',\
+'shouldnt', 'our', 'after', 'most', 'such', 'why', 'wheres', 'a', 'hows',\
+'off', 'i', 'youre', 'well', 'yours', 'their', 'so', 'the', 'having', 'once']
 
 
 def pre_clean(review_file):
@@ -60,6 +81,9 @@ def clean(review):
 
 		else: #stems all other words
 			word = PorterStemmer().stem(word, 0,len(word)-1)
+
+		if word in stop_list:
+			continue
 
 		out_review.append(word)
 
