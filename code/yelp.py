@@ -48,7 +48,7 @@ def request(host, path, url_params=None):
         urllib2.HTTPError: An error occurs from the HTTP request.
     """
     url_params = url_params or {}
-    url = 'http://{0}{1}?'.format(host, urllib.quote(path.encode('utf8')))
+    url = 'http://{0}{1}?'.format(host, urllib.quote(path.encode('utf-8')))
 
     consumer = oauth2.Consumer(CONSUMER_KEY, CONSUMER_SECRET)
     oauth_request = oauth2.Request(method="GET", url=url, parameters=url_params)
@@ -63,7 +63,7 @@ def request(host, path, url_params=None):
     token = oauth2.Token(TOKEN, TOKEN_SECRET)
     oauth_request.sign_request(oauth2.SignatureMethod_HMAC_SHA1(), consumer, token)
     signed_url = oauth_request.to_url()
-    
+    print "signed url", signed_url
     print u'Querying {0} ...'.format(url)
 
     conn = urllib2.urlopen(signed_url, None)
@@ -137,7 +137,7 @@ def query_api(location):
 
             if 'name' in bus:
                 name = bus['name']
-                restaurant['name'] = name
+                restaurant['name'] = name.encode('utf-8')
 
             if 'rating' in bus:
                 yelp_star = bus['rating']
