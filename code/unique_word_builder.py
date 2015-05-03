@@ -50,7 +50,7 @@ def build_words_entry(location_list):
 		prob_dict = shelve.open(shelfFile)
 		rest_text = build_text_field(restaurant)
 		unique_words = determine_unique_words(rest_text, prob_dict)
-		#print "unique_words", unique_words
+		print "unique_words", unique_words
 		restaurant["unique_words"] = unique_words
 
 		prob_dict.close()
