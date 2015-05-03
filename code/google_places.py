@@ -10,6 +10,7 @@ import argparse
 
 #Grabbing and parsing the JSON data
 def get_place_id(lat,lng,name):
+  #print "in get place id", lat,lng,name
   #making the url
   AUTH_KEY = "AIzaSyAOjjN8YD3ZudTfA1miPPY3Wm1S7Zla8Dk"
   LOCATION = str(lat) + "," + str(lng)
@@ -24,8 +25,10 @@ def get_place_id(lat,lng,name):
            '&sensor=false&key=%s') % (LOCATION, RADIUS, TYPES, NAME, AUTH_KEY)
   #grabbing the JSON result
   response = urllib.urlopen(MyUrl)
+
   jsonRaw = response.read()
   jsonData = json.loads(jsonRaw)
+  #print jsonData
   if ('results' in jsonData):
     if len(jsonData['results'])==0:
       return None

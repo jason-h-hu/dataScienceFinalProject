@@ -17,6 +17,9 @@ def run_app(d, start, end):
 	for m in meals:
 		coords = m[1]
 		rests = get_restaurants.get_restaurants(coords['lat'], coords['lng'])
+		if rests==None:
+			#TODO! obviously this is NOT only what we want to do, this is a placeholder
+			continue
 		rests = unique_word_builder.build_words_entry(rests)
 		#print m[0],rests[:10]
 

@@ -63,16 +63,14 @@ def request(host, path, url_params=None):
     token = oauth2.Token(TOKEN, TOKEN_SECRET)
     oauth_request.sign_request(oauth2.SignatureMethod_HMAC_SHA1(), consumer, token)
     signed_url = oauth_request.to_url()
-    print "signed url", signed_url
-    print u'Querying {0} ...'.format(url)
-
-    conn = urllib2.urlopen(signed_url, None)
     try:
+        conn = urllib2.urlopen(signed_url, None)
         response = json.loads(conn.read())
-    finally:
         conn.close()
+        return response
+    except:
+        return None
 
-    return response
 
 def search(location):
     """Query the Search API by a search term and location.
@@ -118,7 +116,10 @@ def query_api(location):
         term (str): The search term to query.
         location (str): The location of the business to query.
     """
+    #print "in query api, location", location
     response = search(location)
+    if response==None:
+        return None
 
     businesses = response.get('businesses')
     num_restaurants_found = len(businesses)
@@ -173,7 +174,7 @@ def query_api(location):
 
             if 'review_count' in bus:
                 num_yelp_reviews = bus['review_count']
-                restaurant['num_yelp_reviews'] = num_yelp_reviews
+                restaurant['num_yelp_reviews'] = float(num_yelp_reviews)
 
             if 'distance' in bus:
                 dist_from_ll = bus['distance']
@@ -181,6 +182,7 @@ def query_api(location):
 
             restaurant_list.append(restaurant)
 
+        #print restaurant_list
         return restaurant_list
 
 def main():
