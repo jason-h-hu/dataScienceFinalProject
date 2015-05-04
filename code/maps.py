@@ -65,39 +65,6 @@ def getMeals(start, end, date, DEPARTURE=9, LUNCHTIME=12, DINNERTIME=18, HOURSPE
 			totalSecondsTraveledToday += step["duration"]["value"]
 			totalSecondsTraveledToday %= next_mealtime
 	return meals
-	# totalSecondsTraveled = 0
-
-
-	# startDate = datetime.datetime(date.year, date.month, date.day, 9)
-	# while True:
-	# 	# def getCoordinateAtTime(pathObject, travel_time):
-	# 	totalSecondsTraveled += (LUNCHTIME - DEPARTURE)*60*60
-	# 	# currentDay = datetime.datetime(currentDay.year, currentDay.month, currentDay.day, LUNCHTIME)
-	# 	coordinate, success = getCoordinateAtTime(fullJourney, totalSecondsTraveled)
-	# 	if success:
-	# 		meals.append((secondsToTimestamp(startDate, totalSecondsTraveled), coordinate))
-	# 	else:
-	# 		break
-
-	# 	# dinnertime = datetime.datetime(currentDay.year, currentDay.month, currentDay.day, DINNERTIME)
-	# 	totalSecondsTraveled += (DINNERTIME - LUNCHTIME)*60*60
-	# 	coordinate, success = getCoordinateAtTime(fullJourney, totalSecondsTraveled)
-	# 	if success:
-	# 		meals.append((secondsToTimestamp(startDate, totalSecondsTraveled), coordinate))
-	# 	else:
-	# 		break
-
-	# 	# dinnertime = datetime.datetime(currentDay.year, currentDay.month, currentDay.day, DINNERTIME)
-	# 	totalSecondsTraveled += (HOURSPERDAY - DINNERTIME)*60*60
-	# 	# coordinate, success = getCoordinateAtTime(fullJourney, totalSecondsTraveled)
-	# 	# if success:
-	# 	# 	meals.append((dinnertime, coordinate))
-	# 	# else:
-	# 	# 	break
-
-	# 	# currentDay = currentDay + datetime.timedelta(1)
-	# return meals
-
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # DANGER DANGER! This is all helper functions. You shouldn't need to call any of these functions! 
