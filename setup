@@ -1,5 +1,12 @@
 #! /bin/bash
 
+# Install node stuff
+npm config set prefix $(pwd)
+npm install -g gulp
+cd html && npm install
+cd html && bower install
+
+# Install backend python stuff
 virtualenv backend
 source backend/bin/activate
 pip install Flask
@@ -7,5 +14,7 @@ pip install numpy
 pip install nltk
 pip install oauth2
 deactivate
+
+
 echo
 echo "[Road Trip] All installed! To run, do source backend/bin/activate and start up the servers"
