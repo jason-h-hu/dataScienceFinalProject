@@ -22,6 +22,15 @@ We should interpolate on those segments, so we can find a better coordinate for 
 
 """
 
+
+
+
+LUNCHSECS = 12*60*60
+DINNERSECS = 18*60*60
+
+
+
+
 """ This is the only function you all will care about. 
 Takes in a start and end location, as words
 date is a datetime.datetime() object
@@ -31,16 +40,24 @@ this is a datetime.datetime() object and a (int, int) respectively
 """
 def getMeals(start, end, date):
 	fullJourney = makeRequest(start, end)
-	dayJourneys = splitRouteIntoDays(fullJourney)
 	meals = []
-	daytime = datetime.timedelta(1)
+	startDate = datetime.datetime(date.year, date.month, date.day, 0)
 	currentDay = datetime.datetime(date.year, date.month, date.day, 0)
-	for day in dayJourneys:
-		currentMeals = findMealLocation(day)
-		for secondsEllpased, location in currentMeals:
-			timedelta = datetime.timedelta(0, secondsEllpased)
-			meals.append((currentDay + timedelta, location))
-		currentDay = currentDay + daytime
+	while True:
+		# def getCoordinateAtTime(pathObject, travel_time):
+		lunchtime = currentDay + datetime.timedelta(0, LUNCHSECS)
+		coordinate, success = getCoordinateAtTime(fullJourney, (lunchtime - startDate).total_seconds())
+		if success:
+			meals.append((lunchtime, coordinate))
+		else:
+			break
+		dinnertime = currentDay + datetime.timedelta(0, DINNERSECS)
+		coordinate, success = getCoordinateAtTime(fullJourney, (dinnertime - startDate).total_seconds())
+		if success:
+			meals.append((dinnertime, coordinate))
+		else:
+			break
+		currentDay = currentDay + datetime.timedelta(1)
 	return meals
 
 
@@ -50,6 +67,29 @@ def getMeals(start, end, date):
 
 
 """ Makes the API request, parses it, and returns a pathObject
+Input - startLocation: A string describing the start, as either words or coordinates
+		endLocation: Same, but for the end
+Returns - a pathObject dicitonary:
+	{
+		<------------- summary of the whole path ------------->
+		"distance"
+		"duration"
+		"start_location"
+		"end_location"
+		"steps": [
+			<------------- each individual segment --------->
+			{
+				"distance"
+				"duration"
+				"start_location"
+				"end_location"			
+			},
+			...	
+		]
+	}
+
+	Note, distance and duration have two fields: "value" and "text"
+	Start and end locations have two fields: "lat" and "lng"
 """
 def makeRequest(startLocation, endLocation):
 
@@ -65,13 +105,8 @@ def makeRequest(startLocation, endLocation):
 		return None
 	# See https://developers.google.com/maps/documentation/directions/#DirectionsResponses
 	# for details about the fields returned by the API request.
-	return parseLegHelper(response["routes"][0]["legs"][0])
+	leg = response["routes"][0]["legs"][0]
 
-""" Helps parse the API request, specifically the "leg" field returned by Google
-Takes in the really verbose description, and filters it down to just the
-distance, duration, start_location, and end_location field
-"""
-def parseLegHelper(leg):
 	# A leg as defined by Google is a poriton of the path, 
 	# if we use waypoints. Otherwise, it's the whole path
 	pathObjectFields = ["distance", "duration", "start_location", "end_location"]
@@ -85,85 +120,29 @@ def parseLegHelper(leg):
 
 	return pathObject
 
-# Returns the index of the step in pathObject["steps"]
-# where you'll be after traveling desiredSeconds
-def findTimeHelper(steps, desiredSeconds):
-
-	secsTraveledToday = 0
-	for i, step in enumerate(steps):
-		secsTraveledToday += step["duration"]["value"]
-		if secsTraveledToday > desiredSeconds:
-			return i+1
-
-	return len(steps)
-
-""" Returns a list of new pathObjects
-"""
-def splitRouteIntoDays(pathObject, minHours=6, maxHours=12):
-
-	days = []
-
-	# Right now, I take the average of min and max
-	# and say that's how long we travel
-	idealSeconds = ((minHours + maxHours) / 2)*60*60
-
-
-	# Okay, so this is a bad alogirthm. It greedily goes
-	# through the steps, to carve out segments of the journey.
-	# Paul Valiant would cry. 
+def getCoordinateAtTime(pathObject, travel_time):
+	time_traveled = 0
 	steps = pathObject["steps"]
-	while len(steps) > 0:
-		i = findTimeHelper(steps, idealSeconds)
-		currentSteps = steps[:i]
-		day = {	"distance": {"value": sum([step["distance"]["value"] for step in currentSteps])}, 
-				"duration": {"value": sum([step["duration"]["value"] for step in currentSteps])}, 
-				"start_location": currentSteps[0]["start_location"], 
-				"end_location": currentSteps[-1]["end_location"], 
-				"steps": currentSteps}
-		days.append(day)
-		steps = steps[i:]
+	for step in steps:
+		if step["duration"]["value"] + time_traveled >= travel_time:
+			remaining_time = travel_time - time_traveled
+			return interpolateSegment(step, remaining_time), True
+		time_traveled += step["duration"]["value"]
+	return None, False
 
-	return days
-
-""" Returns the list of (time, coordinates), if applicable
-
-pathObject - ???
-"""
-def findMealLocation(pathObject, departureTime=9, lunch=12, dinner=18):
-
-	meals = []
-	steps = pathObject["steps"]
-	l = findTimeHelper(steps, (lunch-departureTime)*60*60)
-	lunchtime = sum([step["duration"]["value"] for step in steps[:max(l-1, 0)]])
-	lunchlocation = interpolateSegment(steps[l-1], lunchtime, lunch*60*60)
-	lunchtime = lunch*60*60
-
-	d = findTimeHelper(steps, (dinner-departureTime)*60*60)
-	dinnertime = sum([step["duration"]["value"] for step in steps[:max(d-1, 0)]])
-	dinnerlocation = interpolateSegment(steps[d-1], dinnertime, dinner*60*60)
-	dinnertime = dinner*60*60
-
-	return [(lunchtime, lunchlocation), (dinnertime, dinnerlocation)]
-
-
-def interpolateSegment(segment, startTime, desiredTime):
-	p = (desiredTime - startTime)/segment["duration"]["value"]
-	lat = interpolate(segment["start_location"]["lat"], segment["end_location"]["lat"], p)
-	lng = interpolate(segment["start_location"]["lng"], segment["end_location"]["lng"], p)
+def interpolateSegment(step, travel_time):
+	p = (travel_time)/step["duration"]["value"]
+	lat = interpolate(step["start_location"]["lat"], step["end_location"]["lat"], p)
+	lng = interpolate(step["start_location"]["lng"], step["end_location"]["lng"], p)
 	return {"lat":lat, "lng": lng}
 
 def interpolate(x1, x2, p):
 	return x1 + (x2 - x1)*p
 
-def printAsTime(totalSeconds):
-	hours = int(math.floor(totalSeconds/(60*60)))
-	mins = totalSeconds/60 - hours*60
-	return str(hours) + ":" + str(mins)
-
 
 
 def main():
-	getMeals("Providence,RI", "San Francisco,CA", datetime.datetime(2015, 5, 27))
+	print getMeals("Providence,RI", "San Francisco,CA", datetime.datetime(2015, 5, 27))
 
 
 if __name__ == '__main__':
