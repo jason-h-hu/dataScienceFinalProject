@@ -23,7 +23,7 @@ The AngularJS site has [awesome documentation](https://docs.angularjs.org/guide/
 
 # Python API
 
-There's a second server that must be running to serve backend requests. It's built on Flask, with routes annotated in the python code itself. We have an API that interfaces between the backend and frontend, defined as follows:
+There's a second server that must be running to serve backend requests. It's built on Flask, with routes annotated in the python code itself. It will start on port 5000. We have an API that interfaces between the backend and frontend, defined as follows:
 - `/journey`: with start, end locations and departure time for the journey (optional: daily departure time, lunchtime preference, dinnertime preference, and hours driven per day)
 - `/restaurants`: for given mealtime and location, gives back list of restaurants
 
