@@ -1,8 +1,13 @@
 # Overview
 
-We're using AngularJS + Bootstrap as a web framework, with Gulp as the build system behind it all.
+We have two servers that are needed to run Road Trip. One uses AngularJS + Bootstrap as a web framework, with Gulp as the build system behind it all. But we also have an API server serving the backend python code running via Flask. 
 
-# Getting Started
+### Quick Run
+1. Start Angular frontend with `gulp`
+2. Start Python backend with `python app.py`
+3. Visit [http://localhost:8888](http://localhost:8888)
+
+### Getting Started
 
 Install npm if not already installed. Then, install gulp globally with `npm install -g gulp`. Then, in this directory, run `npm install`. It should take a really long time to download all node modules needed to build the project and gulp. Once that's done, run `bower install` to install web frameworks like Angular, Bootstrap, and other libraries needed. With those steps, you should have a working system.
 
@@ -15,6 +20,12 @@ To run a task, run `gulp <taskname>` or just `gulp` for the default (dev). All f
 # Angular
 
 The AngularJS site has [awesome documentation](https://docs.angularjs.org/guide/concepts), and there's another [güd tutorial by Glenn](http://glennstovall.com/blog/2013/06/27/angularjs-an-overview/). The main points are easy data binding between JS and HTML, models and controllers to segment code into easy sections, and routes. Services/factories are also useful to produce objects needed. We're using an extension to Angular's builtin routing called UI Router that allows for multiple named views on one webpage (header, content, footer, for example). [That documentation](https://github.com/angular-ui/ui-router/wiki) is also quite comprehensive.
+
+# Python API
+
+There's a second server that must be running to serve backend requests. It's built on Flask, with routes annotated in the python code itself. We have an API that interfaces between the backend and frontend, defined as follows:
+- `/journey`: with start, end locations and departure time for the journey (optional: daily departure time, lunchtime preference, dinnertime preference, and hours driven per day)
+- `/restaurants`: for given mealtime and location, gives back list of restaurants
 
 # Files Included
 - `package.json`: file that tells npm what to install to make the project run
@@ -31,6 +42,7 @@ The AngularJS site has [awesome documentation](https://docs.angularjs.org/guide/
 	- `views`: folder with templates inside, each in own folder - each has a scss file dictating style for this view, a template (HTML) in a .tpl.html file, and the Angular JS that runs it in the .js file. A view needs at minimum just an html template
 
 # Notes and Tips
+- Make sure to start up both servers! The Python server needs to be running to serve API requests, whereas the gulp server needs to be running to actually serve the website
 - To include other SASS files, those files must be prefixed with an underscore, and can be imported with `@import folder/file` (no underscore)
 - Gulp will quit itself if you modify the gulpfile while running, so you know to start it again
 - To add new modules, views, or sass files, make sure to import them in the appropriate files
