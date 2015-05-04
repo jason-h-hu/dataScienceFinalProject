@@ -1,0 +1,11 @@
+#! /bin/bash
+
+virtualenv backend
+source backend/bin/activate
+pip install Flask
+pip install numpy
+pip install nltk
+pip install oauth2
+deactivate
+echo
+echo "[Road Trip] All installed! To run, do source backend/bin/activate and start up the servers"

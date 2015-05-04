@@ -1,0 +1,19 @@
+#!/bin/bash
+trap 'killall' INT
+
+killall() {
+    trap '' INT TERM     # ignore INT and TERM while shutting down
+    echo "[Road Trip] Shutting down..."     # added double quotes
+    kill -TERM 0         # fixed order, send TERM not INT
+    wait
+    echo "[Road Trip] Done!"
+}
+
+source backend/bin/activate
+cd code && python app.py --gui & # Run backend server
+cd html && gulp & # Run gulp
+deactivate
+
+echo "[Road Trip] Running! Make sure to kill both servers when finished"
+
+cat # wait forever
