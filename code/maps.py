@@ -21,44 +21,82 @@ We should interpolate on those segments, so we can find a better coordinate for 
 
 
 """
+def getMeals(start, end, date, DEPARTURE=9, LUNCHTIME=12, DINNERTIME=18, HOURSPERDAY=12):
+	""" This is the only function you all will care about. 
+	Takes in a start and end location, as words
+	date is a datetime.datetime() object
 
-
-
-
-LUNCHSECS = 12*60*60
-DINNERSECS = 18*60*60
-
-
-
-
-""" This is the only function you all will care about. 
-Takes in a start and end location, as words
-date is a datetime.datetime() object
-
-Returns a list of (timestamp, coordinate) of all the meals we want
-this is a datetime.datetime() object and a (int, int) respectively
-"""
-def getMeals(start, end, date):
+	Returns a list of (timestamp, coordinate) of all the meals we want
+	this is a datetime.datetime() object and a (int, int) respectively
+	"""
 	fullJourney = makeRequest(start, end)
+	steps = fullJourney["steps"]
+
 	meals = []
-	startDate = datetime.datetime(date.year, date.month, date.day, 0)
-	currentDay = datetime.datetime(date.year, date.month, date.day, 0)
-	while True:
-		# def getCoordinateAtTime(pathObject, travel_time):
-		lunchtime = currentDay + datetime.timedelta(0, LUNCHSECS)
-		coordinate, success = getCoordinateAtTime(fullJourney, (lunchtime - startDate).total_seconds())
-		if success:
-			meals.append((lunchtime, coordinate))
+
+	today = datetime.datetime(date.year, date.month, date.day, DEPARTURE)
+
+	totalSecondsTraveledToday = 0
+	important_times = [(LUNCHTIME - DEPARTURE)*60*60, (DINNERTIME - DEPARTURE)*60*60, (HOURSPERDAY)*60*60]
+	i = 0
+
+	for step in steps:
+
+		# This is the time of our next meal
+		next_mealtime = important_times[i]
+
+		# If we're going to be on this step during the next mealtime ...
+		if step["duration"]["value"] + totalSecondsTraveledToday >= next_mealtime:
+
+			# If it's the last one, then we know it's the end of the day. Just reset the day counter
+			if i == len(important_times) - 1:
+				today = datetime.datetime(today.year, today.month, today.day+1, DEPARTURE)
+				totalSecondsTraveledToday += step["duration"]["value"]
+				totalSecondsTraveledToday %= next_mealtime
+
+			# Otherwise it's an actual meal. Figure out the coordinates we'll be at during the mealtime
+			else:
+				remaining_time = next_mealtime - totalSecondsTraveledToday
+				meals.append((today + datetime.timedelta(0, sum(important_times[:i+1])), interpolateSegment(step, remaining_time)))
+				totalSecondsTraveledToday += step["duration"]["value"]
+			i += 1
+			i %= len(important_times)
 		else:
-			break
-		dinnertime = currentDay + datetime.timedelta(0, DINNERSECS)
-		coordinate, success = getCoordinateAtTime(fullJourney, (dinnertime - startDate).total_seconds())
-		if success:
-			meals.append((dinnertime, coordinate))
-		else:
-			break
-		currentDay = currentDay + datetime.timedelta(1)
+			totalSecondsTraveledToday += step["duration"]["value"]
+			totalSecondsTraveledToday %= next_mealtime
 	return meals
+	# totalSecondsTraveled = 0
+
+
+	# startDate = datetime.datetime(date.year, date.month, date.day, 9)
+	# while True:
+	# 	# def getCoordinateAtTime(pathObject, travel_time):
+	# 	totalSecondsTraveled += (LUNCHTIME - DEPARTURE)*60*60
+	# 	# currentDay = datetime.datetime(currentDay.year, currentDay.month, currentDay.day, LUNCHTIME)
+	# 	coordinate, success = getCoordinateAtTime(fullJourney, totalSecondsTraveled)
+	# 	if success:
+	# 		meals.append((secondsToTimestamp(startDate, totalSecondsTraveled), coordinate))
+	# 	else:
+	# 		break
+
+	# 	# dinnertime = datetime.datetime(currentDay.year, currentDay.month, currentDay.day, DINNERTIME)
+	# 	totalSecondsTraveled += (DINNERTIME - LUNCHTIME)*60*60
+	# 	coordinate, success = getCoordinateAtTime(fullJourney, totalSecondsTraveled)
+	# 	if success:
+	# 		meals.append((secondsToTimestamp(startDate, totalSecondsTraveled), coordinate))
+	# 	else:
+	# 		break
+
+	# 	# dinnertime = datetime.datetime(currentDay.year, currentDay.month, currentDay.day, DINNERTIME)
+	# 	totalSecondsTraveled += (HOURSPERDAY - DINNERTIME)*60*60
+	# 	# coordinate, success = getCoordinateAtTime(fullJourney, totalSecondsTraveled)
+	# 	# if success:
+	# 	# 	meals.append((dinnertime, coordinate))
+	# 	# else:
+	# 	# 	break
+
+	# 	# currentDay = currentDay + datetime.timedelta(1)
+	# return meals
 
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -131,7 +169,7 @@ def getCoordinateAtTime(pathObject, travel_time):
 	return None, False
 
 def interpolateSegment(step, travel_time):
-	p = (travel_time)/step["duration"]["value"]
+	p = float(travel_time)/step["duration"]["value"]
 	lat = interpolate(step["start_location"]["lat"], step["end_location"]["lat"], p)
 	lng = interpolate(step["start_location"]["lng"], step["end_location"]["lng"], p)
 	return {"lat":lat, "lng": lng}
@@ -139,10 +177,13 @@ def interpolateSegment(step, travel_time):
 def interpolate(x1, x2, p):
 	return x1 + (x2 - x1)*p
 
+def secondsToTimestamp(start, secondsEllapsed):
+	return start + datetime.timedelta(0, secondsEllapsed)
 
 
 def main():
-	print getMeals("Providence,RI", "San Francisco,CA", datetime.datetime(2015, 5, 27))
+	for label, meal in getMeals("Providence,RI", "San Francisco,CA", datetime.datetime(2015, 5, 27)):
+		print label, "\t", meal["lat"], meal["lng"]
 
 
 if __name__ == '__main__':
