@@ -1,17 +1,13 @@
 # Overview
 
+Don't you hate it when you're stuck somewhere in the middle of Iowa and there's nothing but Sbarro and Taco Bell for miles? Make your next road trip delicious!
+
 We have two servers that are needed to run Road Trip. One uses AngularJS + Bootstrap as a web framework, with Gulp as the build system behind it all. But we also have an API server serving the backend python code running via Flask. 
 
-### Quick Run
-1. Start Angular frontend with `gulp`
-2. Start Python backend with `python app.py`
-3. Visit [http://localhost:8888](http://localhost:8888)
-
-### Getting Started
-
-Install npm if not already installed. Then, install gulp globally with `npm install -g gulp`. Then, in this directory, run `npm install`. It should take a really long time to download all node modules needed to build the project and gulp. Once that's done, run `bower install` to install web frameworks like Angular, Bootstrap, and other libraries needed. With those steps, you should have a working system.
-
-Test it by running `gulp` (equivalent to `gulp dev`). There should be some printouts showing each of the steps it's executed, the last few lines showing that a server started on a given port (8888 by default). If not, troubleshoot!
+# Quick Setup
+1. Setup the virtual environment & npm with `./setup` (will take ~5 min. Sorry.)
+2. Start the servers with `./run` (kill with ctrl-c)
+3. Visit [http://localhost:8888](http://localhost:8888) and have fun!
 
 # Gulp
 
