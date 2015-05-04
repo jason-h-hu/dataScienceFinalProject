@@ -6,14 +6,19 @@ killall() {
     echo "[Road Trip] Shutting down..."     # added double quotes
     kill -TERM 0         # fixed order, send TERM not INT
     wait
-    echo "[Road Trip] Done!"
+    echo "[Road Trip] All cleaned up."
 }
 
+export PATH="./npm-global:$PATH"
 source backend/bin/activate
-cd code && python app.py --gui & # Run backend server
-cd html && gulp & # Run gulp
+cd code
+python app.py --gui & # Run backend server
+cd ..
+cd html
+gulp & # Run gulp
+cd ..
 deactivate
 
-echo "[Road Trip] Running! Make sure to kill both servers when finished"
+echo "[Road Trip] Starting up... Should load python and gulp"
 
 cat # wait forever
