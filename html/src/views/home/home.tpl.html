@@ -6,42 +6,45 @@
 		<span class="help-block">Enter locations as coordinate data or place name</span>  
 
 		<!-- Start -->
-		<div class="form-group">
+		<div class="form-group col-md-7">
 			<label class="control-label" for="start">Starting Location</label>  
 			<input name="start" type="text" ng-model="start" placeholder="Providence, RI" class="form-control input-lg" required>
 		</div>
 
 		<!-- End -->
-		<div class="form-group">
+		<div class="form-group col-md-7">
 			<label class="control-label" for="end">Ending Location</label>  
 			<input name="end" type="text" ng-model="end" placeholder="San Francisco, CA" class="form-control input-lg" required>
 		</div>
 
 		<!-- Date -->
-		<div class="form-group">
+		<div class="form-group col-md-7">
 			<label class="control-label" for="date">Date to Start</label>  
 			<input name="end" type="date" ng-model="date" placeholder="MM-dd-yyyy" class="form-control input-lg" required>
 		</div>	
-	
 
-		&nbsp;
-		<div class="form-group">
-			<button id="submit" type="submit" class="btn btn-lg btn-primary">{{buttonText}} <span ng-if="segment">({{segment}}/{{mealLocations.length}})</span></button>
+		<div class="progress-wrapper">
+			<progress-arc
+			size=250
+			stroke-width=20
+			complete="progress"
+			stroke="#337ab7"></progress-arc>
+			<button id="submit" type="submit" class="btn btn-lg btn-primary progress-text">{{buttonText}}</button> 
 		</div>
 	</form>
 
 
-	<h1 ng-show="mealLocations">Meal Times</h1>
+	<h1 ng-show="mealLocations" class="col-md-12">Meal Times</h1>
 	<ul>
-		<li ng-repeat="meal in mealLocations">On {{meal[0] | date: "MM/dd/yyyy 'at' ha"}}, eat at {{meal[1]}}</li>
+		<li ng-repeat="meal in mealLocations" class="col-md-12">On {{meal[0] | date: "MM/dd/yyyy 'at' ha"}}, eat at {{meal[1]}}</li>
 	</ul>
 
-	<h1 ng-show="restaurantOps">Restaurant Options</h1>
+	<h1 ng-show="restaurantOps" class="col-md-12">Restaurant Options</h1>
 	<ul>
-		<li ng-repeat="(d, rests) in restaurantOps">On {{d | date: "MM/dd/yyyy 'at' ha"}} your options include:
-			<ul>
-				<li ng-repeat="r in rests">{{r.name}}</li>
-			</ul>
+		<li ng-repeat="(d, rests) in restaurantOps" class="col-md-12">On {{d | date: "MM/dd/yyyy 'at' ha"}} your options include:
+		<ul>
+			<li ng-repeat="r in rests" class="col-md-12">{{r.name}}</li>
+		</ul>
 		</li>
 	</ul>
 

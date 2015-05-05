@@ -3,6 +3,26 @@
  * This file contains styles specific to the home template of the app
  */
 
+$circ_width: 250px;
+$off: 100px;
+
 div.home-page {
+	.progress-wrapper {
+		position: relative;
+		float: left;
+		margin-left: 150px;
+		margin-top: -150px;
+	}
+
+	.progress-text {
+		position: absolute;
+		top: $circ_width/2 - 18;
+		text-align:center;
+		left: $off/2;
+		width: $circ_width - $off;
+	}
+	circle {
+		transition: stroke-dashoffset 0.4s ease;
+	}
 
 }

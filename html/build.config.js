@@ -28,7 +28,8 @@ module.exports = {
       'bower_components/**/ui-bootstrap.min.js',
       'bower_components/**/ui-bootstrap-tpls.min.js',
       'bower_components/**/release/angular-ui-router.min.js',
-      'bower_components/**/ui-utils.min.js'
+      'bower_components/**/ui-utils.min.js',
+			'bower_components/**/angular-progress-arc.min.js'
     ],
     css:[
       'bower_components/**/bootstrap.min.css'
