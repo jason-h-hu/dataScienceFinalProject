@@ -12,6 +12,7 @@ import urllib
 import urllib2
 
 import oauth2
+from collections import defaultdict
 
 
 # consumer key: SF7TtjFhkf3sDWq38r5UpQ
@@ -134,7 +135,7 @@ def query_api(location):
         # google_star:<float>, yelp_star:<float>,google_place_id:<str>,yelp_id:<str>}
         for bus in businesses:
 
-            restaurant = {}
+            restaurant = defaultdict(str)
 
             if 'name' in bus:
                 name = bus['name']

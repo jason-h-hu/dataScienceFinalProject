@@ -2,4 +2,47 @@
 
 	<h1 class="welcome">Plan your next roadtrip!</h1>
 
+	<form ng-submit="getJourney()">
+		<span class="help-block">Enter locations as coordinate data or place name</span>  
+
+		<!-- Start -->
+		<div class="form-group">
+			<label class="control-label" for="start">Starting Location</label>  
+			<input name="start" type="text" ng-model="start" placeholder="Providence, RI" class="form-control input-lg" required>
+		</div>
+
+		<!-- End -->
+		<div class="form-group">
+			<label class="control-label" for="end">Ending Location</label>  
+			<input name="end" type="text" ng-model="end" placeholder="San Francisco, CA" class="form-control input-lg" required>
+		</div>
+
+		<!-- Date -->
+		<div class="form-group">
+			<label class="control-label" for="date">Date to Start</label>  
+			<input name="end" type="date" ng-model="date" placeholder="MM-dd-yyyy" class="form-control input-lg" required>
+		</div>	
+	
+
+		&nbsp;
+		<div class="form-group">
+			<button id="submit" type="submit" class="btn btn-lg btn-primary">Route Me</button>
+		</div>
+	</form>
+
+
+	<h1 ng-show="mealLocations">Meal Times</h1>
+	<ul>
+		<li ng-repeat="meal in mealLocations">On {{meal[0] | date: "MM/dd/yyyy 'at' ha"}}, eat at {{meal[1]}}</li>
+	</ul>
+
+	<h1 ng-show="restaurantOps">Restaurant Options</h1>
+	<ul>
+		<li ng-repeat="(d, rests) in restaurantOps">On {{d | date: "MM/dd/yyyy 'at' ha"}} your options include:
+			<ul>
+				<li ng-repeat="r in rests">{{r.name}}</li>
+			</ul>
+		</li>
+	</ul>
+
 </div> <!-- home container -->

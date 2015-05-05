@@ -1,8 +1,8 @@
 #! /bin/bash
 
 # Install node stuff
-npm config set prefix $(pwd)/npm-global
-npm install -g gulp
+#npm config set prefix $(pwd)/npm-global
+#npm install -g gulp
 cd html
 npm install
 bower install

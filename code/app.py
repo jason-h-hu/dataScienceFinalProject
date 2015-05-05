@@ -12,6 +12,15 @@ USERNAME = 'admin'
 PASSWORD = 'default'
 
 """
+Allows Cross-Origin so localhost:8888 can call us
+"""
+def add_cors_header(response):
+	response.headers['Access-Control-Allow-Origin'] = '*'
+	response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
+	response.headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, PATCH, DELETE, OPTIONS'
+	return response
+
+"""
 Runs the full application, printing to the console a list of the top restaurants and reviews
 Inputs: d (str: a date formatted as mm/dd/yyyy),
 		start (str: place name or latlong)
@@ -33,18 +42,17 @@ def test_run(d, start, end):
 def run_app():
 	app = Flask(__name__)
 	app.config.from_object(__name__)
-
+	app.after_request(add_cors_header)
+	
 	"""
 	To test using curl, try this command:
 	curl -H "Content-Type: application/json" -X POST -d '{"start": "Providence, RI", "end": "San Francisco, CA"}' http://127.0.0.1:5000/journey
 	"""
 	@app.route('/journey', methods=["GET", "POST"])
 	def journey():
-		# request.json
 		start = request.json["start"]
 		end = request.json["end"]
-		# http://stackoverflow.com/questions/10805589/converting-json-date-string-to-python-datetime
-		d = datetime.today()
+		d = datetime.strptime(request.json["date"], '%Y-%m-%dT%H:%M:%S.%fZ')
 		meals = maps.getMeals(start, end, d)
 		return json.dumps(meals, default=lambda x: x.isoformat() if hasattr(x, 'isoformat') else x)
 
@@ -54,15 +62,12 @@ def run_app():
 	"""
 	@app.route('/restaurants', methods=["GET", "POST"])
 	def restaurants():
-		print request.json
-
 		coords = request.json
 		rests = get_restaurants.get_restaurants(coords['lat'], coords['lng'])
 		if rests==None:
-			#TODO! obviously this is NOT only what we want to do, this is a placeholder
+			#TODO! obviously this is NOT what we want to do, this is a placeholder
 			return json.dumps([])
 		rests = unique_word_builder.build_words_entry(rests)
-
 		return json.dumps(rests, default=lambda x: x.isoformat() if hasattr(x, 'isoformat') else x)
 
 	app.run()

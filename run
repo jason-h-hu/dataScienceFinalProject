@@ -9,7 +9,7 @@ killall() {
     echo "[Road Trip] All cleaned up."
 }
 
-export PATH="./npm-global:$PATH"
+#export PATH="./npm-global:$PATH"
 source backend/bin/activate
 cd code
 python app.py --gui & # Run backend server
