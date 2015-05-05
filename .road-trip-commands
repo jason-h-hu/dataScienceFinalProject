@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Echoes with colored Road Trip text before
+echo () {
+    builtin echo "[$(tput setaf 4)Road Trip$(tput sgr0)] $1"
+}
+
+# Colors green
+success () {
+    builtin echo "$(tput setaf 2)$1$(tput sgr0)"
+}
+
+# Colors purple
+func () {
+    builtin echo "$(tput setaf 5)$1$(tput sgr0)"
+}
+
+# Adds python server prefix
+adddate() {
+    while IFS= read -r line; do
+        builtin echo "[$(tput setaf 3)Python $(date +'%T')$(tput sgr0)] $line"
+    done
+}

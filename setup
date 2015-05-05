@@ -1,6 +1,10 @@
 #! /bin/bash
 
+# Setup
+source .road-trip-commands
+
 # Install node stuff
+echo "Installing $(func 'npm') packages..."
 npm config set prefix $(pwd)/npm-global
 export PATH="./npm-global/bin/:$PATH"
 npm install -g gulp
@@ -9,14 +13,28 @@ cd html && npm install
 ../npm-global/bin/bower install
 cd ..
 npm config delete prefix
+echo "Done installing $(func 'npm') packages"
 
 # Install backend python stuff
+echo "Configuring $(func 'python') virtualenv..."
 virtualenv backend
 source backend/bin/activate
 pip install Flask
 pip install nltk
 pip install oauth2
-deactivate
 
-echo
-echo "[Road Trip] All installed! To run, do ./run from this folder"
+# These lines only needed on Mac (and only work with Homebrew and python 2.7)
+# Installs berkeley db globally, installs bsddb3, then copies over its version 
+# of pybsddb as _bsddb, allowing oauth2 to function (Mac specific error)
+if [ "$(uname)" == "Darwin" ]; then
+    echo "Installing Mac specific packages"
+    brew install berkeley-db --without-java
+    BERKELEYDB_DIR=$(find $(brew --cellar)/berkeley-db -name 6*) YES_I_HAVE_THE_RIGHT_TO_USE_THIS_BERKELEY_DB_VERSION=1 pip install bsddb3
+    sudo cp backend/lib/python2.7/site-packages/bsddb3/_pybsddb.so backend/lib/python2.7/lib-dynload/_bsddb.so
+fi
+
+# Get out of python env
+deactivate
+echo "Done installing $(func 'python') packages"
+
+echo "$(success 'Done with setup!')"

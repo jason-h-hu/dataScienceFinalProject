@@ -1,24 +1,34 @@
 #!/bin/bash
-trap 'killall' INT
 
 killall() {
     trap '' INT TERM     # ignore INT and TERM while shutting down
-    echo "[Road Trip] Shutting down..."     # added double quotes
+    echo "Shutting down..."     # added double quotes
     kill -TERM 0         # fixed order, send TERM not INT
     wait
-    echo "[Road Trip] All cleaned up."
+    echo "$(success 'Quit cleanly')"
 }
 
+# Setup
+source .road-trip-commands
 export PATH="./npm-global/bin/:$PATH"
+echo "Starting servers..."
 source backend/bin/activate
+
+# Python server
+echo "Starting $(func 'python') backend server..."
 cd code
-python app.py --gui & # Run backend server
+(python app.py --gui 3>&1 1>&2- 2>&3-) | adddate &
 cd ..
+
+# Gulp server
+echo "Starting $(func 'gulp') for frontend..."
 cd html
 gulp & # Run gulp
 cd ..
+
+# Out of environment
 deactivate
 
-echo "[Road Trip] Starting up... Should load python and gulp"
-
+# Killall activated
+trap 'killall' INT
 cat # wait forever
