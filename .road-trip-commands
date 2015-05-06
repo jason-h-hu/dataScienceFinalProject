@@ -16,8 +16,8 @@ func () {
 }
 
 # Adds python server prefix
-adddate() {
+prefix () {
     while IFS= read -r line; do
-        builtin echo "[$(tput setaf 3)Python $(date +'%T')$(tput sgr0)] $line"
+        builtin echo "[$(tput setaf 3)Python server$(tput sgr0)] $line"
     done
 }

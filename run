@@ -17,7 +17,7 @@ source backend/bin/activate
 # Python server
 echo "Starting $(func 'python') backend server..."
 cd code
-(python app.py --gui 3>&1 1>&2- 2>&3-) | adddate &
+(python app.py --gui 3>&1 1>&2- 2>&3-) | prefix &
 cd ..
 
 # Gulp server
