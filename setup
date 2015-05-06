@@ -30,6 +30,7 @@ if [ "$(uname)" == "Darwin" ]; then
     echo "Installing Mac specific packages"
     brew install berkeley-db --without-java
     BERKELEYDB_DIR=$(find $(brew --cellar)/berkeley-db -name 6*) YES_I_HAVE_THE_RIGHT_TO_USE_THIS_BERKELEY_DB_VERSION=1 pip install bsddb3
+    echo "Please enter your password to install _bsddb into the environment"
     sudo cp backend/lib/python2.7/site-packages/bsddb3/_pybsddb.so backend/lib/python2.7/lib-dynload/_bsddb.so
 fi
 
