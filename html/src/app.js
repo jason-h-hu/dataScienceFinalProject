@@ -20,6 +20,9 @@ angular.module('app', [
             'content': {
                 templateUrl: 'views/home/home.tpl.html'
             },
+            'map@home': {
+                templateUrl: 'views/map/map.tpl.html'
+            },
             'footer': {
                 templateUrl: 'views/footer/footer.tpl.html'
             }

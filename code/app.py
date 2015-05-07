@@ -56,13 +56,13 @@ def run_app():
 
 	"""
 	To test using curl, try this command:
-	curl -H "Content-Type: application/json" -X POST -d '{"start": "Providence, RI", "end": "San Francisco, CA"}' http://127.0.0.1:5000/journey
+	curl -H "Content-Type: application/json" -X POST -d '{"start": "Providence, RI", "end": "San Francisco, CA", "date":"2011-12-01T12:00:00.00Z"}' http://127.0.0.1:5000/journey
 	"""
 	@app.route('/journey', methods=["GET", "POST"])
 	def journey():
 		start = request.json["start"]
 		end = request.json["end"]
-		d = datetime.strptime(request.json["date"], '%Y-%m-%dT%H:%M:%S.%fZ')
+		d = datetime.strptime(request.json["date"], '%Y-%m-%dT%H:%M:%S.%fZ') if request.json["date"] != None else datetime.datetime.today()
 		meals = maps.getMeals(start, end, d)
 		return json.dumps(meals, default=lambda x: x.isoformat() if hasattr(x, 'isoformat') else x)
 
