@@ -3,6 +3,7 @@ angular.module('app.views.header', [])
   	$scope.isCollapsed = true;
 
   	$scope.navigation = [
-  		{ state:'home', title: 'Home' }
+  		{ state:'home', title: 'Plan Journey' },
+  		{ state:'about', title: 'About' }
   	];
   });

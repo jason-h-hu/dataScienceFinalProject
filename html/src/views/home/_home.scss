@@ -3,26 +3,34 @@
  * This file contains styles specific to the home template of the app
  */
 
-$circ_width: 250px;
-$off: 100px;
-
 div.home-page {
-	.progress-wrapper {
-		position: relative;
-		float: left;
-		margin-left: 150px;
-		margin-top: -150px;
+	.journey {
+		font-size: 1.4em;
+		color: $color_white;
+		background: transparentize($color_blue_dark, 0.5);
+		padding: 20px 15px 165px 15px;
+		h1 {
+			text-align: center;
+			margin-bottom: 50px;
+		}
 	}
-
 	.progress-text {
-		position: absolute;
-		top: $circ_width/2 - 18;
-		text-align:center;
-		left: $off/2;
-		width: $circ_width - $off;
+		float: right;
+		margin-top: -45px;
+		margin-right: -70px;
+		font-size: 1.5em;
+		text-align: center;
+		color: $color_white;
 	}
-	circle {
-		transition: stroke-dashoffset 0.4s ease;
+	.progress svg {
+		float: right;
+		margin-top: -80px;
+		margin-right: -20px;	
+		circle {
+			transition: stroke-dashoffset 0.4s ease;
+			stroke: $color_red;
+		}
 	}
+	
 
 }

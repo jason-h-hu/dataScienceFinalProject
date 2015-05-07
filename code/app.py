@@ -45,6 +45,13 @@ def run_app():
 	app.after_request(add_cors_header)
 	
 	"""
+	Clears current requests somehow (TODO!!)
+	"""
+	@app.route('/clear', methods=["POST"])
+	def clear():
+		return json.dumps({})
+
+	"""
 	To test using curl, try this command:
 	curl -H "Content-Type: application/json" -X POST -d '{"start": "Providence, RI", "end": "San Francisco, CA"}' http://127.0.0.1:5000/journey
 	"""

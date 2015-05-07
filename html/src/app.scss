@@ -8,3 +8,11 @@
 @import 'sass/fonts';
 @import 'sass/extensions';
 @import 'views/views';
+
+body {
+	background-image: url("/assets/scenic-bg.jpg");
+	background-size: 100% 100%;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+}

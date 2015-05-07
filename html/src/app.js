@@ -26,6 +26,21 @@ angular.module('app', [
         }
     })
 
+    $stateProvider.state('about',{
+        url: '/about',
+        views: {
+            'header': {
+                templateUrl: 'views/header/header.tpl.html'
+            },
+            'content': {
+                templateUrl: 'views/about/about.tpl.html'
+            },
+            'footer': {
+                templateUrl: 'views/footer/footer.tpl.html'
+            }
+        }
+    })
+
 	// Configure other router providers
 	$urlRouterProvider.otherwise('/');
 })
