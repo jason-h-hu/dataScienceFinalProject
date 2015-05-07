@@ -89,7 +89,7 @@ def clean(review):
 		if word in stop_list:
 			continue
 
-		out_review.append(word)
+		out_review.append(word.encode('utf-8'))
 
 	return " ".join(out_review)
 
