@@ -30,6 +30,8 @@
 		<progress-arc size=100 stroke-width=20 complete="progress" class="progress"></progress-arc>
 		<p class="progress-text" ng-if="progress">{{progress*100 | intNum}}%</p>
 
+	 	<div ui-view="map" class="gmap"></div>
+
 		<!-- Temporary, just shows meals and such -->
 		<h1 ng-show="mealLocations" class="col-md-12">Meal Times</h1>
 		<ul>
