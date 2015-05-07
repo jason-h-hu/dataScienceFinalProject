@@ -11,7 +11,7 @@ AUTH_KEY = "AIzaSyBXuz1jrJbf0aJYAx031Yqop0RGQ5MrxaI"
 def query_google(lat, lng, name, radius=10):
   place_info = get_place_info(lat,lng,name)
   if (place_info != None):
-    print place_info
+    # print place_info
     (place_id,rating) = place_info
     review_list=get_reviews(place_id)
     googleDict = {}
@@ -43,7 +43,7 @@ def get_place_info(lat,lng,name,radius=10):
   response = urllib.urlopen(MyUrl)
   jsonRaw = response.read()
   jsonData = json.loads(jsonRaw)
-  print jsonData
+  # print jsonData
   if ('results' in jsonData):
     if len(jsonData['results'])==0:
       return None
@@ -70,7 +70,7 @@ def get_reviews(place_id):
            '&sensor=false&key=%s') % (PLACE_ID, AUTH_KEY)
   #grabbing the JSON result
   response = urllib.urlopen(MyUrl)
-  print response
+  # print response
   jsonRaw = response.read()
   jsonData = json.loads(jsonRaw)
   reviewData = jsonData['result']['reviews']
@@ -98,7 +98,7 @@ def main():
 
     try:
         google_results = query_google(input_values.lat, input_values.lng, input_values.name, radius=10)
-        print google_results
+        # print google_results
 
     except urllib2.HTTPError as error:
         sys.exit('Encountered HTTP error {0}. Abort program.'.format(error.code))

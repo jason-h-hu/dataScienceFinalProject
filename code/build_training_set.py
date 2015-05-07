@@ -23,6 +23,9 @@ def regression():
 
     # The coefficients
     print('Coefficients: \n', regr.coef_)
+    print("classifying [[5.0,0,0],[4.5,0,0],[4.9,0,0],[4.6,0,0]]")
+    X_test = [[5.0,0,0],[4.5,0,0],[4.9,0,0],[4.6,0,0]]
+    print regr.predict(X_test)
 
 def generateData():
     myReader = csv.reader(open('toplist.csv'))
@@ -46,16 +49,16 @@ def generateData():
         # print restLong
         # print restName
         googleDict = google_places.query_google(restLat, restLong, restName)
-        print googleDict
         location = str(restLat) + "," + str(restLong)
         yelp_info = yelp.query_api(location,search_name=restName)
         print yelp_info
+
         #infoArray = [rating,sentiment, numReviews]
         if googleDict!=None:
             # print googleDict
-            print "inside"
-            print Y_train
-            print X_train
+            # print "inside"
+            # print Y_train
+            # print X_train
             infoArray = [googleDict['google_rating'],0,1]
             Y_train.append(restRanking)
             X_train.append(infoArray)
