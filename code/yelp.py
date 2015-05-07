@@ -13,7 +13,7 @@ import urllib2
 
 import oauth2
 from collections import defaultdict
-
+from difflib import SequenceMatcher
 
 # consumer key: SF7TtjFhkf3sDWq38r5UpQ
 CONSUMER_KEY = "SF7TtjFhkf3sDWq38r5UpQ"
@@ -33,6 +33,8 @@ SORT = "1" #sort by distance
 SARAH_HOUSE = "41.826998,-71.403599"
 OFFSET = "20"
 
+def string_similarity(str1,str2):
+    return SequenceMatcher(None,str1,str2).ratio()
 
 def request(host, path, url_params=None):
     """Prepares OAuth authentication and sends the request to the API.
@@ -73,7 +75,7 @@ def request(host, path, url_params=None):
         return None
 
 
-def search(location):
+def search(location,name=None):
     """Query the Search API by a search term and location.
 
     Args:
@@ -83,6 +85,20 @@ def search(location):
     Returns:
         dict: The JSON response from the request.
     """
+
+    if name:
+        print "name given:", name
+        url_params = {
+            # 'term': term.replace(' ', '+'),
+            'term':name.replace(' ','+'),
+            'll': location.replace(' ', '+'), #need to check in an pass eventually
+            # 'limit': SEARCH_LIMIT.replace(' ', '+'),
+            # 'offset': OFFSET.replace(' ', '+'),
+            'limit': SEARCH_LIMIT.replace(' ', '+'),
+            'sort': SORT.replace(' ', '+'),
+            'category_filter': "restaurants"
+    }
+
     
     url_params = {
         # 'term': term.replace(' ', '+'),
@@ -110,7 +126,8 @@ def get_business(business_id):
 
     return request(API_HOST, business_path)
 
-def query_api(location):
+
+def query_api(location,search_name=None):
     """Queries the API by the input values from the user.
 
     Args:
@@ -183,17 +200,30 @@ def query_api(location):
 
             restaurant_list.append(restaurant)
 
+        if search_name:
+            #we only care about getting back the one restaurant with that name
+            best_restaurant = restaurant_list[0]
+            best_similarity = string_similarity(search_name,restaurant_list[0]['name'])
+            for rest in restaurant_list:
+                curr_similarity = string_similarity(rest['name'],search_name)
+                if curr_similarity>best_similarity:
+                    best_restaurant = rest
+                    best_similarity = curr_similarity
+            return best_restaurant #if name given, not expecting a list, only wants one restaurant returned
+
         #print restaurant_list
         return restaurant_list
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-ll', '--ll', dest='ll', default=SARAH_HOUSE, type=str, help='Search location (default: %(default)s)')
-
+    parser.add_argument('-name','--name', dest='name', default=None, type=str, help= 'Name of restaurant (default: %(default)s)')
     input_values = parser.parse_args()
 
+    # Acorn: "39.7686109,-104.9797577" 
+    # 39.764238,-104.97848
     try:
-        query_api(input_values.ll)
+        query_api(input_values.ll,input_values.name)
        
     except urllib2.HTTPError as error:
         sys.exit('Encountered HTTP error {0}. Abort program.'.format(error.code))
