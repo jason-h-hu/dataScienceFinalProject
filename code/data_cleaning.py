@@ -20,6 +20,8 @@ from collections import defaultdict
 from porter_stemmer import PorterStemmer
 import re
 import string as str
+from nltk.stem.wordnet import WordNetLemmatizer
+lmtzr = WordNetLemmatizer()
 
 bus_dict = defaultdict(lambda :False)
 stop_list = ['get','just','went','will','on', 'us', \
@@ -52,7 +54,11 @@ def pre_clean(review_file):
 		review = obj["text"] 
 		bus_id = obj["business_id"] 
 		if bus_id in bus_dict:
-			clean(review)
+			print clean(review)
+
+def contains_weird(s):
+    return any(not(char.isalpha()) for char in s)
+
 """
 clean
 input: string to clean
@@ -65,22 +71,20 @@ def clean(review):
 	out_review = []
 
 	for word in review:
-		if not word[0].isalpha(): #skip words that start with numbers
+		if word in stop_list:
+			continue
+
+		word = re.sub(r'(.)\1+', r'\1\1', word)
+		word = word.translate(str.maketrans("",""), str.punctuation)
+
+		if contains_weird(word): #skip words that start with numbers
 			continue
 		
 		elif "www" in word or"http" in word: #replace URLs
 			word = "*URL*"
-		elif word[0] == "@": #replace at mentions
-			word = "AT_USER"
-		elif word[0]=="#":
-			word = word[1:]
-		word = re.sub(r'(.)\1+', r'\1\1', word)
-		word = word.translate(str.maketrans("",""), str.punctuation)
-		if word in stop_list:
-			continue
 
-		else: #stems all other words
-			word = PorterStemmer().stem(word, 0,len(word)-1)
+		word = lmtzr.lemmatize(word)
+		word = lmtzr.lemmatize(word, pos='v')
 
 		if word in stop_list:
 			continue
@@ -110,7 +114,7 @@ def main():
 		reviews = open(sys.argv[1])
 		businesses = open(sys.argv[2])
 		build_businesses(businesses)
-		clean(reviews)
+		pre_clean(reviews)
 
 if __name__ == "__main__":
-    main(sys.argv)
+    main()
