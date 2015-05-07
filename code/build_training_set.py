@@ -47,6 +47,9 @@ def generateData():
         # print restName
         googleDict = google_places.query_google(restLat, restLong, restName)
         print googleDict
+        location = str(restLat) + "," + str(restLong)
+        yelp_info = yelp.query_api(location,search_name=restName)
+        print yelp_info
         #infoArray = [rating,sentiment, numReviews]
         if googleDict!=None:
             # print googleDict
