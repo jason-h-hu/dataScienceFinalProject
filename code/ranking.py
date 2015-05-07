@@ -21,13 +21,13 @@ def create_weighted_stars(rests):
 		v = float(rest['num_yelp_reviews'])
 		rest['weighted_stars'] = (v/(v+m))*R + (m/(v+m))*C
 
-"""
-Creates relative_unique values based on sentiment
-TODO: Does nothing for now
-"""
-def create_relative_uniqueness(rests):
-	for r in rests:
-		r['relative_unique'] = 0.0
+# """
+# Creates relative_unique values based on uniqueness
+# TODO: Does nothing for now
+# """
+# def create_relative_uniqueness(rests):
+# 	for r in rests:
+# 		r['relative_unique'] = 0.0
 
 """
 Linearly combines all metrics
@@ -35,8 +35,9 @@ Linearly combines all metrics
 def weight(rest):
 	star = rest['weighted_stars']
 	dist = rest['dist_from_ll']
-	uniq = rest['relative_unique']
+	# uniq = rest['relative_unique']
 	sent = rest['sentiment']
+	numRevs = rest['num_yelp_reviews']
 
 	rest['weighted_score'] = 0.0
 	return rest

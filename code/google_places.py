@@ -6,17 +6,18 @@
 import urllib, json
 import argparse
 
-
+AUTH_KEY = "AIzaSyCExDxuW1YxLX_Y7JTumtpTKD0YlLU3tFY"
 
 #Grabbing and parsing the JSON data
 def get_place_id(lat,lng,name):
-  #print "in get place id", lat,lng,name
+  print "in get place id", lat,lng,name
   #making the url
-  AUTH_KEY = "AIzaSyAOjjN8YD3ZudTfA1miPPY3Wm1S7Zla8Dk"
+  # AUTH_KEY = "AIzaSyAOjjN8YD3ZudTfA1miPPY3Wm1S7Zla8Dk"
   LOCATION = str(lat) + "," + str(lng)
   RADIUS = 10 #radius
   TYPES = "restaurant"
-  NAME = name
+  NAME = str(name)
+  print name
   MyUrl = ('https://maps.googleapis.com/maps/api/place/nearbysearch/json'
            '?location=%s'
            '&radius=%s'
@@ -25,9 +26,11 @@ def get_place_id(lat,lng,name):
            '&sensor=false&key=%s') % (LOCATION, RADIUS, TYPES, NAME, AUTH_KEY)
   #grabbing the JSON result
   response = urllib.urlopen(MyUrl)
-
+  print response
   jsonRaw = response.read()
+  print jsonRaw
   jsonData = json.loads(jsonRaw)
+  print jsonData
   #print jsonData
   if ('results' in jsonData):
     if len(jsonData['results'])==0:
@@ -48,7 +51,7 @@ def IterJson(place):
 
 def get_reviews(place_id):
   PLACE_ID = str(place_id)
-  AUTH_KEY = "AIzaSyAOjjN8YD3ZudTfA1miPPY3Wm1S7Zla8Dk"
+  # AUTH_KEY = "AIzaSyAOjjN8YD3ZudTfA1miPPY3Wm1S7Zla8Dk"
   MyUrl = ('https://maps.googleapis.com/maps/api/place/details/json'
            '?placeid=%s'
            '&sensor=false&key=%s') % (PLACE_ID, AUTH_KEY)
@@ -101,6 +104,7 @@ def main():
         googleDict['google_place_id']=place_id
         googleDict['googe_rating']=rating
         googleDict['reviews'] = review_list
+        # print googleDict
         return googleDict
 
         # query_api(LL)
