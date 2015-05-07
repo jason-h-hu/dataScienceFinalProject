@@ -39,6 +39,7 @@ def weight(rest):
 	sent = rest['sentiment']
 
 	rest['weighted_score'] = 0.0
+	return rest
 
 
 

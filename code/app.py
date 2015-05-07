@@ -39,6 +39,7 @@ def test_run(d, start, end):
 			continue
 		rests = unique_word_builder.build_words_entry(rests)
 		rests = ranking.rank(rests)
+		rests = [(r["name"],r["weighted_score"]) for r in rests]
 		print m[0],rests[:10]
 
 def run_app():
