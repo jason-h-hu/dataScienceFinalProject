@@ -13,7 +13,7 @@ from time import sleep
 SARAH_HOUSE_LAT = 41.826998
 SARAH_HOUSE_LNG = -71.403599
 
-def get_restaurants(lat=SARAH_HOUSE_LAT,lng=SARAH_HOUSE_LNG):
+def get_restaurants(lat=SARAH_HOUSE_LAT,lng=SARAH_HOUSE_LNG,pmin=1,pmax=5):
     sleep(1)
     ll = str(lat) + "," + str(lng)
     restaurant_list = yelp.query_api(ll)

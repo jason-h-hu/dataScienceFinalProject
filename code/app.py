@@ -28,12 +28,12 @@ Inputs: d (str: a date formatted as mm/dd/yyyy),
 		end (str: place name or latlong)
 Prints: top x restaurants and relevant information about them
 """
-def test_run(d, start, end):
+def test_run(d, start, end, pmin, pmax):
 	print 'Finding places to eat for a road trip starting '+str(d)+' at '+start+' and ending at '+end
 	meals = maps.getMeals(start, end, d)
 	for m in meals:
 		coords = m[1]
-		rests = get_restaurants.get_restaurants(coords['lat'], coords['lng'])
+		rests = get_restaurants.get_restaurants(coords['lat'], coords['lng'],pmin=1,pmax=5)
 		if rests==None:
 			#TODO! obviously this is NOT only what we want to do, this is a placeholder
 			continue
@@ -73,7 +73,7 @@ def run_app():
 	@app.route('/restaurants', methods=["GET", "POST"])
 	def restaurants():
 		coords = request.json
-		rests = get_restaurants.get_restaurants(coords['lat'], coords['lng'])
+		rests = get_restaurants.get_restaurants(coords['lat'], coords['lng'],pmin=1,pmax=5)
 		if rests==None:
 			#TODO! obviously this is NOT what we want to do, this is a placeholder
 			return json.dumps([])
@@ -95,10 +95,13 @@ if __name__ == '__main__':
 		help='The starting location of the trip, as a string')
 	parser.add_argument('-e', '--end', type=str, nargs=1, metavar='end',
 		help='The ending location of the trip, as a string')
+	parser.add_argument('-pmin', '--pmin', type=str, nargs=1, metavar = 'pmin', default='1',
+		help='The minimum price for the restaurant, between 1 and 5, as a string')
+	parser.add_argument('-pmax','--pmax', type=str, nargs=1, metavar = 'pmax', default='5',
+		help="The maximum price for the restaurant, between 1 and 5, as a string")
 	parser.add_argument('-g', '--gui', action='store_true', default=False,
 		help='Whether to also run this with a Flask server')
 	args = parser.parse_args()
-
 	if args.gui:
 		run_app()
 	else:
@@ -106,4 +109,4 @@ if __name__ == '__main__':
 		if args.start == None or args.end == None:
 			print "NO! YOU NEED TO PROVIDE AN START AND END"
 		else:
-			test_run(args.date, args.start[0], args.end[0])
+			test_run(args.date, args.start[0], args.end[0], int(args.pmin[0]), int(args.pmax[0]))
