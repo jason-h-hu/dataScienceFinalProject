@@ -16,12 +16,15 @@ source backend/bin/activate
 
 # Download NLTK data - to local tmp
 if [ "$(uname)" == "Darwin" ]; then
-    export NLTK_DATA=/tmp/nltk/
-    python -m nltk.downloader -d /tmp/nltk/ all
+    NLTK_DIR="/tmp/nltk/"
 else
-    export NLTK_DATA=/ltmp/nltk/
-    python -m nltk.downloader -d /ltmp/nltk/ all
+    NLTK_DIR="/ltmp/nltk/"
 fi;
+if [ ! -d "$NLTK_DIR" ]; then
+    echo "Downloading $(func 'nltk') data..."
+    python -m nltk.downloader -d $NLTK_DIR all
+fi;
+export NLTK_DATA=$NLTK_DIR
 
 # Python server
 echo "Starting $(func 'python') backend server..."

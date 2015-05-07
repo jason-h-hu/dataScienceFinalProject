@@ -115,8 +115,8 @@ gulp.task('clean', clean)
 gulp.task('sass', ['clean', 'vendor'], sass)
 gulp.task('js', ['clean', 'vendor'], js)
 gulp.task('vendor', ['clean'], vendor)
-gulp.task('partials', ['clean'], partials)
-gulp.task('assets', ['clean'], assets)
+gulp.task('partials', ['clean', 'vendor'], partials)
+gulp.task('assets', ['clean', 'vendor'], assets)
 gulp.task('html', ['vendor', 'js', 'sass', 'assets', 'partials'], html)
 gulp.task('watch', ['build'], function () {
   connect.server({
