@@ -42,6 +42,40 @@ def get_place_id(lat,lng,name):
   else:
     return None
 
+
+def training_get_place_id(lat,lng,name):
+  print "in get place id", lat,lng,name
+  #making the url
+  # AUTH_KEY = "AIzaSyAOjjN8YD3ZudTfA1miPPY3Wm1S7Zla8Dk"
+  LOCATION = str(lat) + "," + str(lng)
+  RADIUS = 100 #radius
+  TYPES = "restaurant"
+  NAME = str(name)
+  print name
+  MyUrl = ('https://maps.googleapis.com/maps/api/place/nearbysearch/json'
+           '?location=%s'
+           '&radius=%s'
+           '&types=%s'
+           '&name=%s'
+           '&sensor=false&key=%s') % (LOCATION, RADIUS, TYPES, NAME, AUTH_KEY)
+  #grabbing the JSON result
+  response = urllib.urlopen(MyUrl)
+  print response
+  jsonRaw = response.read()
+  print jsonRaw
+  jsonData = json.loads(jsonRaw)
+  print jsonData
+  #print jsonData
+  if ('results' in jsonData):
+    if len(jsonData['results'])==0:
+      return None
+    elif ('rating' in jsonData['results'][0]):
+      return (jsonData['results'][0]['place_id'], jsonData['results'][0]['rating'])
+    else:
+      return None
+  else:
+    return None
+
 #This is a helper to grab the Json data that I want in a list
 def IterJson(place):
   x = [place['name'], place['reference'], place['geometry']['location']['lat'], 
@@ -81,6 +115,18 @@ def queryGoogle(lat, lng, name):
     return googleDict
   else:
     return None
+
+def trainingQueryGoogle(lat, lng, name):
+  if (get_place_id(lat, lng, name)!=None):
+    (place_id,rating) = training_get_place_id(lat, lng, name)
+    review_list=get_reviews(place_id)
+    googleDict = {}
+    googleDict['google_place_id']=place_id
+    googleDict['googe_rating']=rating
+    googleDict['reviews'] = review_list
+    return googleDict
+  else:
+    return None
   
 def main():
    
@@ -104,6 +150,7 @@ def main():
         googleDict['google_place_id']=place_id
         googleDict['googe_rating']=rating
         googleDict['reviews'] = review_list
+        # print googleDict 
         # print googleDict
         return googleDict
 
