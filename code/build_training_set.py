@@ -1,17 +1,38 @@
 import csv
 import time
 import google_places
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn import linear_model
 
-
+X_train = []
+Y_train= []
 def main():
+    generateData()
+    regression()
+
+def regression():
+    # X_train = sampleArray
+    # Y_train = answer
+    # Create linear regression object
+    regr = linear_model.LinearRegression()
+    print "X_train length "+str(len(X_train))
+    print "Y_train length "+str(len(Y_train))
+    # Train the model using the training sets
+    regr.fit(X_train, Y_train)
+
+    # The coefficients
+    print('Coefficients: \n', regr.coef_)
+
+def generateData():
     myReader = csv.reader(open('toplist.csv'))
     next(myReader, None) # Skip the header in the csv file
     # for i in range(27):
     #     next(myReader, None) # Skip the header in the csv file
     count = 0
     trainingData = {}
-    sampleArray = []
-    answer = []
+    # sampleArray = []
+    # answer = []
     for line in myReader:
         count=count+1
         if count==5:
@@ -23,17 +44,19 @@ def main():
         restLong = float(line[4])
         # print restLat
         # print restLong
-        print restName
+        # print restName
         googleDict = google_places.query_google(restLat, restLong, restName)
-        # print googleDict
+        print googleDict
         #infoArray = [rating,sentiment, numReviews]
         if googleDict!=None:
-            print googleDict
+            # print googleDict
+            print "inside"
+            print Y_train
+            print X_train
             infoArray = [googleDict['google_rating'],0,1]
-            answer.append(restRanking)
-            sampleArray.append(infoArray)
-    print answer
-    print sampleArray
+            Y_train.append(restRanking)
+            X_train.append(infoArray)
+    # return (answer, sampleArray)
 
 
 
