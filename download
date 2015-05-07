@@ -1,4 +1,0 @@
-#!/bin/bash
-
-export NLTK_DATA=/ltmp/nltk/
-python -m nltk.downloader -d /ltmp/nltk/ all
