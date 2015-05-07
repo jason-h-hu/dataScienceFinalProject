@@ -33,7 +33,7 @@ def get_restaurants(lat=SARAH_HOUSE_LAT,lng=SARAH_HOUSE_LNG,pmin=1,pmax=5):
             name = restaurant['name']
         if lat and lng and name:
             #print "calling google places"
-            google_dict = google_places.queryGoogle(lat, lng, name)
+            google_dict = google_places.query_google(lat, lng, name)
             if (google_dict!=None):
                 #print "google dict was not none"
                 restaurant['google_place_id'] = google_dict['google_place_id']

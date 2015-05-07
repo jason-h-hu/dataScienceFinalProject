@@ -22,7 +22,7 @@ def main():
         print restLat
         print restLong
         print restName
-        googleDict = google_places.trainingQueryGoogle(restLat, restLong, restName)
+        googleDict = google_places.query_google(restLat, restLong, restName)
         print googleDict
         #infoArray = [rating,sentiment, numReviews]
         # infoArray = [googleDict['google_rating'],0,1]
