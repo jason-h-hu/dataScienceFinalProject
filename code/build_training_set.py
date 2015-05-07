@@ -6,6 +6,8 @@ import google_places
 def main():
     myReader = csv.reader(open('toplist.csv'))
     next(myReader, None) # Skip the header in the csv file
+    # for i in range(27):
+    #     next(myReader, None) # Skip the header in the csv file
     count = 0
     trainingData = {}
     for line in myReader:

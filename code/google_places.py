@@ -117,7 +117,7 @@ def queryGoogle(lat, lng, name):
     return None
 
 def trainingQueryGoogle(lat, lng, name):
-  if (get_place_id(lat, lng, name)!=None):
+  if (training_get_place_id(lat, lng, name)!=None):
     (place_id,rating) = training_get_place_id(lat, lng, name)
     review_list=get_reviews(place_id)
     googleDict = {}
