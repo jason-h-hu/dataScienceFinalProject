@@ -6,16 +6,17 @@
 import urllib, urllib2, json
 import argparse
 
-AUTH_KEY = "AIzaSyCExDxuW1YxLX_Y7JTumtpTKD0YlLU3tFY"
+AUTH_KEY = "AIzaSyBXuz1jrJbf0aJYAx031Yqop0RGQ5MrxaI"
 
 def query_google(lat, lng, name, radius=10):
   place_info = get_place_info(lat,lng,name)
   if (place_info != None):
+    print place_info
     (place_id,rating) = place_info
     review_list=get_reviews(place_id)
     googleDict = {}
     googleDict['google_place_id']=place_id
-    googleDict['googe_rating']=rating
+    googleDict['google_rating']=rating
     googleDict['reviews'] = review_list
     return googleDict
   else:
@@ -25,7 +26,7 @@ def query_google(lat, lng, name, radius=10):
 
 #Grabbing and parsing the JSON data
 def get_place_info(lat,lng,name,radius=10):
-  print "in get place id", lat,lng,name
+  # print "in get place id", lat,lng,name
   #making the url
   # AUTH_KEY = "AIzaSyAOjjN8YD3ZudTfA1miPPY3Wm1S7Zla8Dk"
   LOCATION = str(lat) + "," + str(lng)
@@ -42,6 +43,7 @@ def get_place_info(lat,lng,name,radius=10):
   response = urllib.urlopen(MyUrl)
   jsonRaw = response.read()
   jsonData = json.loads(jsonRaw)
+  print jsonData
   if ('results' in jsonData):
     if len(jsonData['results'])==0:
       return None
@@ -68,6 +70,7 @@ def get_reviews(place_id):
            '&sensor=false&key=%s') % (PLACE_ID, AUTH_KEY)
   #grabbing the JSON result
   response = urllib.urlopen(MyUrl)
+  print response
   jsonRaw = response.read()
   jsonData = json.loads(jsonRaw)
   reviewData = jsonData['result']['reviews']

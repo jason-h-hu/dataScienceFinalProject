@@ -34,7 +34,7 @@ def build_text_field(restaurant):
 def determine_unique_words(rest_text, prob_dict):
 	interesting_words_dict = defaultdict(lambda: 0.0)
 	for word in rest_text:
-		if word in prob_dict and prob_dict[word] != 0:
+		if word in prob_dict:
 			interesting_words_dict[word] += (1/prob_dict[word])
 
 	sorted_words = sorted(interesting_words_dict.items(), key=operator.itemgetter(1))
