@@ -15,17 +15,17 @@ div.home-page {
 		}
 	}
 	.progress-text {
-		float: right;
-		margin-top: -45px;
-		margin-right: -70px;
+		float: left;
+		margin-top: -36px;
+		margin-left: -70px;
 		font-size: 1.5em;
 		text-align: center;
 		color: $color_white;
 	}
 	.progress svg {
-		float: right;
-		margin-top: -80px;
-		margin-right: -20px;	
+		float: left;
+		margin-top: -70px;
+		margin-left: -20px;	
 		circle {
 			transition: stroke-dashoffset 0.4s ease;
 			stroke: $color_red;
