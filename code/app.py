@@ -4,6 +4,7 @@ from datetime import datetime, date
 import get_restaurants
 import unique_word_builder
 import json
+import ranking
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 
 DEBUG = True
@@ -37,7 +38,8 @@ def test_run(d, start, end):
 			#TODO! obviously this is NOT only what we want to do, this is a placeholder
 			continue
 		rests = unique_word_builder.build_words_entry(rests)
-		#print m[0],rests[:10]
+		rests = ranking.rank(rests)
+		print m[0],rests[:10]
 
 def run_app():
 	app = Flask(__name__)
@@ -75,6 +77,7 @@ def run_app():
 			#TODO! obviously this is NOT what we want to do, this is a placeholder
 			return json.dumps([])
 		rests = unique_word_builder.build_words_entry(rests)
+		rests = ranking.rank(rests)
 		return json.dumps(rests, default=lambda x: x.isoformat() if hasattr(x, 'isoformat') else x)
 
 	app.run()
