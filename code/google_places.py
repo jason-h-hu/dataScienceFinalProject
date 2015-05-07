@@ -15,7 +15,7 @@ def query_google(lat, lng, name, radius=10):
     review_list=get_reviews(place_id)
     googleDict = {}
     googleDict['google_place_id']=place_id
-    googleDict['googe_rating']=rating
+    googleDict['google_rating']=rating
     googleDict['reviews'] = review_list
     return googleDict
   else:

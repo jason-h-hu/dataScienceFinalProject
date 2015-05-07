@@ -1,127 +1,100 @@
 Restaurant,Ranking,City,Lat,Long
-East Side Pockets,1,"San Francisco, CA",41.829554,-71.400978
 Frasca Food and Wine,1,"Denver, CO",39.7391667,-104.9841667
 Acorn,2,"Denver, CO",39.7686109,-104.9797577
 Cholon,3,"Denver, CO",39.7505568,-104.9996268
-Sushi Den,4,"Denver, CO",39.689585,-104.980781
-Mizuna,5,"Denver, CO",39.7686109,-104.9797577
-Fruition Restaurant,6,"Denver, CO",39.7686109,-104.9797577
-The Plimoth,7,"Denver, CO",39.7686109,-104.9797577
-Basta,8,"Denver, CO",39.7391667,-104.9841667
-Colt & Gray,9,"Denver, CO",39.7391667,-104.9841667
-Bittersweet,10,"Denver, CO",39.7391667,-104.9841667
-Oak at Fourteenth,11,"Denver, CO",39.7391667,-104.9841667
-Luca,12,"Denver, CO",39.7391667,-104.9841667
-Bistro Barbès,13,"Denver, CO",39.7391667,-104.9841667
-The Populist,14,"Denver, CO",39.7391667,-104.9841667
-To the Wind Bistro,15,"Denver, CO",39.7391667,-104.9841667
-Rioja,16,"Denver, CO",39.7391667,-104.9841667
-Lower48 Kitchen,17,"Denver, CO",39.7391667,-104.9841667
-Stoic & Genuine,18,"Denver, CO",39.7391667,-104.9841667
-Barolo Grill,19,"Denver, CO",39.7391667,-104.9841667
-Work & Class,20,"Denver, CO",39.7391667,-104.9841667
-Old Major,21,"Denver, CO",39.7391667,-104.9841667
-Beast + Bottle,22,"Denver, CO",39.7391667,-104.9841667
-Potager,23,"Denver, CO",39.7391667,-104.9841667
-Duo Restaurant,24,"Denver, CO",39.7391667,-104.9841667
-Tables,25,"Denver, CO",39.7391667,-104.9841667
-Kokkari Estiatorio,1,"San Francisco, CA",37.775,-122.4183333
-Gary Danko,2,"San Francisco, CA",37.775,-122.4183333
-Quince,3,"San Francisco, CA",37.775,-122.4183333
-Acquerello,4,"San Francisco, CA",37.775,-122.4183333
-Boulevard,5,"San Francisco, CA",37.775,-122.4183333
-La Folie,6,"San Francisco, CA",37.775,-122.4183333
-Frances,7,"San Francisco, CA",37.775,-122.4183333
-Benu,8,"San Francisco, CA",37.775,-122.4183333
-Delfina Restaurant,9,"San Francisco, CA",37.775,-122.4183333
-Swan Oyster Depot,10,"San Francisco, CA",37.775,-122.4183333
-House of Prime Rib,11,"San Francisco, CA",37.775,-122.4183333
-La Ciccia,12,"San Francisco, CA",37.775,-122.4183333
-Cotogna,13,"San Francisco, CA",37.775,-122.4183333
-Harris'  The San Francisco Steakhouse,14,"San Francisco, CA",37.775,-122.4183333
-Nopa,15,"San Francisco, CA",37.775,-122.4183333
-Tartine Bakery and Cafe,16,"San Francisco, CA",37.775,-122.4183333
-Ruth's Chris Steak House,17,"San Francisco, CA",37.775,-122.4183333
-Roka Akor,18,"San Francisco, CA",37.775,-122.4183333
-B. Patisserie,19,"San Francisco, CA",37.775,-122.4183333
-Range,20,"San Francisco, CA",37.775,-122.4183333
-Aziza,21,"San Francisco, CA",37.775,-122.4183333
-Greens Restaurant,22,"San Francisco, CA",37.775,-122.4183333
-Gialina,23,"San Francisco, CA",37.775,-122.4183333
-Atelier Crenn,24,"San Francisco, CA",37.775,-122.4183333
-Zuni Cafe,25,"San Francisco, CA",37.775,-122.4183333
-State Bird Provisions,26,"San Francisco, CA",37.775,-122.4183333
-4505 Burgers and BBQ,27,"San Francisco, CA",37.775,-122.4183333
-The House,28,"San Francisco, CA",37.775,-122.4183333
-Sotto Mare,29,"San Francisco, CA",37.775,-122.4183333
-Campton Place Restaurant,30,"San Francisco, CA",37.775,-122.4183333
-Spruce,31,"San Francisco, CA",37.775,-122.4183333
-Hog Island Oyster Co,32,"San Francisco, CA",37.775,-122.4183333
-Chapeau!,33,"San Francisco, CA",37.775,-122.4183333
-Mama's,34,"San Francisco, CA",37.775,-122.4183333
-Millennium,35,"San Francisco, CA",37.775,-122.4183333
-Michael Mina,36,"San Francisco, CA",37.775,-122.4183333
-Canela Bistro Bar,37,"San Francisco, CA",37.775,-122.4183333
-Tony's Pizza Napoletana,38,"San Francisco, CA",37.775,-122.4183333
-Crustacean,39,"San Francisco, CA",37.775,-122.4183333
-Coi Restaurant,40,"San Francisco, CA",37.775,-122.4183333
-Alexander's Steakhouse,41,"San Francisco, CA",37.775,-122.4183333
-Thanh Long,42,"San Francisco, CA",37.775,-122.4183333
-Chiaroscuro,43,"San Francisco, CA",37.775,-122.4183333
-Locanda,44,"San Francisco, CA",37.775,-122.4183333
-Brenda's French Soul Food,45,"San Francisco, CA",37.775,-122.4183333
-Yank Sing,46,"San Francisco, CA",37.775,-122.4183333
-The Slanded Door,47,"San Francisco, CA",37.775,-122.4183333
-Lolo,48,"San Francisco, CA",37.775,-122.4183333
-Zarzuela,49,"San Francisco, CA",37.775,-122.4183333
-Coqueta,50,"San Francisco, CA",37.775,-122.4183333
-Savona,25,"Dayton, OH",39.7588889,-84.1916667
-Treasure Island,24,"Dayton, OH",39.7588889,-84.1916667
-Bullwinkle's,23,"Dayton, OH",39.7588889,-84.1916667
-Buckhorn Tavern,22,"Dayton, OH",39.7588889,-84.1916667
-Dayton Racquet Club,21,"Dayton, OH",39.7588889,-84.1916667
-La Piazza,20,"Dayton, OH",39.7588889,-84.1916667
-C'est Tout,19,"Dayton, OH",39.7588889,-84.1916667
-Coldwater Cafe,18,"Dayton, OH",39.7588889,-84.1916667
-Jay's Seafood,17,"Dayton, OH",39.7588889,-84.1916667
-Harrison's,16,"Dayton, OH",39.7588889,-84.1916667
-Paragon Club,15,"Dayton, OH",39.7588889,-84.1916667
-Carvers,14,"Dayton, OH",39.7588889,-84.1916667
-Thai 9,13,"Dayton, OH",39.7588889,-84.1916667
-Mamma Disalvo's,12,"Dayton, OH",39.7588889,-84.1916667
-Coco's Bistro,11,"Dayton, OH",39.7588889,-84.1916667
-Seasons Bistro,10,"Dayton, OH",39.7588889,-84.1916667
-Pine Club,9,"Dayton, OH",39.7588889,-84.1916667
-Oakwood Club,8,"Dayton, OH",39.7588889,-84.1916667
-Rue Dumaine,7,"Dayton, OH",39.7588889,-84.1916667
-El Meson,6,"Dayton, OH",39.7588889,-84.1916667
-The Winds Cafe,5,"Dayton, OH",39.7588889,-84.1916667
-Meadowlark,4,"Dayton, OH",39.7588889,-84.1916667
-Hawthorn Grill,3,"Dayton, OH",39.7588889,-84.1916667
-Caroline,2,"Dayton, OH",39.7588889,-84.1916667
-Roost Modern Italian,1,"Dayton, OH",39.7588889,-84.1916667
-Le Bernadin,1,"New York City, NY",40.7834345,-73.9662495
-Bouley,2,"New York City, NY",40.7834345,-73.9662495
-Jean-Georges,3,"New York City, NY",40.7834345,-73.9662495
-Gotham Bar & Grill,4,"New York City, NY",40.7834345,-73.9662495
-Eleven Madison Park,5,"New York City, NY",40.7834345,-73.9662495
-Daniel,6,"New York City, NY",40.7834345,-73.9662495
-Susha Yasuda,7,"New York City, NY",40.7834345,-73.9662495
-Gramercy Tavern,8,"New York City, NY",40.7834345,-73.9662495
-Peter Luger Steak House,9,"New York City, NY",40.7834345,-73.9662495
-La Grenouille,10,"New York City, NY",40.7834345,-73.9662495
-Annisa,11,"New York City, NY",40.7834345,-73.9662495
-Sea Fire Grill,12,"New York City, NY",40.7834345,-73.9662495
-Per Se,13,"New York City, NY",40.7834345,-73.9662495
-Marea,14,"New York City, NY",40.7834345,-73.9662495
-Benjamin Steakhouse,15,"New York City, NY",40.7834345,-73.9662495
-Tocqueville,16,"New York City, NY",40.7834345,-73.9662495
-Nobu,17,"New York City, NY",40.7834345,-73.9662495
-Union Square Cafe,18,"New York City, NY",40.7834345,-73.9662495
-Mas (farmhouse),19,"New York City, NY",40.7834345,-73.9662495
-Nougatine At Jean-Georges,20,"New York City, NY",40.7834345,-73.9662495
-The Little Owl,21,"New York City, NY",40.7834345,-73.9662495
-Pearl Oyster Bar,22,"New York City, NY",40.7834345,-73.9662495
-Estiatrio Milos,23,"New York City, NY",40.7834345,-73.9662495
-Dovetail,24,"New York City, NY",40.7834345,-73.9662495
-Aquagrill,25,"New York City, NY",40.7834345,-73.9662495
+Sushi Den,4,"Denver, CO",39.7391667,-104.9841667
+Mizuna,5,"Denver, CO",39.727428,-104.984146
+Fruition Restaurant,6,"Denver, CO",39.725704,-104.971295
+The Plimoth,7,"Denver, CO",39.756991,-104.95934
+Basta,8,"Denver, CO",40.015227,-105.247627
+Colt & Gray,9,"Denver, CO",39.757345,-105.008493
+Bittersweet,10,"Denver, CO",39.71094,-104.981102
+Oak at Fourteenth,11,"Denver, CO",40.018153,-105.277073
+Luca,12,"Denver, CO",39.727551,-104.983911
+Bistro Barbès,13,"Denver, CO",39.756717,-104.928754
+The Populist,14,"Denver, CO",39.764238,-104.97848
+To the Wind Bistro,15,"Denver, CO",39.740318,-104.94805
+Rioja,16,"Denver, CO",39.747949,-104.999481
+Lower48 Kitchen,17,"Denver, CO",39.752405,-104.991057
+Stoic & Genuine,18,"Denver, CO",39.753122,-105.000145
+Barolo Grill,19,"Denver, CO",39.725407,-104.951451
+Work & Class,20,"Denver, CO",39.757667,-104.986097
+Old Major,21,"Denver, CO",39.76359,-105.010752
+Beast + Bottle,22,"Denver, CO",39.743461,-104.978121
+Potager,23,"Denver, CO",39.734066,-104.975417
+Duo Restaurant,24,"Denver, CO",39.762181,-105.016191
+Tables,25,"Denver, CO",39.750487,-104.917792
+Kokkari Estiatorio,1,"San Francisco, CA",37.796984,-122.399721
+Gary Danko,2,"San Francisco, CA",37.805831,-122.420575
+Quince,3,"San Francisco, CA",37.797566,-122.403396
+Acquerello,4,"San Francisco, CA",37.791611,-122.421432
+Boulevard,5,"San Francisco, CA",37.79332,-122.392761
+La Folie,6,"San Francisco, CA",37.798138,-122.422048
+Frances,7,"San Francisco, CA",37.762865,-122.432186
+Benu,8,"San Francisco, CA",37.785396,-122.399094
+Delfina Restaurant,9,"San Francisco, CA",37.785396,-122.399094
+Swan Oyster Depot,10,"San Francisco, CA",37.79094,-122.420799
+House of Prime Rib,11,"San Francisco, CA",37.793393,-122.42263
+La Ciccia,12,"San Francisco, CA",37.741907,-122.426644
+Cotogna,13,"San Francisco, CA",37.797539,-122.403598
+Harris'  The San Francisco Steakhouse,14,"San Francisco, CA",37.79499,-122.423048
+Nopa,15,"San Francisco, CA",37.774901,-122.437508
+Tartine Bakery and Cafe,16,"San Francisco, CA",37.761418,-122.424104
+Ruth's Chris Steak House,17,"San Francisco, CA",37.790567,-122.422913
+Roka Akor,18,"San Francisco, CA",37.796533,-122.403845
+B. Patisserie,19,"San Francisco, CA",37.78801,-122.440908
+Range,20,"San Francisco, CA",37.759411,-122.421694
+Aziza,21,"San Francisco, CA",37.780496,-122.481756
+Greens Restaurant,22,"San Francisco, CA",37.806816,-122.431488
+Gialina,23,"San Francisco, CA",37.734015,-122.434282
+Atelier Crenn,24,"San Francisco, CA",37.79838,-122.436119
+Zuni Cafe,25,"San Francisco, CA",37.773646,-122.421573
+Savona,25,"Dayton, OH",39.626197,-84.159461
+Treasure Island,24,"Dayton, OH",39.692694,-84.218496
+Bullwinkle's,23,"Dayton, OH",39.642424,-84.289178
+Buckhorn Tavern,22,"Dayton, OH",39.855551,-84.264243
+Dayton Racquet Club,21,"Dayton, OH",39.760895,-84.191344
+La Piazza,20,"Dayton, OH",40.040193,-84.203246
+C'est Tout,19,"Dayton, OH",39.707037,-84.170303
+Coldwater Cafe,18,"Dayton, OH",39.961509,-84.170508
+Jay's Seafood,17,"Dayton, OH",39.756256,-84.186681
+Harrison's,16,"Dayton, OH",39.96092,-84.169702
+Paragon Club,15,"Dayton, OH",39.628124,-84.180379
+Carvers,14,"Dayton, OH",39.631236,-84.196438
+Thai 9,13,"Dayton, OH",39.75689,-84.18595
+Mamma Disalvo's,12,"Dayton, OH",39.688949,-84.142393
+Coco's Bistro,11,"Dayton, OH",39.750406,-84.186697
+Seasons Bistro,10,"Dayton, OH",39.923871,-83.808407
+Pine Club,9,"Dayton, OH",39.733652,-84.180156
+Oakwood Club,8,"Dayton, OH",39.70904,-84.170586
+Rue Dumaine,7,"Dayton, OH",39.629055,-84.189523
+El Meson,6,"Dayton, OH",39.67731,-84.238667
+The Winds Cafe,5,"Dayton, OH",39.806035,-83.888646
+Meadowlark,4,"Dayton, OH",39.666058,-84.162889
+Hawthorn Grill,3,"Dayton, OH",39.688322,-84.14535
+Caroline,2,"Dayton, OH",40.039004,-84.203392
+Roost Modern Italian,1,"Dayton, OH",39.756985,-84.189798
+Le Bernadin,1,"New York City, NY",40.761471,-73.981702
+Bouley,2,"New York City, NY",40.716962,-74.008867
+Jean-Georges,3,"New York City, NY",40.769069,-73.98156
+Gotham Bar & Grill,4,"New York City, NY",40.734089,-73.993823
+Eleven Madison Park,5,"New York City, NY",40.741505,-73.986627
+Daniel,6,"New York City, NY",40.766693,-73.967769
+Susha Yasuda,7,"New York City, NY",40.751119,-73.973505
+Gramercy Tavern,8,"New York City, NY",40.738381,-73.988463
+Peter Luger Steak House,9,"New York City, NY",40.709803,-73.962521
+La Grenouille,10,"New York City, NY",40.75968,-73.975571
+Annisa,11,"New York City, NY",40.732497,-74.002397
+Sea Fire Grill,12,"New York City, NY",40.754692,-73.972222
+Per Se,13,"New York City, NY",40.753158,-73.977976
+Marea,14,"New York City, NY",40.767405,-73.981057
+Benjamin Steakhouse,15,"New York City, NY",40.751724,-73.979047
+Tocqueville,16,"New York City, NY",40.736624,-73.9926
+Union Square Cafe,18,"New York City, NY",40.736865,-73.991262
+Mas (farmhouse),19,"New York City, NY",40.729329,-74.003922
+Nougatine At Jean-Georges,20,"New York City, NY",40.769069,-73.98156
+The Little Owl,21,"New York City, NY",40.732217,-74.005212
+Pearl Oyster Bar,22,"New York City, NY",40.731335,-74.001914
+Estiatrio Milos,23,"New York City, NY",40.763598,-73.978951
+Dovetail,24,"New York City, NY",40.780946,-73.976605
+Aquagrill,25,"New York City, NY",40.725309,-74.003843
