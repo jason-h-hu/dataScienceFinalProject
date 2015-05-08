@@ -37,7 +37,7 @@ def get_restaurants(lat=SARAH_HOUSE_LAT,lng=SARAH_HOUSE_LNG,pmin=1,pmax=5):
             if (google_dict!=None):
                 #print "google dict was not none"
                 restaurant['google_place_id'] = google_dict['google_place_id']
-                restaurant['google_rating'] = google_dict['googe_rating']
+                restaurant['google_rating'] = google_dict['google_rating']
                 restaurant['google_review_list'] = google_dict['reviews']
             else:
                 #print "google dict was none"
