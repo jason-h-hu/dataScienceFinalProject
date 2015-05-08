@@ -20,6 +20,7 @@ def create_weighted_stars(rests):
 		R = rest['yelp_star']
 		v = float(rest['num_yelp_reviews'])
 		rest['weighted_stars'] = (v/(v+m))*R + (m/(v+m))*C
+	return rests
 
 # """
 # Creates relative_unique values based on uniqueness

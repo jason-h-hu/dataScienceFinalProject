@@ -6,7 +6,7 @@
 import urllib, urllib2, json
 import argparse
 
-AUTH_KEY = "AIzaSyBXuz1jrJbf0aJYAx031Yqop0RGQ5MrxaI"
+AUTH_KEY = "AIzaSyAoeV7IGw-dgK8uKsFwHixc8a8c5lP_lmE"
 
 def query_google(lat, lng, name, radius=10):
   place_info = get_place_info(lat,lng,name)

@@ -49,9 +49,9 @@ def build_sent_entry(location_list, sentiment_file):
 	build_scores(sentiment_file)
 	for restaurant in location_list:
 		rest_text = build_text_field(restaurant)
-
-	sentiment = determine_sent(rest_text)
-	restaurant["sentiment"] = sentiment
+ #sarah indented teh next two lines in
+		sentiment = determine_sent(rest_text)
+		restaurant["sentiment"] = sentiment
 
 	return location_list
 
