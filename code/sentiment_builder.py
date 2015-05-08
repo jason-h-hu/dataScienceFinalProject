@@ -13,7 +13,6 @@ output: dictionary of restaurants for one location with an added "unique_words" 
 
 from collections import defaultdict
 import data_cleaning
-import shelve
 import operator
 
 scores = {} # initialize an empty dictionary

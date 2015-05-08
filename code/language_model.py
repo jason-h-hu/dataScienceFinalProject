@@ -11,7 +11,6 @@ and changing them to "*UNK*", then finding a probability for "*UNK*"
 import sys
 import math
 from collections import defaultdict
-import shelve
 
 
 prob_dict = defaultdict(lambda:0.0)
@@ -93,13 +92,8 @@ def main(argv):
         word_count(training)
         clean_words()
         set_prob()
-        probs_to_save = shelve.open("data/prob_dict_shelf", writeback=True)
-        
-        for p in prob_dict:
-            probs_to_save[p] = prob_dict[p]
-
-
-        probs_to_save.close()
+        with open('data/prob_dict', 'w') as f:
+            json.dump(prob_dict, f)
 
 if __name__ == "__main__":
     main(sys.argv)
