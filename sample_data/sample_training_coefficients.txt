@@ -1,0 +1,7 @@
+With senitment being added manully as zero
+
+X_train length 81
+Y_train length 81
+('Coefficients: \n', array([ -4.67412642e+00,   0.00000000e+00,  -1.50388113e-03]))
+classifying [[5.0,0,0],[4.5,0,0],[4.9,0,0],[4.6,0,0]]
+[  8.51413031  11.67832814   9.80115817  11.88465425]
