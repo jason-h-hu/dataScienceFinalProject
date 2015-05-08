@@ -1,4 +1,5 @@
 import build_classifier
+from sklearn import linear_model
 """
 weighted rating (WR) = (v / (v+m)) * R + (m / (v+m)) * C
 Where:
@@ -39,7 +40,9 @@ def weight(rest, regr):
 	# uniq = rest['relative_unique']
 	sent = rest['sentiment']
 	numRevs = rest['num_yelp_reviews']
-	rest['weighted_score'] = regr.predict([star, sent, numRevs])
+	xTest = [[star, sent, numRevs]]
+	# print xTest
+	rest['weighted_score'] = regr.predict(xTest)[0]
 	return rest
 
 
@@ -54,5 +57,5 @@ def rank(rests):
 	create_weighted_stars(rests)
 	# create_relative_uniqueness(rests)
 	rests = [weight(r, regr) for r in rests]
-	rests.sort(key = lambda x: x['weighted_score'], reverse=True)
+	rests.sort(key = lambda x: x['weighted_score'])
 	return rests
