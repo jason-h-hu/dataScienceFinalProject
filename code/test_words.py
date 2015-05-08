@@ -33,9 +33,9 @@ def determine_unique_words(rest_text, prob_dict):
 	interesting_words_dict = defaultdict(lambda: 0.0)
 	for word in rest_text:
 		if word in prob_dict:
-			interesting_words_dict[word] += (1/prob_dict[word])
+			interesting_words_dict[word] += 500 + (.01/prob_dict[word])
 
-	sorted_words = sorted(interesting_words_dict.items(), key=operator.itemgetter(1))
+	sorted_words = sorted(interesting_words_dict.items(), key=operator.itemgetter(1), reverse = True)
 	unique_words =  sorted_words[:10]
 	for i in range(len(unique_words)):
 		unique_words[i] = unique_words[i][0]

@@ -74,11 +74,9 @@ Goes through and makes all words that appear less than 3 times *UNK*
 
 def clean_words():
     global word_dict
-    print "food", word_dict["food"]
-    print "beer",word_dict["beer"]
     for word in word_dict.keys():
-        if (word_dict[word] <= 15 or word_dict[word] >= 65000):
-            word_dict["*UNK*"] += word_dict[word]
+        if (word_dict[word] <= 600 or word_dict[word] >= 65000):
+            #word_dict["*UNK*"] += word_dict[word]
             del word_dict[word]
 
 
