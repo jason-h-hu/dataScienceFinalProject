@@ -2,7 +2,7 @@
 	<ui-gmap-google-map class="myMap" center='map.center' zoom='map.zoom'>
 	<ui-gmap-marker coords="{'latitude': 39.82, 'longitude': -98.57}" idkey=1>
     </ui-gmap-marker>
-	<ui-gmap-marker ng-repeat="meal in mealLocations" coords="{'latitude': meal[1]['lat'], 'longitude': meal[1]['lng']}" idkey="$index">
+	<ui-gmap-marker ng-repeat="meal in locations" coords="{'latitude': meal[1]['lat'], 'longitude': meal[1]['lng']}" idkey="$index">
     </ui-gmap-marker>
 
 

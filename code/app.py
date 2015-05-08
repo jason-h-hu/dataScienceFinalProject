@@ -8,21 +8,17 @@ import json
 import ranking
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 
+DEBUG = True # Necessary for Flask - DO NOT REMOVE UNTIL HANDIN
 
-"""
-This is the general helper method to get a list of restaurants from a coordinate.
-Inputs: {'lat': , 'lng'}
-Output: List of restaurants
-"""
+# Function for both the cli and gui to call from below
 def get_restaurants_from_coordinate(coords):
 	rests = get_restaurants.get_restaurants(coords['lat'], coords['lng'],pmin=1,pmax=5)
 	if rests==None:
 		return []
-	rests = unique_word_builder.build_words_entry(rests)
+	#rests = unique_word_builder.build_words_entry(rests)
 	rests = sentiment_builder.build_sent_entry(rests)
-	rests = ranking.rank(rests)
-	return rests
-
+	return ranking.rank(rests)
+	
 """
 Allows Cross-Origin so localhost:8888 can call us
 """
@@ -39,12 +35,14 @@ Inputs: d (str: a date formatted as mm/dd/yyyy),
 		end (str: place name or latlong)
 Prints: top x restaurants and relevant information about them
 """
-def test_run(d, start, end, pmin, pmax):
+def run_commmand_line(d, start, end, pmin, pmax):
 	print 'Finding places to eat for a road trip starting '+str(d)+' at '+start+' and ending at '+end
 	meals = maps.getMeals(start, end, d)
 	for m in meals:
 		coords = m[1]
-		rests = x(coords)
+		rests = get_restaurants_from_coordinate(coords)
+		if rests==[]:
+			continue
 		rests = [(r["name"],r["weighted_score"],"Info is",r['weighted_stars'],r['sentiment'],r['num_yelp_reviews']) for r in rests]
 		print m[0],rests[:10]
 
@@ -86,7 +84,7 @@ def run_app():
 
 
 """
-Simply takes command line arguments and runs the app - see test_run for more details
+Simply takes command line arguments and runs the app - see run_commmand_line for more details
 """
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Find places to eat for your next big roadtrip!', prog="roadtrip")
@@ -110,4 +108,4 @@ if __name__ == '__main__':
 		if args.start == None or args.end == None:
 			print "NO! YOU NEED TO PROVIDE AN START AND END"
 		else:
-			test_run(args.date, args.start[0], args.end[0], int(args.pmin[0]), int(args.pmax[0]))
+			run_commmand_line(args.date, args.start[0], args.end[0], int(args.pmin[0]), int(args.pmax[0]))

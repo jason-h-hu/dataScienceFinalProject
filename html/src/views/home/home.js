@@ -77,7 +77,7 @@ angular.module('app.views.home', ['angular-progress-arc'])
 			incrementMealProgress();
 		}).error(function (data, status) {
 			showError(data, status);
-			console.log('Specifically, error getting restaurant for', mealDate, mRest);
+			console.log('Specifically, error getting restaurant for', mealDate, mealLocation);
 		});
 	}
 
