@@ -30,7 +30,7 @@ def build_text_field(restaurant):
 
 
 def build_scores(sentiment_file):
-	global scores
+	# global scores
 	for line in sentiment_file:
 		term, score  = line.split("\t")  # The file is tab-delimited. "\t" means "tab character"
 		scores[term] = float(score)      # Convert the score to a float.
@@ -38,13 +38,13 @@ def build_scores(sentiment_file):
 def determine_sent(rest_text):
 	sentiment_score = 0.0
 	for word in rest_text:
-		if word in score:
+		if word in scores:
 			sentiment_score += scores[word]
 
 	return sentiment_score
 
 
-def build_sent_entry(location_list, sentiment_file):
+def build_sent_entry(location_list): #took out sent file as input
 	sentiment_file = open("data/AFINN-111.txt")
 	build_scores(sentiment_file)
 	for restaurant in location_list:
