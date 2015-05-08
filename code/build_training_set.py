@@ -7,7 +7,7 @@ from sklearn import linear_model
 import yelp
 import ranking
 import json
-# import sentiment_builder
+import sentiment_builder
 
 X_train = []
 Y_train= []
@@ -18,12 +18,14 @@ def main():
 
 def getRestData(restList):
     # print restList
+    if restList==None or len(restList)==0:
+        return None
     restList = ranking.create_weighted_stars(restList)
     restList =sentiment_builder.build_sent_entry(rests)
     for rest in restList:
         weightedStars= rest['weighted_stars']
-        # sentiment = rest['sentiment']
-        sentiment = 0
+        sentiment = rest['sentiment']
+        #sentiment = 0
         numReviews = rest['num_yelp_reviews']
         featureArray = [weightedStars, sentiment, numReviews]
         Y_train.append(rest['ranking'])
@@ -71,8 +73,8 @@ def generateRestInfo():
                 restDict['yelp_star']=yelp_info['yelp_star']
                 restDict['yelp_review']=yelp_info['yelp_review']
                 restList.append(restDict)
-                with open('trainingData.json', 'w') as f:
-                    json.dump(restDict, f)
+                #with open('trainingData.json', 'w') as f:
+                #    json.dump(restDict, f)
     return restList
 
 
