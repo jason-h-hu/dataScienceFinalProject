@@ -11,6 +11,7 @@ and changing them to "*UNK*", then finding a probability for "*UNK*"
 import sys
 import math
 from collections import defaultdict
+import json
 
 
 prob_dict = defaultdict(lambda:0.0)
@@ -73,9 +74,10 @@ Goes through and makes all words that appear less than 3 times *UNK*
 
 def clean_words():
     global word_dict
-
+    print "food", word_dict["food"]
+    print "beer",word_dict["beer"]
     for word in word_dict.keys():
-        if word_dict[word] <= 3:
+        if (word_dict[word] <= 15 or word_dict[word] >= 65000):
             word_dict["*UNK*"] += word_dict[word]
             del word_dict[word]
 

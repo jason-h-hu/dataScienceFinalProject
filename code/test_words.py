@@ -13,6 +13,7 @@ output: dictionary of restaurants for one location with an added "unique_words" 
 
 from collections import defaultdict
 import data_cleaning
+import shelve
 import operator
 import json
 
@@ -20,14 +21,11 @@ prob_dict_file = 'data/prob_dict'
 
 
 def build_text_field(restaurant):
-	text_string = restaurant["yelp_review"]
-
-	for review in restaurant["google_review_list"]:
-		text_string = text_string+" "+review["review_text"]
-
-	text_string = data_cleaning.clean(text_string)
+	text_string = []
+	for line in restaurant:
+		text_string += (data_cleaning.clean(line).split())
 	
-	return text_string.split() if len(text_string)>1 else []
+	return text_string if len(text_string)>1 else []
 
 
 
@@ -44,16 +42,17 @@ def determine_unique_words(rest_text, prob_dict):
 	return unique_words
 
 
-def build_words_entry(location_list):
+def build_words_entry(rest_text):
 
 	with open(prob_dict_file) as f:
-		for restaurant in location_list:
-			prob_dict = json.load(f)
-			rest_text = build_text_field(restaurant)
-			unique_words = determine_unique_words(rest_text, prob_dict)
-			restaurant["unique_words"] = unique_words
+		prob_dict = json.load(f)
+		rest_text = build_text_field(rest_text)
+		unique_words = determine_unique_words(rest_text, prob_dict)
+		print unique_words
 
-	return location_list
+
+
+build_words_entry(open("louis.txt"))
 
 
 
