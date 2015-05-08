@@ -17,7 +17,7 @@ echo "Done installing $(func 'npm') packages"
 
 # Install backend python stuff
 echo "Configuring $(func 'python') virtualenv..."
-virtualenv backend
+virtualenv --system-site-packages backend
 source backend/bin/activate
 pip install Flask
 pip install nltk
