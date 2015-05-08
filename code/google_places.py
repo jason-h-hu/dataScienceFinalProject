@@ -7,6 +7,8 @@ import urllib, urllib2, json
 import argparse
 from config import *
 
+
+
 def query_google(lat, lng, name, radius=10):
   place_info = get_place_info(lat,lng,name)
   if (place_info != None):
