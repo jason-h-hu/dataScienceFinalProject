@@ -16,7 +16,7 @@ import data_cleaning
 import shelve
 import operator
 
-shelfFile = 'data/prob_dict_shelf'
+shelfFile = 'data/prob_dict_shelf.db'
 
 
 def build_text_field(restaurant):
