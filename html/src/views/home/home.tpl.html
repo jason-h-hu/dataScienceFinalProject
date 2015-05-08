@@ -1,7 +1,7 @@
 <div class="home-page container" ng-controller="HomeCtrl">
 	<div class="row">
 
-
+		<!-- Journey form to enable searching for a route -->
 		<form class="journey" ng-submit="getJourney()">
 			<h1>Find meals for your next cross-country journey!</h1>
 
@@ -31,22 +31,18 @@
 		<progress-arc size=100 stroke-width=20 complete="progress" class="progress"></progress-arc>
 		<p class="progress-text" ng-if="progress">{{progress*100 | intNum}}%</p>
 
-	 	<div ui-view="map" class="gmap"></div>
+		<!-- Map -->
+		<div class="col-md-12">
+	 		<div ui-view="map" class="gmap"></div>
+	 	</div>
 
-		<!-- Temporary, just shows meals and such -->
-		<h1 ng-show="mealLocations" class="col-md-12">Meal Times</h1>
-		<ul>
-			<li ng-repeat="meal in mealLocations" class="col-md-12">On {{meal[0] | date: "MM/dd/yyyy 'at' ha"}}, eat at {{meal[1]}}</li>
-		</ul>
-
-		<h1 ng-show="restaurantOps" class="col-md-12">Restaurant Options</h1>
-		<ul>
-			<li ng-repeat="(d, rests) in restaurantOps" class="col-md-12">On {{d | date: "MM/dd/yyyy 'at' ha"}} your options include:
-			<ul>
-				<li ng-repeat="r in rests" class="col-md-12">{{r.name}}</li>
-			</ul>
-			</li>
-		</ul>
+	 	<!-- Restaurants side scroll -->
+	 	<div class="restaurants col-md-12">
+		 	<h1 ng-show="itinerary.length > 0">Restaurant Options</h1>
+			<div ng-repeat="r in itinerary[locations[currMeal][0]]" class="col-md-12 restaurant">
+				<p>{{r.name}}</p>
+			</div>
+		</div>
 
 	</div> <!-- row -->
 

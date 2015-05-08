@@ -1,3 +1,3 @@
 angular.module('app.modules', [
-	'app.metaModifier'
+	'app.numExtensions'
 ]);

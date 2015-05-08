@@ -6,9 +6,11 @@ angular.module('app.views.home', ['angular-progress-arc'])
 	var buttonText = 'New Journey';
 	var searchProg = 0.05;
 
+	// Data for the HTML
 	$scope.buttonText = buttonText;
-
-	// Testing purposes, maybe date is a good one to keep in
+	$scope.locations = []; // List of (date, location) tuples
+	$scope.itinerary = {}; // Dict of location -> list of restaurants
+	$scope.currMeal = 0; // Index of meal we're on
 	$scope.start = "Providence, RI";
 	$scope.end = "San Francisco, CA";
 	$scope.date = new Date();	
@@ -20,28 +22,8 @@ angular.module('app.views.home', ['angular-progress-arc'])
 			method: 'POST'
 		});
 		resetProgress();
-		$scope.mealLocations = undefined;
-		$scope.restaurantOps = undefined;
-	}
-
-	// Saves restaurants data for segment to $scope.restaurantOps dictionary, where key is datetime
-	function getRestaurants(seg) {
-		var meal = $scope.mealLocations[seg];
-		var m_rest = meal[1];
-		var m_date = meal[0];
-		$http({
-			url: 'http://localhost:5000/restaurants',
-			method: 'POST',
-			data: m_rest,
-			headers: {'Content-Type': 'application/json'}
-		}).success(function (data, status) {
-			if ($scope.restaurantOps === undefined) $scope.restaurantOps = {};
-			$scope.restaurantOps[m_date] = data; // List of restaurant objects
-			incrementMealProgress();
-		}).error(function (data, status) {
-			showError(data, status);
-			console.log('Specifically, error getting restaurant for', m_date, m_rest);
-		});
+		$scope.locations = [];
+		$scope.itinerary = {};
 	}
 
 	// Resets progress to 0 along with segment
@@ -57,7 +39,7 @@ angular.module('app.views.home', ['angular-progress-arc'])
 
 	function incrementMealProgress() {
 		$scope.segment += 1;
-		var total = $scope.mealLocations ? $scope.mealLocations.length : 0;
+		var total = $scope.locations.length;
 		var seg = $scope.segment;
 
 		// Bounds between 0.05 (searchProg) and 1.0) and sets text
@@ -80,6 +62,25 @@ angular.module('app.views.home', ['angular-progress-arc'])
 		}
 	}
 
+	// Saves restaurants data for segment to $scope.itinerary dictionary, where key is datetime
+	function getRestaurants(seg) {
+		var meal = $scope.locations[seg];
+		var mealDate = meal[0];
+		var mealLocation = meal[1];
+		$http({
+			url: 'http://localhost:5000/restaurants',
+			method: 'POST',
+			data: mealLocation,
+			headers: {'Content-Type': 'application/json'}
+		}).success(function (listOfRestaurants, status) {
+			$scope.itinerary[mealDate] = listOfRestaurants; // List of restaurant objects
+			incrementMealProgress();
+		}).error(function (data, status) {
+			showError(data, status);
+			console.log('Specifically, error getting restaurant for', mealDate, mRest);
+		});
+	}
+
 	// Shows button text that says error and console logs full thing
 	function showError(data, status) {
 		$scope.buttonText = 'Error getting journey (server returned status '+status+')';
@@ -87,7 +88,7 @@ angular.module('app.views.home', ['angular-progress-arc'])
 		clear();
 	}
 
-	// Saves journey from start to end to $scope.mealLocations
+	// Saves journey from start to end to $scope.locations
 	$scope.getJourney = function() {
 		clear();
 		$scope.buttonText = 'Getting mealtimes...';
@@ -97,15 +98,11 @@ angular.module('app.views.home', ['angular-progress-arc'])
 			data: {'start': $scope.start, 'end': $scope.end, 'date': $scope.date},
 			headers: {'Content-Type': 'application/json'}
 		}).success(function (data, status) {
-			$scope.mealLocations = data;
+			$scope.locations = data;
 			setProgress(searchProg, 'Finding restuarants...');
 			getRestaurants(0);
 		}).error(function (data, status) {
 			showError(data, status);
 		});
-	};
-}).filter('intNum', function(){
-	return function(input){
-		return parseInt(input, 10);
 	};
 });

@@ -79,7 +79,7 @@ def run_app():
 		if rests==None:
 			#TODO! obviously this is NOT what we want to do, this is a placeholder
 			return json.dumps([])
-		rests = unique_word_builder.build_words_entry(rests)
+		#rests = unique_word_builder.build_words_entry(rests)
 		rests = sentiment_builder.build_sent_entry(rests)
 		rests = ranking.rank(rests)
 		return json.dumps(rests, default=lambda x: x.isoformat() if hasattr(x, 'isoformat') else x)
