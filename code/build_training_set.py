@@ -69,7 +69,7 @@ def generateRestInfo():
         if googleDict!=None:
             yelp_info = yelp.query_api(location,search_name=restName)
             if yelp_info!=None:
-                
+                print "restName", restName, "yelp_info_name", yelp_info['name']
                 restDict = {}
                 restDict['ranking']=restRanking
                 restDict['google_rating']=googleDict['google_rating']

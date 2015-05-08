@@ -8,3 +8,4 @@ npm-global
 html/app
 *.swp
 .DS_STORE
+code/config.py
