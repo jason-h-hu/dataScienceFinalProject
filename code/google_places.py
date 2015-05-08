@@ -5,14 +5,16 @@
 #BEGIN PROGRAM.
 import urllib, urllib2, json
 import argparse
-
-AUTH_KEY = "AIzaSyCExDxuW1YxLX_Y7JTumtpTKD0YlLU3tFY"
+from config import *
 
 def query_google(lat, lng, name, radius=10):
   place_info = get_place_info(lat,lng,name)
   if (place_info != None):
+    # print place_info
     (place_id,rating) = place_info
     review_list=get_reviews(place_id)
+    if review_list==None:
+      return None
     googleDict = {}
     googleDict['google_place_id']=place_id
     googleDict['google_rating']=rating
@@ -25,7 +27,7 @@ def query_google(lat, lng, name, radius=10):
 
 #Grabbing and parsing the JSON data
 def get_place_info(lat,lng,name,radius=10):
-  print "in get place id", lat,lng,name
+  # print "in get place id", lat,lng,name
   #making the url
   # AUTH_KEY = "AIzaSyAOjjN8YD3ZudTfA1miPPY3Wm1S7Zla8Dk"
   LOCATION = str(lat) + "," + str(lng)
@@ -42,6 +44,7 @@ def get_place_info(lat,lng,name,radius=10):
   response = urllib.urlopen(MyUrl)
   jsonRaw = response.read()
   jsonData = json.loads(jsonRaw)
+  # print jsonData
   if ('results' in jsonData):
     if len(jsonData['results'])==0:
       return None
@@ -68,17 +71,23 @@ def get_reviews(place_id):
            '&sensor=false&key=%s') % (PLACE_ID, AUTH_KEY)
   #grabbing the JSON result
   response = urllib.urlopen(MyUrl)
+  # print response
   jsonRaw = response.read()
   jsonData = json.loads(jsonRaw)
-  reviewData = jsonData['result']['reviews']
-  review_list = []
-  for review in reviewData:
-    review_dict = {}
-    review_dict['review_star']=review['rating']
-    review_dict['review_author']=review['author_name']
-    review_dict['review_text'] = review['text']
-    review_list.append(review_dict)
-  return review_list
+  if ('result' in jsonData):
+    if len(jsonData['result'])==0:
+      return None
+    if ('reviews' in jsonData['result']):
+      reviewData = jsonData['result']['reviews']
+      review_list = []
+      for review in reviewData:
+        review_dict = {}
+        review_dict['review_star']=review['rating']
+        review_dict['review_author']=review['author_name']
+        review_dict['review_text'] = review['text']
+        review_list.append(review_dict)
+      return review_list
+  return None
   
 def main():
    
@@ -95,7 +104,7 @@ def main():
 
     try:
         google_results = query_google(input_values.lat, input_values.lng, input_values.name, radius=10)
-        print google_results
+        # print google_results
 
     except urllib2.HTTPError as error:
         sys.exit('Encountered HTTP error {0}. Abort program.'.format(error.code))

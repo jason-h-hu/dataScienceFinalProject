@@ -13,7 +13,7 @@ import urllib2
 
 import oauth2
 from collections import defaultdict
-
+#from difflib import SequenceMatcher
 
 # consumer key: SF7TtjFhkf3sDWq38r5UpQ
 CONSUMER_KEY = "SF7TtjFhkf3sDWq38r5UpQ"
@@ -32,6 +32,32 @@ SORT = "1" #sort by distance
 #temp global for testing
 SARAH_HOUSE = "41.826998,-71.403599"
 OFFSET = "20"
+
+# def string_similarity(str1,str2):
+#     return SequenceMatcher(None,str1,str2).ratio()
+
+def get_bigrams(string):
+    '''
+    Takes a string and returns a list of bigrams
+    '''
+    s = string.lower()
+    return [s[i:i+2] for i in xrange(len(s) - 1)]
+
+def string_similarity(str1, str2):
+    '''
+    Perform bigram comparison between two strings
+    and return a percentage match in decimal form
+    '''
+    pairs1 = get_bigrams(str1)
+    pairs2 = get_bigrams(str2)
+    union  = len(pairs1) + len(pairs2)
+    hit_count = 0
+    for x in pairs1:
+        for y in pairs2:
+            if x == y:
+                hit_count += 1
+                break
+    return (2.0 * hit_count) / union
 
 
 def request(host, path, url_params=None):
@@ -73,7 +99,7 @@ def request(host, path, url_params=None):
         return None
 
 
-def search(location):
+def search(location,name=None,offset=None):
     """Query the Search API by a search term and location.
 
     Args:
@@ -83,18 +109,23 @@ def search(location):
     Returns:
         dict: The JSON response from the request.
     """
-    
+
     url_params = {
         # 'term': term.replace(' ', '+'),
         'll': location.replace(' ', '+'), #need to check in an pass eventually
         # 'limit': SEARCH_LIMIT.replace(' ', '+'),
         # 'offset': OFFSET.replace(' ', '+'),
         'limit': SEARCH_LIMIT.replace(' ', '+'),
-        'sort': SORT.replace(' ', '+'),
-        'category_filter': "restaurants"
+        'sort': SORT.replace(' ', '+')#,
+        #'category_filter': "restaurants"
     }
-    # print 'url_params'
-    # print url_params
+
+    if name:
+        url_params['term'] = name.replace(' ','+')
+
+    if offset:
+        url_params['offset'] = offset
+    
     return request(API_HOST, SEARCH_PATH, url_params=url_params)
 
 def get_business(business_id):
@@ -110,7 +141,8 @@ def get_business(business_id):
 
     return request(API_HOST, business_path)
 
-def query_api(location):
+
+def query_api(location,search_name=None, offset=None):
     """Queries the API by the input values from the user.
 
     Args:
@@ -118,7 +150,7 @@ def query_api(location):
         location (str): The location of the business to query.
     """
     #print "in query api, location", location
-    response = search(location)
+    response = search(location,search_name,offset)
     if response==None:
         return None
 
@@ -183,17 +215,35 @@ def query_api(location):
 
             restaurant_list.append(restaurant)
 
-        #print restaurant_list
+        
+        if search_name:
+            #we only care about getting back the one restaurant with that name
+            best_restaurant = restaurant_list[0]
+            best_similarity = string_similarity(search_name,restaurant_list[0]['name'])
+            for rest in restaurant_list:
+                curr_similarity = string_similarity(rest['name'],search_name)
+                #print "looking at rest:", rest['name'], "curr_similarity is:", curr_similarity
+                if curr_similarity>best_similarity:
+                    best_restaurant = rest
+                    best_similarity = curr_similarity
+            #print "search name was:", search_name, "best_restaurant found:", best_restaurant['name']
+            return best_restaurant #if name given, not expecting a list, only wants one restaurant returned
+
+        # for rest in restaurant_list:
+        #     print rest['name']
         return restaurant_list
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-ll', '--ll', dest='ll', default=SARAH_HOUSE, type=str, help='Search location (default: %(default)s)')
-
+    parser.add_argument('-name','--name', dest='name', default=None, type=str, help= 'Name of restaurant (default: %(default)s)')
+    parser.add_argument('-offset','--offset', dest='offset',default=None,type=str, help= 'offset range of restaurants returned')
     input_values = parser.parse_args()
 
+    # Acorn: "39.7686109,-104.9797577" 
+    # 39.764238,-104.97848
     try:
-        query_api(input_values.ll)
+        query_api(input_values.ll,input_values.name,input_values.offset)
        
     except urllib2.HTTPError as error:
         sys.exit('Encountered HTTP error {0}. Abort program.'.format(error.code))
