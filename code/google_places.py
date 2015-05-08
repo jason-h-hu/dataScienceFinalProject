@@ -14,6 +14,8 @@ def query_google(lat, lng, name, radius=10):
     # print place_info
     (place_id,rating) = place_info
     review_list=get_reviews(place_id)
+    if review_list==None:
+      return None
     googleDict = {}
     googleDict['google_place_id']=place_id
     googleDict['google_rating']=rating
@@ -73,15 +75,19 @@ def get_reviews(place_id):
   # print response
   jsonRaw = response.read()
   jsonData = json.loads(jsonRaw)
-  reviewData = jsonData['result']['reviews']
-  review_list = []
-  for review in reviewData:
-    review_dict = {}
-    review_dict['review_star']=review['rating']
-    review_dict['review_author']=review['author_name']
-    review_dict['review_text'] = review['text']
-    review_list.append(review_dict)
-  return review_list
+  if ('result' in jsonData):
+    if len(jsonData['result'])==0:
+      return None
+    reviewData = jsonData['result']['reviews']
+    review_list = []
+    for review in reviewData:
+      review_dict = {}
+      review_dict['review_star']=review['rating']
+      review_dict['review_author']=review['author_name']
+      review_dict['review_text'] = review['text']
+      review_list.append(review_dict)
+    return review_list
+  return None
   
 def main():
    

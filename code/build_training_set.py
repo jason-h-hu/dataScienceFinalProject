@@ -21,7 +21,7 @@ def getRestData(restList):
     if restList==None or len(restList)==0:
         return None
     restList = ranking.create_weighted_stars(restList)
-    restList =sentiment_builder.build_sent_entry(rests)
+    # restList =sentiment_builder.build_sent_entry(rests)
     for rest in restList:
         weightedStars= rest['weighted_stars']
         sentiment = rest['sentiment']
@@ -64,6 +64,7 @@ def generateRestInfo():
         if googleDict!=None:
             yelp_info = yelp.query_api(location,search_name=restName)
             if yelp_info!=None:
+                
                 restDict = {}
                 restDict['ranking']=restRanking
                 restDict['google_rating']=googleDict['google_rating']
