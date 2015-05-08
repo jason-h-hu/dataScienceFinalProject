@@ -9,7 +9,14 @@ angular.module('app', [
 	'app.views'
 ])
 
-.config(function($urlRouterProvider, $stateProvider){
+.config(function($urlRouterProvider, $stateProvider, uiGmapGoogleMapApiProvider){
+
+    uiGmapGoogleMapApiProvider.configure({
+        v: '3.17',
+        libraries: 'drawing,geometry,visualization'
+    });
+
+
 	// Set up states
 	$stateProvider.state('home',{
         url: '/',

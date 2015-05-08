@@ -29,7 +29,9 @@ module.exports = {
       'bower_components/**/ui-bootstrap-tpls.min.js',
       'bower_components/**/release/angular-ui-router.min.js',
       'bower_components/**/ui-utils.min.js',
-			'bower_components/**/angular-progress-arc.min.js'
+			'bower_components/**/angular-progress-arc.min.js',
+      'bower_components/**/angular-google-maps.min.js',
+      'bower_components/**/lodash.underscore.min.js'
     ],
     css:[
       'bower_components/**/bootstrap.min.css'

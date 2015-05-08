@@ -1,3 +1,9 @@
 <div ng-controller="MapCtrl">
-	<p>OMG IS THIS WORKING</p>
+	<ui-gmap-google-map class="myMap" center='map.center' zoom='map.zoom'>
+	<ui-gmap-marker ng-repeat="meal in mealLocations" coords="{'latitude': 39.82, 'longitude': -98.57 , 'idKey': $index}">
+    </ui-gmap-marker>
+
+
+	</ui-gmap-google-map>
+
 </div>
