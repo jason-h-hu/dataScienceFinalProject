@@ -21,15 +21,20 @@ def getRestData(restList):
     if restList==None or len(restList)==0:
         return None
     restList = ranking.create_weighted_stars(restList)
-    # restList =sentiment_builder.build_sent_entry(rests)
+    restList =sentiment_builder.build_sent_entry(restList)
     for rest in restList:
         weightedStars= rest['weighted_stars']
         sentiment = rest['sentiment']
-        #sentiment = 0
+        # sentiment = 0
         numReviews = rest['num_yelp_reviews']
         featureArray = [weightedStars, sentiment, numReviews]
         Y_train.append(rest['ranking'])
         X_train.append(featureArray)
+    trainingInfo = {}
+    trainingInfo['X_train']=X_train
+    trainingInfo['Y_train']=Y_train
+    with open('trainingData.json', 'w') as f:
+        json.dump(trainingInfo, f)
 
 def regression():
     # Create linear regression object
@@ -76,6 +81,8 @@ def generateRestInfo():
                 restList.append(restDict)
                 #with open('trainingData.json', 'w') as f:
                 #    json.dump(restDict, f)
+    # with open('trainingData.json', 'w') as f:
+    #     json.dump(restList, f)
     return restList
 
 

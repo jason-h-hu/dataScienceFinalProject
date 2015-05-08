@@ -6,7 +6,7 @@
 import urllib, urllib2, json
 import argparse
 
-AUTH_KEY = "AIzaSyB7USSLMTKeNpbGtGpRDsEMQmGLLHD05RA"
+AUTH_KEY = "AIzaSyBv8kaueXCg2J2xfHLclVG7FdkYypcGzfY"
 
 def query_google(lat, lng, name, radius=10):
   place_info = get_place_info(lat,lng,name)
@@ -78,15 +78,16 @@ def get_reviews(place_id):
   if ('result' in jsonData):
     if len(jsonData['result'])==0:
       return None
-    reviewData = jsonData['result']['reviews']
-    review_list = []
-    for review in reviewData:
-      review_dict = {}
-      review_dict['review_star']=review['rating']
-      review_dict['review_author']=review['author_name']
-      review_dict['review_text'] = review['text']
-      review_list.append(review_dict)
-    return review_list
+    if ('reviews' in jsonData['result']):
+      reviewData = jsonData['result']['reviews']
+      review_list = []
+      for review in reviewData:
+        review_dict = {}
+        review_dict['review_star']=review['rating']
+        review_dict['review_author']=review['author_name']
+        review_dict['review_text'] = review['text']
+        review_list.append(review_dict)
+      return review_list
   return None
   
 def main():
