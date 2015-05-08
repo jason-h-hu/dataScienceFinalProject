@@ -8,10 +8,20 @@ import json
 import ranking
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 
-DEBUG = True
-SECRET_KEY = 'DATASCIENCEISSOCOOL'
-USERNAME = 'admin'
-PASSWORD = 'default'
+
+"""
+This is the general helper method to get a list of restaurants from a coordinate.
+Inputs: {'lat': , 'lng'}
+Output: List of restaurants
+"""
+def get_restaurants_from_coordinate(coords):
+	rests = get_restaurants.get_restaurants(coords['lat'], coords['lng'],pmin=1,pmax=5)
+	if rests==None:
+		return []
+	rests = unique_word_builder.build_words_entry(rests)
+	rests = sentiment_builder.build_sent_entry(rests)
+	rests = ranking.rank(rests)
+	return rests
 
 """
 Allows Cross-Origin so localhost:8888 can call us
@@ -34,13 +44,7 @@ def test_run(d, start, end, pmin, pmax):
 	meals = maps.getMeals(start, end, d)
 	for m in meals:
 		coords = m[1]
-		rests = get_restaurants.get_restaurants(coords['lat'], coords['lng'],pmin=1,pmax=5)
-		if rests==None:
-			#TODO! obviously this is NOT only what we want to do, this is a placeholder
-			continue
-		# rests = unique_word_builder.build_words_entry(rests)
-		rests = sentiment_builder.build_sent_entry(rests)
-		rests = ranking.rank(rests)
+		rests = x(coords)
 		rests = [(r["name"],r["weighted_score"],"Info is",r['weighted_stars'],r['sentiment'],r['num_yelp_reviews']) for r in rests]
 		print m[0],rests[:10]
 
@@ -75,13 +79,7 @@ def run_app():
 	@app.route('/restaurants', methods=["GET", "POST"])
 	def restaurants():
 		coords = request.json
-		rests = get_restaurants.get_restaurants(coords['lat'], coords['lng'],pmin=1,pmax=5)
-		if rests==None:
-			#TODO! obviously this is NOT what we want to do, this is a placeholder
-			return json.dumps([])
-		#rests = unique_word_builder.build_words_entry(rests)
-		rests = sentiment_builder.build_sent_entry(rests)
-		rests = ranking.rank(rests)
+		rests = get_restaurants_from_coordinate(coords)
 		return json.dumps(rests, default=lambda x: x.isoformat() if hasattr(x, 'isoformat') else x)
 
 	app.run()
