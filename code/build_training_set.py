@@ -6,7 +6,8 @@ import numpy as np
 from sklearn import linear_model
 import yelp
 import ranking
-import sentiment_builder
+import json
+# import sentiment_builder
 
 X_train = []
 Y_train= []
@@ -21,25 +22,16 @@ def getRestData(restList):
     restList =sentiment_builder.build_sent_entry(rests)
     for rest in restList:
         weightedStars= rest['weighted_stars']
-        sentiment = rest['sentiment']
+        # sentiment = rest['sentiment']
+        sentiment = 0
         numReviews = rest['num_yelp_reviews']
         featureArray = [weightedStars, sentiment, numReviews]
         Y_train.append(rest['ranking'])
         X_train.append(featureArray)
-    # infoArray = [rating,0,yelp_info['num_yelp_reviews']]
-                # Y_train.append(restRanking)
-                # X_train.append(infoArray)
-    # print restList
-
 
 def regression():
-    # X_train = sampleArray
-    # Y_train = answer
     # Create linear regression object
     regr = linear_model.LinearRegression()
-    print "X_train length "+str(len(X_train))
-    print "Y_train length "+str(len(Y_train))
-    # Train the model using the training sets
     regr.fit(X_train, Y_train)
 
     # The coefficients
@@ -51,8 +43,6 @@ def regression():
 def generateRestInfo():
     myReader = csv.reader(open('toplist.csv'))
     next(myReader, None) # Skip the header in the csv file
-    # for i in range(27):
-    #     next(myReader, None) # Skip the header in the csv file
     count = 0
     trainingData = {}
     restList = []
@@ -65,23 +55,12 @@ def generateRestInfo():
         restRanking = float(line[1])
         restLat = float(line[3])
         restLong = float(line[4])
-        # print restLat
-        # print restLong
-        # print restName
         googleDict = google_places.query_google(restLat, restLong, restName)
         location = str(restLat) + "," + str(restLong)
-        # print restName
-        # yelp_info = yelp.query_api(location,search_name=restName)
-        # print yelp_info
 
         #infoArray = [rating,sentiment, numReviews]
         if googleDict!=None:
-            # print googleDict
-            # print "inside"
-            # print Y_train
-            # print X_train
             yelp_info = yelp.query_api(location,search_name=restName)
-            # print yelp_info
             if yelp_info!=None:
                 restDict = {}
                 restDict['ranking']=restRanking
@@ -91,15 +70,9 @@ def generateRestInfo():
                 restDict["num_yelp_reviews"] = yelp_info['num_yelp_reviews']
                 restDict['yelp_star']=yelp_info['yelp_star']
                 restDict['yelp_review']=yelp_info['yelp_review']
-                # restDict['training_rating'] = np.average([restDict['yelp_star'], restDict['google_rating']])
-                # weightedRating = ranking.rate
                 restList.append(restDict)
-
-
-                # infoArray = [rating,0,yelp_info['num_yelp_reviews']]
-                # Y_train.append(restRanking)
-                # X_train.append(infoArray)
-    # return (answer, sampleArray)
+                with open('trainingData.json', 'w') as f:
+                    json.dump(restDict, f)
     return restList
 
 
