@@ -1,0 +1,14 @@
+<div ng-controller="RestaurantsCtrl">
+	<div ng-repeat="r in itinerary[locations[currMeal][0]]" class="restaurant">
+		<img ng-src="{{r.img_url}}" ng-if="r.img_url"></img>
+		<h3>{{r.name}}</h3>
+		<h5>{{r.address[0]}}</h5>
+		<h5>{{r.address[1]}}</h5>
+		<h5>{{r.phone_num | tel}}</h5>
+		<p>Combined Rating: {{r.weighted_stars}}</p>
+		<blockquote ng-if="r.yelp_review">{{r.yelp_review}}</blockquote>
+		<!-- TESTING FOR KV PAIRS <ul>
+			<li ng-repeat="(k,v) in r"><p>{{k}}:{{v}}</p></li>
+		</ul> -->
+	</div>
+</div>

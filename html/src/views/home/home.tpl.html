@@ -32,18 +32,12 @@
 		<p class="progress-text" ng-if="progress">{{progress*100 | intNum}}%</p>
 
 		<!-- Map -->
-		<div class="col-md-12">
-	 		<div ui-view="map" class="gmap"></div>
-	 	</div>
+		<div ui-view="map" class="gmap col-md-12"></div>
 
 	 	<!-- Restaurants side scroll -->
-	 	<div class="restaurants col-md-12">
-		 	<h1 ng-show="itinerary.length > 0">Restaurant Options</h1>
-			<div ng-repeat="r in itinerary[locations[currMeal][0]]" class="col-md-12 restaurant">
-				<p>{{r.name}}</p>
-			</div>
-		</div>
-
+	 	<h1 ng-show="itinerary[locations[currMeal][0]].length > 0" class="col-md-12">Restaurant Options for Meal {{currMeal}}</h1>	
+	 	<div ui-view="restaurants" class="restaurants col-md-12"></div>
+		
 	</div> <!-- row -->
 
 </div> <!-- home container -->

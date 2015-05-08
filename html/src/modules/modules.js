@@ -1,3 +1,4 @@
 angular.module('app.modules', [
-	'app.numExtensions'
+	'app.numExtensions',
+	'app.phoneFilter'
 ]);

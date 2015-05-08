@@ -30,6 +30,9 @@ angular.module('app', [
             'map@home': {
                 templateUrl: 'views/map/map.tpl.html'
             },
+            'restaurants@home': {
+                templateUrl: 'views/restaurants/restaurants.tpl.html'
+            },
             'footer': {
                 templateUrl: 'views/footer/footer.tpl.html'
             }

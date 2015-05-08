@@ -1,0 +1,29 @@
+/**
+ * RESTAURANTS
+ * This file contains styles specific to the restaurants section of the home template of the app
+ */
+.restaurants {
+	.restaurant {
+		background-color: #222;
+		display: inline-block;
+	    width: 350px;
+	    height: 100%;
+	    padding: 15px;
+	    white-space: normal;
+	    img {
+	    	width: 100px;
+	    	display: inline-block;
+	    }
+	    h3 {
+	    	width: 200px;
+	    	display: inline-block;
+	    }
+	}
+	margin-top: 40px;
+	margin-bottom: 40px;
+	overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+	height: 100%;
+	width: 100%;
+}
