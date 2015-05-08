@@ -11,7 +11,7 @@ killall() {
 # Setup
 source .road-trip-commands
 export PATH="./npm-global/bin/:$PATH"
-echo "Starting servers..."
+echo "Starting app..."
 source backend/bin/activate
 
 # Download NLTK data - to local tmp
@@ -26,21 +26,29 @@ if [ ! -d "$NLTK_DIR" ]; then
 fi;
 export NLTK_DATA=$NLTK_DIR
 
-# Python server
-echo "Starting $(func 'python') backend server..."
-cd code
-(python app.py --gui 3>&1 1>&2- 2>&3-) | prefix &
-cd ..
+# Run command line, or GUI if no arg specified
+if [ $# -eq 0 ]; then
 
-# Gulp server
-echo "Starting $(func 'gulp') for frontend..."
-cd html
-gulp & # Run gulp
-cd ..
+	# Python server
+	echo "Starting $(func 'python') backend server..."
+	cd code
+	(python app.py --gui 3>&1 1>&2- 2>&3-) | prefix &
+	cd ..
 
-# Out of environment
-deactivate
+	# Gulp server
+	echo "Starting $(func 'gulp') for frontend..."
+	cd html
+	gulp & # Run gulp
+	cd ..
 
-# Killall activated
-trap 'killall' INT
-cat # wait forever
+	# Out of environment
+	deactivate
+
+	# Killall activated
+	trap 'killall' INT
+	cat # wait forever
+
+elif [ $1="--cli" ]; then
+	echo "Command line interface setup! Make sure to $(func 'deactivate') when finished"
+
+fi;
