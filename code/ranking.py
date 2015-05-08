@@ -1,4 +1,4 @@
-
+import build_classifier
 """
 weighted rating (WR) = (v / (v+m)) * R + (m / (v+m)) * C
 Where:
@@ -33,14 +33,13 @@ def create_weighted_stars(rests):
 """
 Linearly combines all metrics
 """
-def weight(rest):
+def weight(rest, regr):
 	star = rest['weighted_stars']
-	dist = rest['dist_from_ll']
+	# dist = rest['dist_from_ll']
 	# uniq = rest['relative_unique']
 	sent = rest['sentiment']
 	numRevs = rest['num_yelp_reviews']
-
-	rest['weighted_score'] = 0.0
+	rest['weighted_score'] = regr.predict([star, sent, numRevs])
 	return rest
 
 
@@ -51,8 +50,9 @@ Adds the weighted rank to the restaurant dictionary as 'weighted_score'
 Returns a sorted list
 """
 def rank(rests):
+	regr = build_classifier.regression()
 	create_weighted_stars(rests)
-	create_relative_uniqueness(rests)
-	rests = [weight(r) for r in rests]
+	# create_relative_uniqueness(rests)
+	rests = [weight(r, regr) for r in rests]
 	rests.sort(key = lambda x: x['weighted_score'], reverse=True)
 	return rests
