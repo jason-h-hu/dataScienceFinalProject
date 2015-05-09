@@ -3,13 +3,16 @@
  * This file contains styles specific to the restaurants section of the home template of the app
  */
 .restaurants {
-	background-color: #ffffff;
+	background: #eeeeee;
 	border-top: 2px solid $color_primary;
+	h2 {
+		margin-top: -5px;
+	}
 	.restaurant {
 		padding-top: 10px;
 		padding-bottom: 10px;
 		&:nth-child(odd) {
-			background-color: $color_muted;
+			background-color: $color_gray;
 		}
 	}
 }

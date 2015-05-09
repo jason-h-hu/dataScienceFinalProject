@@ -7,7 +7,7 @@
 		ng-if="isLoading && mealStats.total == 0" 
 		max="1" 
 		value="1" 
-		type="primary">
+		type="info">
 	</progressbar>
 	
 	<!-- If we have mealStats.total, show the dots -->
@@ -15,8 +15,9 @@
 		<svg viewBox="0 0 116.869 138.73"
 			ng-repeat="meal in locations"
 			class="acorn"
-			ng-class="{'loaded': mealStats.loaded > $index}"
-			tooltip="Meal at {{meal[0] | formatDate}}">
+			ng-class="{'loaded': mealStats.loaded > $index, 'selected': mealStats.curr == $index && mealStats.loaded > $index }"
+			tooltip="{{ mealStats.loaded > $index ? ('Meal at '+ (meal[0] | formatDate)) : 'Still loading meal...'}}"
+			ng-click="select($index)">
 			<path d="M58.435,65.739c-21.635,0-40.521,3.508-50.623,0.672
 				c-0.121,1.621-0.186,3.26-0.186,4.916c0,16.779,9.322,45.707,27.417,53.555c19.131,8.297,23.392,13.849,23.392,13.849
 				s4.261-5.552,23.391-13.849c18.096-7.848,27.418-36.775,27.418-53.555c0-1.656-0.065-3.295-0.186-4.916

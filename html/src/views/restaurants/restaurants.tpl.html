@@ -1,4 +1,5 @@
 <div ng-controller="RestaurantsCtrl" class="col-xs-12" ng-show="mealStats.loaded > 0">
+	<h5>Meal at {{locations[mealStats.curr][0] | formatDate}}</h5>
 	<h2>Restaurants</h2>
 	<div ng-repeat="r in itinerary[locations[mealStats.curr][0]]" class="restaurant row">
 		<img class="col-xs-6" ng-src="{{r.img_url}}"></img>

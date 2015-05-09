@@ -21,6 +21,12 @@
 			fill: darken($color_primary, 5%);
 			&.loaded {
 				fill: $color_muted;
+				&:hover {
+					fill: lighten($color_primary, 45%);
+				}
+			}
+			&.selected, &.selected:hover {
+				fill: $color_selected;
 			}
 		}
 	}
