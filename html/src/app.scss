@@ -10,8 +10,13 @@
 @import 'views/views';
 
 body {
-	background-image: url("/assets/chipmunk-pattern.jpg");
+	// background-image: url("/assets/chipmunk-pattern.jpg");
 	background-size: 100% 100%;
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
+}
+
+.left-side {
+	height: 100vh;
+	overflow: scroll;
 }

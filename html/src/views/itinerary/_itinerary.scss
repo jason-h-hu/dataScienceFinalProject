@@ -4,6 +4,8 @@
  */
 
 .itinerary {
+	border-top: 2px solid $color_activated;
+	margin-top: 10px;
 	.acorns {
 		svg.acorn {
 			width: 33px;

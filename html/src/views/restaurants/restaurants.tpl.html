@@ -1,15 +1,11 @@
-<div ng-controller="RestaurantsCtrl">
-	<h1 ng-show="itinerary[locations[currMeal][0]].length > 0" class="col-md-12">Restaurant Options for Meal {{currMeal}}</h1
-	<div ng-repeat="r in itinerary[locations[currMeal][0]]" class="restaurant">
-		<img ng-src="{{r.img_url}}" ng-if="r.img_url"></img>
-		<h3>{{r.name}}</h3>
-		<h5>{{r.address[0]}}</h5>
-		<h5>{{r.address[1]}}</h5>
-		<h5>{{r.phone_num | tel}}</h5>
-		<p>Combined Rating: {{r.weighted_stars}}</p>
-		<blockquote ng-if="r.yelp_review">{{r.yelp_review}}</blockquote>
-		<ul>
-			<li ng-repeat="(k,v) in r"><p>{{k}}:{{v}}</p></li>
-		</ul>
+<div ng-controller="RestaurantsCtrl" class="col-xs-12" ng-show="mealStats.loaded > 0">
+	<h2>Restaurants</h2>
+	<div ng-repeat="r in itinerary[locations[mealStats.curr][0]]" class="restaurant row">
+		<img class="col-xs-6" ng-src="{{r.img_url}}"></img>
+		<h4 class="col-xs-6">{{r.name}}</h4>
+		<stars class="col-xs-6" value="r.weighted_stars"></stars>
+		<p class="col-xs-6">
+			<span ng-repeat="word in r.unique_words">{{word+' '}}</span>
+		</p>
 	</div>
 </div>

@@ -13,25 +13,14 @@
   <div class="container-fluid">
     <div class="row">
 
-      <!-- Left side -->
-      <div class="col-md-3">
-        <div class="row">
+      <div class="col-md-3 left-side">
+        <div class="search-form row" ui-view="search-form"></div>
+        <div class="itinerary row" ui-view="itinerary"></div>
+        <div class="restaurants row" ui-view="restaurants"></div>
+      </div>
 
-          <!-- Form -->
-          <div class="search-form" ui-view="search-form"></div>
-
-          <!-- Itinerary -->
-          <div class="itinerary" ui-view="itinerary">
-          </div>
-
-          <!-- Restaurant Results -->
-          <div class="restaurants col-md-12" ui-view="restaurants" style="background: green;">
-          </div>
-        </div>
-      </div> <!-- left side -->
-
-      <!-- Map -->
       <div class="map col-md-9" ui-view="map"></div>
+      
     </div>
   </div>
 

@@ -3,7 +3,12 @@
  * This file contains styles specific to the restaurants section of the home template of the app
  */
 .restaurants {
+	border-top: 2px solid $color_activated;
 	.restaurant {
-		
+		padding-top: 10px;
+		padding-bottom: 10px;
+		&:nth-child(odd) {
+			background: $color_deactivated;
+		}
 	}
 }
