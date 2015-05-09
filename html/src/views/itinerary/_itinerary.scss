@@ -4,8 +4,13 @@
  */
 
 .itinerary {
-	border-top: 2px solid $color_activated;
-	margin-top: 10px;
+	background: $color_primary;
+	border-top: 2px solid $color_primary;
+	padding-bottom: 5px;
+	h2 {
+		color: #ffffff;
+		padding-bottom: 10px;
+	}
 	.acorns {
 		svg.acorn {
 			width: 33px;
@@ -13,9 +18,9 @@
 			margin-right: 10px;
 			margin-top: -10px;
 			margin-bottom: 5px;
-			fill: $color_deactivated;
+			fill: darken($color_primary, 5%);
 			&.loaded {
-				fill: $color_activated;
+				fill: $color_muted;
 			}
 		}
 	}

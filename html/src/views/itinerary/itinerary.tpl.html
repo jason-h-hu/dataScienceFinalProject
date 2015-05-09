@@ -1,5 +1,5 @@
 <div class="col-xs-12" ng-if="isLoading || mealStats.total" ng-controller="ItineraryCtrl">
-	<h2>Meals</h2>
+	<h2>{{isLoading ? 'Finding Meals...' : 'Meals'}}</h2>
 	
 	<!-- If we're loading and mealStats.total == 0, show an indeterminite progress bar -->
 	<progressbar

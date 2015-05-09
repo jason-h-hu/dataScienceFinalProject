@@ -4,12 +4,19 @@
  */
 
 .search-form {
-	margin-top: 10px;
-	#title {
-		text-align: center;
+	background: #ffffff;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	.logo, .title {
+		float: left;
+		margin-bottom: 20px;
 	}
-}
-.logo {
-	width: 105px;
-	padding-bottom: 20px;
+	.logo {
+		margin-left: 20px;
+		max-width: 25%;
+	}
+	.title {
+		line-height: 1.35em;
+		margin-left: 10px;
+	}
 }
