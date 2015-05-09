@@ -15,4 +15,13 @@
 			background-color: $color_gray;
 		}
 	}
+	.chip {
+		img {
+			margin-left: auto;
+			margin-right: auto;
+			display: block;
+			padding-top: 30px;
+			padding-bottom: 30px;
+		}
+	}
 }
