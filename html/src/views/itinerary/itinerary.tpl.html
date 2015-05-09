@@ -1,4 +1,6 @@
-<div class="col-xs-12" ng-controller="ItineraryCtrl">
+<div class="col-xs-12" ng-if="isLoading || mealStats.total" ng-controller="ItineraryCtrl">
+	<h2>Meals</h2>
+	
 	<!-- If we're loading and mealStats.total == 0, show an indeterminite progress bar -->
 	<progressbar
 		class="progress-striped active"
@@ -10,13 +12,19 @@
 	
 	<!-- If we have mealStats.total, show the dots -->
 	<div ng-if="mealStats.total" class="acorns">
-		<ul>
-			<li class="acorn"
+		<svg viewBox="0 0 116.869 138.73"
 			ng-repeat="meal in locations"
-			ng-class="{'loaded': mealStats.loaded > $index}">
-				{{meal[0] | formatDate}}:{{meal[1]}}
-			</li>
-		</ul>
+			class="acorn"
+			ng-class="{'loaded': mealStats.loaded <= $index}"
+			tooltip="Meal at {{meal[0] | formatDate}}">
+			<path d="M58.435,65.739c-21.635,0-40.521,3.508-50.623,0.672
+				c-0.121,1.621-0.186,3.26-0.186,4.916c0,16.779,9.322,45.707,27.417,53.555c19.131,8.297,23.392,13.849,23.392,13.849
+				s4.261-5.552,23.391-13.849c18.096-7.848,27.418-36.775,27.418-53.555c0-1.656-0.065-3.295-0.186-4.916
+				C98.956,69.247,80.068,65.739,58.435,65.739z"/>
+			<path d="M67.086,18.768c3.965-5.755,9.337-12.022,9.337-12.022S76.423,0,67.429,0c-5.619,0-7.728,10.53-8.519,18.433
+				c-0.158,0-0.316-0.003-0.476-0.003C26.162,18.43,0,32.284,0,49.374c0,17.089,26.162,9.283,58.435,9.283s58.435,7.806,58.435-9.283
+				C116.869,33.841,95.256,20.982,67.086,18.768z"/>
+		</svg>
 	</div>
 
 </div>

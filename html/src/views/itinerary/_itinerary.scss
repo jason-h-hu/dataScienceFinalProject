@@ -4,9 +4,17 @@
  */
 
 .itinerary {
-	.acorns .acorn {
-		&.loaded {
-			color: blue;
+	.acorns {
+		svg.acorn {
+			width: 33px;
+			height: auto;
+			margin-right: 10px;
+			margin-top: -10px;
+			margin-bottom: 5px;
+			fill: $color_deactivated;
+			&.loaded {
+				fill: $color_activated;
+			}
 		}
 	}
 }
