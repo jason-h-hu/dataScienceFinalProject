@@ -15,7 +15,7 @@ def get_restaurants_from_coordinate(coords):
 	rests = get_restaurants.get_restaurants(coords['lat'], coords['lng'],pmin=1,pmax=5)
 	if rests==None:
 		return []
-	#rests = unique_word_builder.build_words_entry(rests)
+	rests = unique_word_builder.build_words_entry(rests)
 	rests = sentiment_builder.build_sent_entry(rests)
 	return ranking.rank(rests)
 	

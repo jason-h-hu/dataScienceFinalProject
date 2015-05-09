@@ -47,8 +47,8 @@ def determine_unique_words(rest_text, prob_dict):
 def build_words_entry(location_list):
 
 	with open(prob_dict_file) as f:
+		prob_dict = json.load(f)
 		for restaurant in location_list:
-			prob_dict = json.load(f)
 			rest_text = build_text_field(restaurant)
 			unique_words = determine_unique_words(rest_text, prob_dict)
 			restaurant["unique_words"] = unique_words
