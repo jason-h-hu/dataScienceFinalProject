@@ -3,6 +3,10 @@
 - Check errors in more places
 - Change run/setup script to not install packages we don't need (BSDDB specifically)
 - Change run script to use python -m SimpleHTTPServer 8888 instead of gulp for the frontend, with compiled version of site
+- Stars for overview restaurants
+- Details for restaurant on click
+- Styling chip
+- Pins...
 
 # Overview
 
