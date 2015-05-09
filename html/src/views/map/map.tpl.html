@@ -5,10 +5,12 @@
 		<ui-gmap-google-map center='map.center' zoom='map.zoom'>
 
 			<!-- <Marks for every meal -->
-			<ui-gmap-marker 
+			<ui-gmap-marker
+				ng-if="mealStats.loaded > $index"
 				ng-repeat="meal in locations" 
 				coords="{'latitude': meal[1]['lat'], 'longitude': meal[1]['lng']}" 
-				idkey="$index">
+				idkey="$index"
+				click="setRestaurant($index)">
 			</ui-gmap-marker>
 
 			<!-- <ui-gmap-polyline path="path" stroke="{color: '#6060FB', weight: 10}" ></ui-gmap-polyline> -->

@@ -18,7 +18,8 @@ module.exports = {
   dest: {
     js: 'js/',
     css: 'css/',
-    assets: 'assets/'
+    assets: 'assets/',
+    fonts: 'fonts/'
   },
 
   // Vendor code for the build process (Angular + Bootstrap)
@@ -35,6 +36,9 @@ module.exports = {
     ],
     css:[
       'bower_components/**/bootstrap.min.css'
+    ],
+    fonts:[
+      'bower_components/bootstrap/fonts/glyphicons*.*'
     ]
   }
 };

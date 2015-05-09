@@ -1,13 +1,23 @@
 <div ng-controller="RestaurantsCtrl" class="col-xs-12" ng-show="mealStats.loaded > 0">
 	<h5>Meal at {{locations[mealStats.curr][0] | formatDate}}</h5>
 	<h2>Restaurants</h2>
-	<div ng-repeat="r in itinerary[locations[mealStats.curr][0]]" class="restaurant row">
-		<img class="col-xs-6" ng-src="{{r.img_url}}"></img>
-		<h4 class="col-xs-6">{{r.name}}</h4>
-		<stars class="col-xs-6" value="r.weighted_stars"></stars>
-		<p class="col-xs-6">
-			<span ng-repeat="word in r.unique_words">{{word+' '}}</span>
+	<div ng-repeat="r in itinerary[locations[mealStats.curr][0]]" class="restaurant row" ng-click="mealExpand(r)">
+		<img class="col-xs-5" ng-src="{{r.img_url}}"></img>
+		<h4 class="col-xs-7">{{r.name}}</h4>
+    	<rating class="col-xs-7" ng-model="r.weighted_stars" readonly="true"></rating>
+		<p class="col-xs-7">
+			<span ng-repeat="word in r.unique_words">{{$last ? word : word+', '}}</span>
 		</p>
+
+		<div ng-if="r.expanded" class="col-xs-12" style="margin-top:20px;">
+			<p>{{r.phone_num | tel}}</p>
+			<p>{{r.address[0]}}, {{r.address[1]}}</p>
+			<blockquote>{{r.yelp_review}}</blockquote>
+			<p>Combined Stars: {{r.weighted_stars}}</p>
+			<p>Weighted Score: {{r.weighted_score}}</p>
+			<p>Review Sentiment: {{r.sentiment}}</p>
+			<a ng-href="{{r.rest_url}}" target="_blank">More information at Yelp</a>
+		</div>
 	</div>
 	<div class="chip">
 		<img src="/assets/chipmunk.svg">

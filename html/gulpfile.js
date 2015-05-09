@@ -18,7 +18,7 @@ var gulp        = require('gulp'),
 
 /////////////////////////////////////////////////////////////
 
-/* TODO:
+/*
 // gulp should be called like this :
 // $ gulp --type production
 .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
@@ -58,6 +58,13 @@ function vendor(){
   return gulp.src(cfg.vendor.js)
     .pipe(concat('vendor.min.js'))
     .pipe(gulp.dest(cfg.build+cfg.dest.js))
+    .pipe(connect.reload())
+}
+
+// Copies vendor font files into build dir
+function fonts(){
+  return gulp.src(cfg.vendor.fonts)
+    .pipe(gulp.dest(cfg.build+cfg.dest.fonts))
     .pipe(connect.reload())
 }
 
@@ -115,9 +122,10 @@ gulp.task('clean', clean)
 gulp.task('sass', ['clean', 'vendor'], sass)
 gulp.task('js', ['clean', 'vendor'], js)
 gulp.task('vendor', ['clean'], vendor)
+gulp.task('fonts', ['clean', 'vendor'], fonts)
 gulp.task('partials', ['clean', 'vendor'], partials)
 gulp.task('assets', ['clean', 'vendor'], assets)
-gulp.task('html', ['vendor', 'js', 'sass', 'assets', 'partials'], html)
+gulp.task('html', ['vendor', 'js', 'sass', 'assets', 'partials', 'fonts'], html)
 gulp.task('watch', ['build'], function () {
   connect.server({
     root: cfg.build,
