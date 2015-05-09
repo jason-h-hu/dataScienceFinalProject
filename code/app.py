@@ -50,15 +50,9 @@ def run_app():
 	app = Flask(__name__)
 	app.config.from_object(__name__)
 	app.after_request(add_cors_header)
-	
-	"""
-	Clears current requests somehow (TODO!!)
-	"""
-	@app.route('/clear', methods=["POST"])
-	def clear():
-		return json.dumps({})
 
 	"""
+	Returns the list of (time, location) for all the meals
 	To test using curl, try this command:
 	curl -H "Content-Type: application/json" -X POST -d '{"start": "Providence, RI", "end": "San Francisco, CA", "date":"2011-12-01T12:00:00.00Z"}' http://127.0.0.1:5000/journey
 	"""
@@ -68,6 +62,23 @@ def run_app():
 		end = request.json["end"]
 		d = datetime.strptime(request.json["date"], '%Y-%m-%dT%H:%M:%S.%fZ') if request.json["date"] != None else datetime.datetime.today()
 		meals = maps.getMeals(start, end, d)
+		return json.dumps(meals, default=lambda x: x.isoformat() if hasattr(x, 'isoformat') else x)
+
+	"""
+	Returns a dict, containing:
+	{
+		"path": A polyline, defined as [{latitude: int, longitude: int} ... ],
+		"locations":[(timestamp, coordinate) ...]
+	}
+	To test using curl, try this command:
+	curl -H "Content-Type: application/json" -X POST -d '{"start": "Providence, RI", "end": "San Francisco, CA", "date":"2011-12-01T12:00:00.00Z"}' http://127.0.0.1:5000/journeyWithPath
+	"""
+	@app.route('/journeyWithPath', methods=["GET", "POST"])
+	def journeyWithPath():
+		start = request.json["start"]
+		end = request.json["end"]
+		d = datetime.strptime(request.json["date"], '%Y-%m-%dT%H:%M:%S.%fZ') if request.json["date"] != None else datetime.datetime.today()
+		meals = maps.getMealsAndPath(start, end, d)
 		return json.dumps(meals, default=lambda x: x.isoformat() if hasattr(x, 'isoformat') else x)
 
 	"""

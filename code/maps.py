@@ -3,26 +3,8 @@ import json
 import math
 import datetime
 
-"""
-
-NOTES: 
-
-Right now, the whole journey is being partitioned into days using a greedy algorithm.
-
-To decide where we'll be for a meal, we find the segment we'll be traveling on when it's mealtime, and we use the "destination" field of that segment
-
-These have a few weird edge cases. 
-
-Day partitioning could be much smarter.
-
-Also, if we're on a long segment during lunchtime, that schedules lunch for around 3 or 4. 
-
-We should interpolate on those segments, so we can find a better coordinate for lunch
-
-
-"""
 def getMeals(start, end, date, DEPARTURE=9, LUNCHTIME=12, DINNERTIME=18, HOURSPERDAY=12):
-	""" This is the only function you all will care about. 
+	""" 
 	Takes in a start and end location, as words
 	date is a datetime.datetime() object
 
@@ -30,10 +12,43 @@ def getMeals(start, end, date, DEPARTURE=9, LUNCHTIME=12, DINNERTIME=18, HOURSPE
 	this is a datetime.datetime() object and a (int, int) respectively
 	"""
 	fullJourney = makeRequest(start, end)
+	return getMealsHelper(fullJourney, date, DEPARTURE, LUNCHTIME, DINNERTIME, HOURSPERDAY)
+
+def getMealsAndPath(start, end, date, DEPARTURE=9, LUNCHTIME=12, DINNERTIME=18, HOURSPERDAY=12):
+	""" 
+	Takes in a start and end location, as words
+	date is a datetime.datetime() object
+
+	Returns the results from the Google Directions API, and the list 
+	of (timestamp, coordinate) of all the meals we want.
+		{
+			"path": A polyline, defined as [{latitude: int, longitude: int} ... ],
+			"locations": [(timestamp, coordinate) ...]
+		}
+	"""
+	fullJourney = makeRequest(start, end)
+	print fullJourney
+	path = fullJourney["steps"]
+	path = map(lambda x: {"latitude": x["start_location"]["lat"] , "longitude": x["start_location"]["lng"]}, path)
+	# lastPoint = fullJourney["steps"][-1]["end_location"]
+	# path += {"latitude": lastPoint["lat"], "longitude": lastPoint["lng"]}
+	# print path
+	return  {
+		"path":  path,
+		"locations": getMealsHelper(fullJourney, date, DEPARTURE, LUNCHTIME, DINNERTIME, HOURSPERDAY)
+	}  
+
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# DANGER DANGER! This is all helper functions. You shouldn't need to call any of these functions! 
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+def getMealsHelper(fullJourney, date, DEPARTURE=9, LUNCHTIME=12, DINNERTIME=18, HOURSPERDAY=12):
+
 	steps = fullJourney["steps"]
 
 	meals = []
-
 	today = datetime.datetime(date.year, date.month, date.day, DEPARTURE)
 
 	totalSecondsTraveledToday = 0
@@ -65,11 +80,6 @@ def getMeals(start, end, date, DEPARTURE=9, LUNCHTIME=12, DINNERTIME=18, HOURSPE
 			totalSecondsTraveledToday += step["duration"]["value"]
 			totalSecondsTraveledToday %= next_mealtime
 	return meals
-
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# DANGER DANGER! This is all helper functions. You shouldn't need to call any of these functions! 
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
 """ Makes the API request, parses it, and returns a pathObject
 Input - startLocation: A string describing the start, as either words or coordinates

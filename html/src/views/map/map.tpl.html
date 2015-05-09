@@ -1,15 +1,21 @@
 <div ng-controller="MapCtrl">
 	<div class="row">
 
-		<!-- Map -->
+	<!-- Map -->
 		<ui-gmap-google-map center='map.center' zoom='map.zoom'>
-		
+
 			<!-- <Marks for every meal -->
 			<ui-gmap-marker 
 				ng-repeat="meal in locations" 
 				coords="{'latitude': meal[1]['lat'], 'longitude': meal[1]['lng']}" 
 				idkey="$index">
-		    </ui-gmap-marker>
+			</ui-gmap-marker>
+
+			<!-- <ui-gmap-polyline path="path" stroke="{color: '#6060FB', weight: 10}" ></ui-gmap-polyline> -->
+			<ui-gmap-polyline 
+				path="{'latitude': 37.7833, 'longitude': -122.4167}" 
+				stroke="{color: '#6060FB', weight: 10}" >
+			</ui-gmap-polyline>
 
 		</ui-gmap-google-map>
 
