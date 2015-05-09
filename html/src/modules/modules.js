@@ -1,4 +1,5 @@
 angular.module('app.modules', [
 	'app.numExtensions',
-	'app.phoneFilter'
+	'app.phoneFilter',
+	'app.dateExtensions'
 ]);

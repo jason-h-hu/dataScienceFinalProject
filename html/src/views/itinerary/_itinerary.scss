@@ -4,5 +4,9 @@
  */
 
 .itinerary {
-	
+	.acorns .acorn {
+		&.loaded {
+			color: blue;
+		}
+	}
 }

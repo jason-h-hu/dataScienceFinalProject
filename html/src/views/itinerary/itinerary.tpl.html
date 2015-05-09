@@ -10,7 +10,13 @@
 	
 	<!-- If we have mealStats.total, show the dots -->
 	<div ng-if="mealStats.total" class="acorns">
-		
+		<ul>
+			<li class="acorn"
+			ng-repeat="meal in locations"
+			ng-class="{'loaded': mealStats.loaded > $index}">
+				{{meal[0] | formatDate}}:{{meal[1]}}
+			</li>
+		</ul>
 	</div>
 
 </div>

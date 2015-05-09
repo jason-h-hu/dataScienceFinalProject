@@ -54,6 +54,11 @@ angular.module('app', [
         }
     }
 
+    // Returns with range in array
+    $rootScope.range = function(n) {
+        return new Array(n);
+    };
+
     $scope.appName = 'Chipmunk';
     $rootScope.clearAllData();
 });
