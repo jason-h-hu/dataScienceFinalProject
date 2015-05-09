@@ -10,9 +10,30 @@
 
 <body>
   <!-- Template view for app screens -->
-  <div ui-view="header"></div>
-  <div ui-view="content" class="content"></div>
-  <div ui-view="footer"></div>
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- Left side -->
+      <div class="col-md-3">
+        <div class="row">
+
+          <!-- Form -->
+          <div class="search-form" ui-view="search-form"></div>
+
+          <!-- Itinerary -->
+          <div class="itinerary col-md-12" ui-view="itinerary" style="background: pink;">
+          </div>
+
+          <!-- Restaurant Results -->
+          <div class="restaurants col-md-12" ui-view="restaurants" style="background: green;">
+          </div>
+        </div>
+      </div> <!-- left side -->
+
+      <!-- Map -->
+      <div class="map col-md-9" ui-view="map"></div>
+    </div>
+  </div>
 
   <!-- inject:js -->
   <!-- endinject -->

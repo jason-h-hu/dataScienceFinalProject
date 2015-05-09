@@ -1,1 +1,10 @@
-.angular-google-map-container { height: 400px; }
+/**
+ * MAP
+ * Styles specific to the big map on the right
+ */
+
+.map {
+	.angular-google-map-container { 
+		height: 100vh;
+	}
+}

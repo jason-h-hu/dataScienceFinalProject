@@ -1,9 +1,17 @@
 <div ng-controller="MapCtrl">
-	<ui-gmap-google-map class="myMap" center='map.center' zoom='map.zoom'>
-	<ui-gmap-marker ng-repeat="meal in locations" coords="{'latitude': meal[1]['lat'], 'longitude': meal[1]['lng']}" idkey="$index">
-    </ui-gmap-marker>
+	<div class="row">
 
+		<!-- Map -->
+		<ui-gmap-google-map center='map.center' zoom='map.zoom'>
+		
+			<!-- <Marks for every meal -->
+			<ui-gmap-marker 
+				ng-repeat="meal in locations" 
+				coords="{'latitude': meal[1]['lat'], 'longitude': meal[1]['lng']}" 
+				idkey="$index">
+		    </ui-gmap-marker>
 
-	</ui-gmap-google-map>
+		</ui-gmap-google-map>
 
+	</div>
 </div>

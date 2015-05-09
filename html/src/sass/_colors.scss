@@ -4,27 +4,4 @@
  * to be included in the main app scss file
  */
 
-// American flag colors!
-$color_blue: #0052A5;
-$color_blue_dark: darken($color_blue, 15%);
-$color_red: #E0162B;
-$color_white: #FFFFFF;
-
-body, html {
-	color: darken($color_white, 15%);
-}
-
-h1,h2,h3,h4,h5,h6 {
-	color: $color_white;
-}
-
-.btn-primary {
-	background-color: $color_blue;
-	border-color: lighten($color_blue, 5%);
-}
-
-.btn-danger {
-	color: $color_white;
-	background-color: $color_red;
-	border-color: darken($color_red, 5%);
-}
+ $color_white: #fff;

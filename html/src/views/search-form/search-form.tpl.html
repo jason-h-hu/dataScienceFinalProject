@@ -1,0 +1,52 @@
+<div ng-controller="SearchCtrl">
+	<h1 id="title">Chipmunk</h1>
+	<form class="journey" ng-submit="getJourney()">
+		
+
+		<!-- Start -->
+		<div class="form-group col-xs-12">
+			<input name="start" 
+			type="text" 
+			ng-model="start" 
+			placeholder="Where from?" 
+			class="form-control input input-sm" 
+			required>
+		</div>
+
+		<!-- End -->
+		<div class="form-group col-xs-12">
+			<input name="end" 
+			type="text" 
+			ng-model="end" 
+			placeholder="Where to?" 
+			class="form-control input input-sm" 
+			required>
+		</div>
+
+		<!-- Date -->
+		<div class="form-group col-xs-6">
+			<input name="end" 
+			type="date" 
+			ng-model="date" 
+			placeholder="Leaving when?" 
+			class="form-control input input-sm" 
+			required>
+		</div>
+
+		<!-- Button -->
+		<div class="col-xs-6">
+			<button 
+			id="submit" 
+			type="submit" 
+			class="btn btn-sm btn-block btn-primary"
+			ng-disabled="!buttonEnabled">
+			{{buttonEnabled ? 'Find Meals' : 'Loading...'}}
+		</button>
+		</div>
+
+		<!-- Loading progress -->
+		<div class="col-xs-12" ng-if="progress">
+			<progressbar class="progress-striped active" max="1" value="1" type="primary"></progressbar>
+		</div>
+	</form>
+</div>

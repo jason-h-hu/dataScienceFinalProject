@@ -21,35 +21,17 @@ angular.module('app', [
 	$stateProvider.state('home',{
         url: '/',
         views: {
-            'header': {
-                templateUrl: 'views/header/header.tpl.html'
+            'itinerary': {
+                templateUrl: 'views/itinerary/itinerary.tpl.html'
             },
-            'content': {
-                templateUrl: 'views/home/home.tpl.html'
+            'search-form': {
+                templateUrl: 'views/search-form/search-form.tpl.html'
             },
-            'map@home': {
+            'map': {
                 templateUrl: 'views/map/map.tpl.html'
             },
-            'restaurants@home': {
+            'restaurants': {
                 templateUrl: 'views/restaurants/restaurants.tpl.html'
-            },
-            'footer': {
-                templateUrl: 'views/footer/footer.tpl.html'
-            }
-        }
-    })
-
-    $stateProvider.state('about',{
-        url: '/about',
-        views: {
-            'header': {
-                templateUrl: 'views/header/header.tpl.html'
-            },
-            'content': {
-                templateUrl: 'views/about/about.tpl.html'
-            },
-            'footer': {
-                templateUrl: 'views/footer/footer.tpl.html'
             }
         }
     })
@@ -58,6 +40,19 @@ angular.module('app', [
 	$urlRouterProvider.otherwise('/');
 })
 
-.controller('AppCtrl', function($scope) {
-	$scope.appName = 'Road Trip';
+.controller('AppCtrl', function($scope, $rootScope) {
+
+    // Clear all saved data to default
+    $rootScope.clearAllData = function(){
+        $rootScope.locations = []; // List of (date, location) tuples
+        $rootScope.itinerary = {}; // Dict of location -> list of restaurants
+        $rootScope.mealStats = {
+            loaded: 0,  // Farthest meal that's fully loaded
+            total:  0,  // Total number of meals
+            curr:   0   // Index of meal we've selected in frontend
+        }
+    }
+
+    $scope.appName = 'Chipmunk';
+    $rootScope.clearAllData();
 });
