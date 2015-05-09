@@ -39,8 +39,8 @@
 			id="submit" 
 			type="submit" 
 			class="btn btn-sm btn-block btn-primary"
-			ng-disabled="!buttonEnabled">
-			{{buttonEnabled ? 'Find Meals' : 'Loading...'}}
+			ng-disabled="isLoading">
+			{{isLoading ? 'Loading...' : 'Find Meals'}}
 		</button>
 		</div>
 

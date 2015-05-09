@@ -44,6 +44,7 @@ angular.module('app', [
 
     // Clear all saved data to default
     $rootScope.clearAllData = function(){
+        $rootScope.isLoading = false; // Whether we're fetching route data
         $rootScope.locations = []; // List of (date, location) tuples
         $rootScope.itinerary = {}; // Dict of location -> list of restaurants
         $rootScope.mealStats = {

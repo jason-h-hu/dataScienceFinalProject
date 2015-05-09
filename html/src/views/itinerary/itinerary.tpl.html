@@ -1,3 +1,16 @@
-<div class="container" ng-controller="ItineraryCtrl">
-  Itinerary Here!
+<div class="col-xs-12" ng-controller="ItineraryCtrl">
+	<!-- If we're loading and mealStats.total == 0, show an indeterminite progress bar -->
+	<progressbar
+		class="progress-striped active"
+		ng-if="isLoading && mealStats.total == 0" 
+		max="1" 
+		value="1" 
+		type="primary">
+	</progressbar>
+	
+	<!-- If we have mealStats.total, show the dots -->
+	<div ng-if="mealStats.total" class="acorns">
+		
+	</div>
+
 </div>

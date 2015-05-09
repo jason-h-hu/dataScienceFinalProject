@@ -1,8 +1,6 @@
 angular.module('app.views.searchForm', [])
 .controller('SearchCtrl', function($scope, $rootScope, $http, $timeout){
-	// HTML Data
 	$rootScope.pageTitle = "Find Meals";
-	$scope.buttonEnabled = true;
 	$scope.date = new Date();
 
 	// TODO: TESTING
@@ -35,7 +33,7 @@ angular.module('app.views.searchForm', [])
 		// Increment progress and get next meal
 		$rootScope.mealStats.loaded += 1;
 		if ($rootScope.mealStats.loaded < $rootScope.mealStats.total) getMeal();
-		else $scope.buttonEnabled = true; // Done searching
+		else $rootScope.isLoading = false; // Done searching
 	}
 
 	// Saves restaurants data for segment to $scope.itinerary dictionary, where key is datetime
@@ -49,7 +47,7 @@ angular.module('app.views.searchForm', [])
 	// Saves journey from start to end as (date, mealtime) tuples to to $rootScope.locations
 	$scope.getJourney = function() {
 		$rootScope.clearAllData();
-		$scope.buttonEnabled = false;
+		$rootScope.isLoading = true;
 		$http(packagePost('journey',{'start': $scope.start, 'end': $scope.end, 'date': $scope.date}))
 		.success(function (data) {
 			$rootScope.locations = data; // List of (date, location) tuples
