@@ -116,8 +116,8 @@ def search(location,name=None,offset=None):
         # 'limit': SEARCH_LIMIT.replace(' ', '+'),
         # 'offset': OFFSET.replace(' ', '+'),
         'limit': SEARCH_LIMIT.replace(' ', '+'),
-        'sort': SORT.replace(' ', '+')#,
-        #'category_filter': "restaurants"
+        'sort': SORT.replace(' ', '+'),
+        'category_filter': "restaurants"
     }
 
     if name:
