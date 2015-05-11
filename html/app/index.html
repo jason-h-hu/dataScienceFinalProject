@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="AppCtrl">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title ng-bind="pageTitle+' | '+appName"></title>
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/css/vendor.min.css">
+  <link rel="stylesheet" href="/css/app.min.css">
+  <!-- endinject -->
+</head>
+
+<body>
+  <!-- Template view for app screens -->
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-3 left-side">
+        <div class="search-form row" ui-view="search-form"></div>
+        <div class="itinerary row" ui-view="itinerary"></div>
+        <div class="restaurants row" ui-view="restaurants"></div>
+      </div>
+
+      <div class="map col-md-9" ui-view="map"></div>
+      
+    </div>
+  </div>
+
+  <!-- inject:js -->
+  <script src="/js/vendor.min.js"></script>
+  <script src="/js/partials.min.js"></script>
+  <script src="/js/app.js"></script>
+  <!-- endinject -->
+</body>
+</html>
+
