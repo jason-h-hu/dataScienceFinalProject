@@ -1,11 +1,3 @@
-# TODO!!
-- Remove ignored API key and add one back in for grader!
-- Returning nones
-- Check errors in more places
-- Change run script to use python -m SimpleHTTPServer 8888 instead of gulp for the frontend, with compiled version of site
-- Styling Chip
-- Cleaning up pin interface on maps, having callout information when clicked
-
 # Overview
 
 Don't you hate it when you're stuck somewhere in the middle of Iowa and there's nothing but Sbarro and Taco Bell for miles? Make your next road trip delicious!
@@ -20,7 +12,7 @@ To load the webapp, do the following:
 3. Visit [http://localhost:8888](http://localhost:8888) and have fun!
 
 ## Command Line
-If you want to load the command line interface instead, do the following:
+The command line interface lets your query for restaurants just using the Python backend, without starting a webserver. To load it instead, do the following:
 
 1. Setup with `./setup`
 2. `source run --cli`

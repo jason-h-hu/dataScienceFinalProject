@@ -51,34 +51,54 @@ def getMealsHelper(fullJourney, date, DEPARTURE=9, LUNCHTIME=12, DINNERTIME=18, 
 	meals = []
 	today = datetime.datetime(date.year, date.month, date.day, DEPARTURE)
 
-	totalSecondsTraveledToday = 0
-	important_times = [(LUNCHTIME - DEPARTURE)*60*60, (DINNERTIME - DEPARTURE)*60*60, (HOURSPERDAY)*60*60]
+	totalSecondsSinceLastStop = 0
+	important_times = [(LUNCHTIME - DEPARTURE)*60*60, (DINNERTIME - LUNCHTIME)*60*60, (HOURSPERDAY+DEPARTURE-DINNERTIME)*60*60]
 	i = 0
+	next_mealtime = important_times[i]
+	totalTotal = 0
 
 	for step in steps:
 
-		# This is the time of our next meal
-		next_mealtime = important_times[i]
+		# You've traveled a bit further
+		remaining_time = next_mealtime - totalSecondsSinceLastStop
+		totalSecondsSinceLastStop += step["duration"]["value"]
+		totalTotal += step["duration"]["value"]
 
-		# If we're going to be on this step during the next mealtime ...
-		if step["duration"]["value"] + totalSecondsTraveledToday >= next_mealtime:
+		# You should stop for a meal!
+		# why the while? Well, on really long stretches (i.e. > 3 hours) maybe there'll
+		# be two meals along that route
+		while totalSecondsSinceLastStop >= next_mealtime:
 
-			# If it's the last one, then we know it's the end of the day. Just reset the day counter
+			# If it's the last "event" then you know it's just finding a place to rest
+			# Reset the counter
 			if i == len(important_times) - 1:
 				today = datetime.datetime(today.year, today.month, today.day+1, DEPARTURE)
-				totalSecondsTraveledToday += step["duration"]["value"]
-				totalSecondsTraveledToday %= next_mealtime
+				interpolateSegment(step, remaining_time)
 
-			# Otherwise it's an actual meal. Figure out the coordinates we'll be at during the mealtime
 			else:
-				remaining_time = next_mealtime - totalSecondsTraveledToday
 				meals.append((today + datetime.timedelta(0, sum(important_times[:i+1])), interpolateSegment(step, remaining_time)))
-				totalSecondsTraveledToday += step["duration"]["value"]
+
+			totalSecondsSinceLastStop -= next_mealtime
 			i += 1
 			i %= len(important_times)
-		else:
-			totalSecondsTraveledToday += step["duration"]["value"]
-			totalSecondsTraveledToday %= next_mealtime
+			next_mealtime = important_times[i]
+			remaining_time += next_mealtime
+
+		# if step["duration"]["value"] + totalSecondsSinceLastStop >= next_mealtime:
+
+		# 	# If it's the last one, then we know it's the end of the day. Just reset the day counter
+		# 	if i == len(important_times) - 1:
+		# 		today = datetime.datetime(today.year, today.month, today.day+1, DEPARTURE)
+		# 		totalSecondsSinceLastStop += step["duration"]["value"]
+		# 		totalSecondsSinceLastStop %= next_mealtime
+
+		# 	# Otherwise it's an actual meal. Figure out the coordinates we'll be at during the mealtime
+		# 	else:
+		# 		remaining_time = next_mealtime - totalSecondsSinceLastStop
+		# 		meals.append((today + datetime.timedelta(0, sum(important_times[:i+1])), interpolateSegment(step, remaining_time)))
+		# 		totalSecondsSinceLastStop += step["duration"]["value"]
+		# 	i += 1
+		# 	i %= len(important_times)
 	return meals
 
 """ Makes the API request, parses it, and returns a pathObject
@@ -135,15 +155,15 @@ def makeRequest(startLocation, endLocation):
 
 	return pathObject
 
-def getCoordinateAtTime(pathObject, travel_time):
-	time_traveled = 0
-	steps = pathObject["steps"]
-	for step in steps:
-		if step["duration"]["value"] + time_traveled >= travel_time:
-			remaining_time = travel_time - time_traveled
-			return interpolateSegment(step, remaining_time), True
-		time_traveled += step["duration"]["value"]
-	return None, False
+# def getCoordinateAtTime(pathObject, travel_time):
+# 	time_traveled = 0
+# 	steps = pathObject["steps"]
+# 	for step in steps:
+# 		if step["duration"]["value"] + time_traveled >= travel_time:
+# 			remaining_time = travel_time - time_traveled
+# 			return interpolateSegment(step, remaining_time), True
+# 		time_traveled += step["duration"]["value"]
+# 	return None, False
 
 def interpolateSegment(step, travel_time):
 	p = float(travel_time)/step["duration"]["value"]
@@ -157,10 +177,11 @@ def interpolate(x1, x2, p):
 def secondsToTimestamp(start, secondsEllapsed):
 	return start + datetime.timedelta(0, secondsEllapsed)
 
+def secondsToHours(seconds):
+	return float(seconds)/60/60
 
 def main():
-	for label, meal in getMeals("Providence,RI", "San Francisco,CA", datetime.datetime(2015, 5, 27)):
-		print label, "\t", meal["lat"], meal["lng"]
+	getMeals("Providence,RI", "Miami,FL", datetime.datetime(2015, 5, 27))
 
 
 if __name__ == '__main__':
