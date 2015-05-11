@@ -169,6 +169,14 @@ def query_api(location,search_name=None, offset=None):
 
             restaurant = defaultdict(str)
 
+            if 'review_count' in bus:
+                num_yelp_reviews = bus['review_count']
+                if num_yelp_reviews==0:
+                    continue
+                restaurant['num_yelp_reviews'] = float(num_yelp_reviews)
+            else:
+                continue
+
             if 'name' in bus:
                 name = bus['name']
                 restaurant['name'] = name.encode('utf-8')
@@ -205,9 +213,7 @@ def query_api(location,search_name=None, offset=None):
                 yelp_id = bus['id']
                 restaurant['yelp_id'] = yelp_id
 
-            if 'review_count' in bus:
-                num_yelp_reviews = bus['review_count']
-                restaurant['num_yelp_reviews'] = float(num_yelp_reviews)
+
 
             if 'distance' in bus:
                 dist_from_ll = bus['distance']
