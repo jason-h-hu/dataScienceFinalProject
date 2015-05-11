@@ -1,5 +1,6 @@
 # TODO!!
 - Remove ignored API key and add one back in for grader!
+- Returning nones
 - Check errors in more places
 - Change run script to use python -m SimpleHTTPServer 8888 instead of gulp for the frontend, with compiled version of site
 - Styling Chip
