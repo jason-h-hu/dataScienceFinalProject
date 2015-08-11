@@ -1,0 +1,30 @@
+#! /bin/bash
+
+# Setup
+source .road-trip-commands
+
+# Install node stuff
+echo "Installing $(func 'npm') packages..."
+npm config set prefix $(pwd)/npm-global
+export PATH="./npm-global/bin/:$PATH"
+npm install -g gulp
+npm install -g bower
+cd html && npm install
+../npm-global/bin/bower install
+cd ..
+npm config delete prefix
+echo "Done installing $(func 'npm') packages"
+
+# Install backend python stuff
+echo "Configuring $(func 'python') virtualenv..."
+virtualenv --system-site-packages backend
+source backend/bin/activate
+pip install Flask
+pip install nltk
+pip install oauth2
+
+# Get out of python env
+deactivate
+echo "Done installing $(func 'python') packages"
+
+echo "$(success 'Done with setup!')"

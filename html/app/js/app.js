@@ -308,12 +308,6 @@ angular.module('app.views.map', ['uiGmapgoogle-maps'])
 		})
 	}
 })
-angular.module('app.views.restaurants', [])
-.controller('RestaurantsCtrl', function ($scope) {
-	$scope.mealExpand = function(rest) {
-		rest.expanded = !rest.expanded;
-	}
-});
 angular.module('app.views.searchForm', [])
 .controller('SearchCtrl', function($scope, $rootScope, $http, $timeout){
 	$rootScope.pageTitle = "Find Meals";
@@ -371,4 +365,11 @@ angular.module('app.views.searchForm', [])
 			getMeal();
 		}).error(showError);
 	};
+});
+
+angular.module('app.views.restaurants', [])
+.controller('RestaurantsCtrl', function ($scope) {
+	$scope.mealExpand = function(rest) {
+		rest.expanded = !rest.expanded;
+	}
 });

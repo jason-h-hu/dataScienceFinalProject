@@ -1,0 +1,54 @@
+#!/bin/bash
+
+killall() {
+    trap '' INT TERM     # ignore INT and TERM while shutting down
+    echo "Shutting down..."     # added double quotes
+    kill -TERM 0         # fixed order, send TERM not INT
+    wait
+    echo "$(success 'Quit cleanly')"
+}
+
+# Setup
+source .road-trip-commands
+export PATH="./npm-global/bin/:$PATH"
+echo "Starting app..."
+source backend/bin/activate
+
+# Download NLTK data - to local tmp
+if [ "$(uname)" == "Darwin" ]; then
+    NLTK_DIR="/tmp/nltk/"
+else
+    NLTK_DIR="/ltmp/nltk/"
+fi;
+if [ ! -d "$NLTK_DIR" ]; then
+    echo "Downloading $(func 'nltk') data..."
+    python -m nltk.downloader -d $NLTK_DIR all
+fi;
+export NLTK_DATA=$NLTK_DIR
+
+# Run command line, or GUI if no arg specified
+if [ $# -eq 0 ]; then
+
+	# Python server
+	echo "Starting $(func 'python') backend server..."
+	cd code
+	(python app.py --gui 3>&1 1>&2- 2>&3-) | prefix &
+	cd ..
+
+	# Gulp server
+	echo "Starting $(func 'gulp') for frontend..."
+	cd html
+	gulp & # Run gulp
+	cd ..
+
+	# Out of environment
+	deactivate
+
+	# Killall activated
+	trap 'killall' INT
+	cat # wait forever
+
+elif [ $1="--cli" ]; then
+	echo "Command line interface setup! Make sure to $(func 'deactivate') when finished"
+
+fi;

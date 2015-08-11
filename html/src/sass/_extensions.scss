@@ -3,3 +3,9 @@
  * This file contains utility type mixins and extensions
  * to be included in the main app scss file
  */
+
+.input-sm {
+	height: 40px;
+	padding: 20px 10px;
+	font-size: 17px;
+}

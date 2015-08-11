@@ -3,8 +3,8 @@
  * This file contains global fonts to be included in the main app scss file
  */
 
-@import url(http://fonts.googleapis.com/css?family=Merriweather:400,300,700|Josefin+Sans:300,400,700);
-$fontstack_body: 'Merriweather', Georgia, Times, serif;
+@import url(http://fonts.googleapis.com/css?family=Lato|Josefin+Sans:300,400,700);
+$fontstack_body: 'Lato', Arial, Helvetica, sans-serif;
 $fontstack_header: 'Josefin Sans', 'Open Sans', 'Lato', Arial, sans-serif;
 
 body, html {
